@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 2 context gathered (02-CONTEXT.md written)
-last_updated: "2026-04-14T16:54:05.314Z"
+stopped_at: Completed 02-01-PLAN.md (editor + parser)
+last_updated: "2026-04-14T16:57:32.975Z"
 progress:
   total_phases: 3
   completed_phases: 1
   total_plans: 4
-  completed_plans: 2
-  percent: 50
+  completed_plans: 3
+  percent: 75
 ---
 
 # State: md2cv
@@ -29,16 +29,16 @@ progress:
 ## Current Position
 
 Phase: 02 (editor-parsing-live-preview) — EXECUTING
-Plan: 1 of 2
+Plan: 2 of 2 (02-01 complete, 02-02 pending)
 **Phase:** 2 — Editor, Parsing & Live Preview
-**Plan:** Context gathered (02-CONTEXT.md written)
+**Plan:** 02-01 complete — editor + parser shipped
 **Status:** Executing Phase 02
-**Progress:** [###-------] 33%
+**Progress:** [████████░░] 75%
 
 | Phase | Status |
 |-------|--------|
 | 1. Foundation & Layout | Complete (2/2 plans) |
-| 2. Editor, Parsing & Live Preview | Context ready — awaiting plan |
+| 2. Editor, Parsing & Live Preview | 02-01 complete (editor + parser), 02-02 pending (preview + templates) |
 | 3. Export & Storage | Not started |
 
 ---
@@ -64,6 +64,9 @@ Plan: 1 of 2
 - **D-07:** Default split ratio is 50/50 on first load
 - **D-08:** Minimum pane width is 20% each side (max 80%) to prevent pane collapse
 - **D-09:** Split ratio persisted to localStorage under key 'md2cv-split-ratio'; range-validated on read (NaN rejected, fallback 0.5)
+- **D-10:** MarkdownIt() instantiated without html:true — XSS mitigation; extra fields contain escaped HTML only
+- **D-11:** CodeMirror Editor uses isInternalChange ref to guard external prop sync, preventing cursor-jumping loops
+- **D-12:** Bullet list items extracted at level=2 (list_item > paragraph > inline nesting in markdown-it token tree)
 
 ### Active Todos
 
@@ -77,8 +80,8 @@ Plan: 1 of 2
 
 ## Session Continuity
 
-**Last session:** 2026-04-14T16:45:00.000Z
-**Stopped at:** Phase 2 context gathered (02-CONTEXT.md written)
+**Last session:** 2026-04-14T16:57:32.972Z
+**Stopped at:** Completed 02-01-PLAN.md (editor + parser)
 **Next action:** Run `/gsd-plan-phase 2` to create Phase 2 plans
 
 ---

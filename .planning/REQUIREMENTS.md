@@ -7,7 +7,7 @@
 
 ### Editor
 
-- [ ] **EDIT-01**: User can type markdown in a CodeMirror editor with syntax highlighting
+- [x] **EDIT-01**: User can type markdown in a CodeMirror editor with syntax highlighting
 - [ ] **EDIT-02**: Editor updates the preview in real time as user types
 
 ### Preview
@@ -18,10 +18,10 @@
 
 ### Parsing
 
-- [ ] **PARS-01**: h1 parses as candidate name (rendered at top of resume)
-- [ ] **PARS-02**: h2 parses as section headers (e.g., Experience, Education)
-- [ ] **PARS-03**: h3 parses as entry titles within sections
-- [ ] **PARS-04**: Bullet lists under h3 entries parse as detail items
+- [x] **PARS-01**: h1 parses as candidate name (rendered at top of resume)
+- [x] **PARS-02**: h2 parses as section headers (e.g., Experience, Education)
+- [x] **PARS-03**: h3 parses as entry titles within sections
+- [x] **PARS-04**: Bullet lists under h3 entries parse as detail items
 
 ### Export
 
@@ -71,12 +71,12 @@
 | LAYO-01 | Phase 1 | Pending |
 | LAYO-02 | Phase 1 | Pending |
 | LAYO-03 | Phase 1 | Pending |
-| EDIT-01 | Phase 2 | Pending |
+| EDIT-01 | Phase 2 | Complete |
 | EDIT-02 | Phase 2 | Pending |
-| PARS-01 | Phase 2 | Pending |
-| PARS-02 | Phase 2 | Pending |
-| PARS-03 | Phase 2 | Pending |
-| PARS-04 | Phase 2 | Pending |
+| PARS-01 | Phase 2 | Complete |
+| PARS-02 | Phase 2 | Complete |
+| PARS-03 | Phase 2 | Complete |
+| PARS-04 | Phase 2 | Complete |
 | PREV-01 | Phase 2 | Pending |
 | PREV-02 | Phase 2 | Pending |
 | PREV-03 | Phase 2 | Pending |
