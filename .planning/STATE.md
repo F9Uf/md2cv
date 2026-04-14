@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-01-PLAN.md (editor + parser)
-last_updated: "2026-04-14T16:57:32.975Z"
+stopped_at: Checkpoint 02-02 Task 3 — awaiting human visual verification
+last_updated: "2026-04-14T17:00:02Z"
 progress:
   total_phases: 3
   completed_phases: 1
@@ -31,8 +31,8 @@ progress:
 Phase: 02 (editor-parsing-live-preview) — EXECUTING
 Plan: 2 of 2 (02-01 complete, 02-02 pending)
 **Phase:** 2 — Editor, Parsing & Live Preview
-**Plan:** 02-01 complete — editor + parser shipped
-**Status:** Executing Phase 02
+**Plan:** 02-02 tasks 1+2 complete — at checkpoint awaiting visual verification
+**Status:** Executing Phase 02 (checkpoint)
 **Progress:** [████████░░] 75%
 
 | Phase | Status |
@@ -67,6 +67,10 @@ Plan: 2 of 2 (02-01 complete, 02-02 pending)
 - **D-10:** MarkdownIt() instantiated without html:true — XSS mitigation; extra fields contain escaped HTML only
 - **D-11:** CodeMirror Editor uses isInternalChange ref to guard external prop sync, preventing cursor-jumping loops
 - **D-12:** Bullet list items extracted at level=2 (list_item > paragraph > inline nesting in markdown-it token tree)
+- **D-13:** Three templates implemented as Tailwind class maps keyed by TemplateName union ('classic'|'modern'|'minimal') — no separate component files per template
+- **D-14:** debounceRef uses ReturnType<typeof setTimeout> for environment-agnostic timer typing
+- **D-15:** localStorage template value validated against explicit allowlist before use (T-02-07 mitigation)
+- **D-16:** resumeData initialized with parseResume(SAMPLE_RESUME) to prevent empty-state flash on first load
 
 ### Active Todos
 
@@ -80,9 +84,9 @@ Plan: 2 of 2 (02-01 complete, 02-02 pending)
 
 ## Session Continuity
 
-**Last session:** 2026-04-14T16:57:32.972Z
-**Stopped at:** Completed 02-01-PLAN.md (editor + parser)
-**Next action:** Run `/gsd-plan-phase 2` to create Phase 2 plans
+**Last session:** 2026-04-14T17:00:02Z
+**Stopped at:** Checkpoint 02-02 Task 3 — awaiting human visual verification of editor-preview pipeline
+**Next action:** Verify app visually (npm run dev), then continue execution of 02-02 Task 3
 
 ---
 
