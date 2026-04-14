@@ -4,6 +4,7 @@ import { EditorState } from '@codemirror/state'
 import { markdown } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
 import { defaultKeymap, history, historyKeymap } from '@codemirror/commands'
+import { oneDark } from '@codemirror/theme-one-dark'
 
 interface EditorProps {
   value: string
@@ -21,6 +22,7 @@ export default function Editor({ value, onChange }: EditorProps) {
     if (!containerRef.current) return
 
     const extensions = [
+      oneDark,
       markdown({ codeLanguages: languages }),
       EditorView.lineWrapping,
       lineNumbers(),
@@ -69,5 +71,5 @@ export default function Editor({ value, onChange }: EditorProps) {
     }
   }, [value])
 
-  return <div ref={containerRef} className="h-full w-full" />
+  return <div ref={containerRef} className="h-full w-full bg-[#282c34]" />
 }
