@@ -24,7 +24,12 @@
   1. On desktop, user sees editor pane and preview pane side by side with no overlap
   2. User can drag the separator between panes to widen or narrow either side
   3. On mobile, user sees tab controls and can toggle between Editor and Preview tabs
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Scaffold Vite + React + Tailwind CSS project and create app shell with header
+- [ ] 01-02-PLAN.md — Build responsive split pane layout with draggable splitter and mobile tabs
+
 **UI hint**: yes
 
 ### Phase 2: Editor, Parsing & Live Preview
@@ -57,11 +62,11 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Layout | 0/? | Not started | - |
+| 1. Foundation & Layout | 0/2 | Not started | - |
 | 2. Editor, Parsing & Live Preview | 0/? | Not started | - |
 | 3. Export & Storage | 0/? | Not started | - |
 
 ---
 
 *Created: 2026-04-14*
-*Last updated: 2026-04-14 after initial roadmap creation*
+*Last updated: 2026-04-14 after phase 1 planning*
