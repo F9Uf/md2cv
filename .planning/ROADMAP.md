@@ -8,7 +8,7 @@
 
 ## Phases
 
-- [ ] **Phase 1: Foundation & Layout** - App shell and pane layout that all features live inside
+- [x] **Phase 1: Foundation & Layout** - App shell and pane layout that all features live inside
 - [ ] **Phase 2: Editor, Parsing & Live Preview** - The core loop: type markdown, see a styled resume instantly
 - [ ] **Phase 3: Export & Storage** - PDF export, markdown download, auto-save, and file import
 
@@ -27,8 +27,8 @@
 **Plans:** 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Scaffold Vite + React + Tailwind CSS project and create app shell with header
-- [ ] 01-02-PLAN.md — Build responsive split pane layout with draggable splitter and mobile tabs
+- [x] 01-01-PLAN.md — Scaffold Vite + React + Tailwind CSS project and create app shell with header
+- [x] 01-02-PLAN.md — Build responsive split pane layout with draggable splitter and mobile tabs
 
 **UI hint**: yes
 
@@ -62,7 +62,7 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Layout | 0/2 | Not started | - |
+| 1. Foundation & Layout | 2/2 | Complete | 2026-04-14 |
 | 2. Editor, Parsing & Live Preview | 0/? | Not started | - |
 | 3. Export & Storage | 0/? | Not started | - |
 
