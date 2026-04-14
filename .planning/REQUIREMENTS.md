@@ -68,29 +68,29 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| EDIT-01 | — | Pending |
-| EDIT-02 | — | Pending |
-| PREV-01 | — | Pending |
-| PREV-02 | — | Pending |
-| PREV-03 | — | Pending |
-| PARS-01 | — | Pending |
-| PARS-02 | — | Pending |
-| PARS-03 | — | Pending |
-| PARS-04 | — | Pending |
-| EXPRT-01 | — | Pending |
-| EXPRT-02 | — | Pending |
-| STOR-01 | — | Pending |
-| STOR-02 | — | Pending |
-| STOR-03 | — | Pending |
-| LAYO-01 | — | Pending |
-| LAYO-02 | — | Pending |
-| LAYO-03 | — | Pending |
+| LAYO-01 | Phase 1 | Pending |
+| LAYO-02 | Phase 1 | Pending |
+| LAYO-03 | Phase 1 | Pending |
+| EDIT-01 | Phase 2 | Pending |
+| EDIT-02 | Phase 2 | Pending |
+| PARS-01 | Phase 2 | Pending |
+| PARS-02 | Phase 2 | Pending |
+| PARS-03 | Phase 2 | Pending |
+| PARS-04 | Phase 2 | Pending |
+| PREV-01 | Phase 2 | Pending |
+| PREV-02 | Phase 2 | Pending |
+| PREV-03 | Phase 2 | Pending |
+| EXPRT-01 | Phase 3 | Pending |
+| EXPRT-02 | Phase 3 | Pending |
+| STOR-01 | Phase 3 | Pending |
+| STOR-02 | Phase 3 | Pending |
+| STOR-03 | Phase 3 | Pending |
 
 **Coverage:**
 - v1 requirements: 17 total
-- Mapped to phases: 0
-- Unmapped: 17 (roadmap pending)
+- Mapped to phases: 17
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-04-14*
-*Last updated: 2026-04-14 after initial definition*
+*Last updated: 2026-04-14 after roadmap creation — traceability complete*
