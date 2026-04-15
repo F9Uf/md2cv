@@ -9,8 +9,8 @@
 ## Phases
 
 - [x] **Phase 1: Foundation & Layout** - App shell and pane layout that all features live inside
-- [ ] **Phase 2: Editor, Parsing & Live Preview** - The core loop: type markdown, see a styled resume instantly
-- [ ] **Phase 3: Export & Storage** - PDF export, markdown download, auto-save, and file import
+- [x] **Phase 2: Editor, Parsing & Live Preview** - The core loop: type markdown, see a styled resume instantly
+- [x] **Phase 3: Export & Storage** - PDF export, markdown download, auto-save, and file import
 
 ---
 
@@ -58,7 +58,7 @@ Plans:
 
 Plans:
 - [x] 03-01-PLAN.md — localStorage auto-save/restore and Download MD button
-- [ ] 03-02-PLAN.md — PDF export via html2pdf.js and Import MD file picker
+- [x] 03-02-PLAN.md — PDF export via html2pdf.js and Import MD file picker
 
 ---
 
@@ -67,8 +67,8 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Layout | 2/2 | Complete | 2026-04-14 |
-| 2. Editor, Parsing & Live Preview | 1/2 | In Progress|  |
-| 3. Export & Storage | 0/2 | Not started | - |
+| 2. Editor, Parsing & Live Preview | 2/2 | Complete | 2026-04-15 |
+| 3. Export & Storage | 2/2 | Complete | 2026-04-15 |
 
 ---
 
