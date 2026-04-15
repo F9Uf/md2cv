@@ -15,10 +15,13 @@ export default function ExportTarget({ resumeData, template }: ExportTargetProps
       id="export-target"
       style={{
         position: 'absolute',
-        left: '-9999px',
         top: 0,
+        left: 0,
         width: '794px',
         backgroundColor: '#ffffff',
+        visibility: 'hidden',
+        pointerEvents: 'none',
+        zIndex: -1,
       }}
     >
       <div style={s.container}>
