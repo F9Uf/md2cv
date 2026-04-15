@@ -110,8 +110,9 @@ export function parseResume(markdownText: string): ResumeData {
       if (context === 'entry' && currentEntry) {
         // Extract list item text into details[]
         for (const t of listTokens) {
-          if (t.type === 'inline' && t.level === 2) {
-            // level 2 = inside list_item > paragraph > inline
+          if (t.type === 'inline' && (t.level === 2 || t.level === 3)) {
+            // level 2 = tight list (list_item > inline)
+            // level 3 = loose list (list_item > paragraph > inline)
             currentEntry.details.push(t.content)
           }
         }
