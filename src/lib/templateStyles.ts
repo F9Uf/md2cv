@@ -35,11 +35,11 @@ export const TEMPLATE_STYLES: Record<TemplateName, TemplateClasses> = {
   minimal: {
     container: 'font-sans max-w-[800px] mx-auto p-10 leading-loose font-light',
     name: 'text-2xl font-extralight tracking-widest mb-2',
-    preamble: 'text-xs text-gray-400 mb-10 tracking-wide',
-    sectionHeading: 'text-xs font-normal uppercase tracking-[0.25em] text-gray-500 mt-10 mb-4',
+    preamble: 'text-xs text-gray-500 mb-10 tracking-wide',
+    sectionHeading: 'text-xs font-normal uppercase tracking-[0.25em] text-gray-700 mt-10 mb-4',
     entryTitle: 'text-sm font-normal mt-4',
-    entryDetail: 'text-sm ml-4 text-gray-500 font-light',
-    detailList: 'list-none pl-4 mt-1 space-y-1.5',
-    extra: 'text-sm text-gray-400 mt-1 font-light [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5',
+    entryDetail: 'text-sm ml-4 text-gray-700 font-light',
+    detailList: 'list-disc pl-4 mt-1 space-y-1.5',
+    extra: 'text-sm text-gray-500 mt-1 font-light [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5',
   },
 }
