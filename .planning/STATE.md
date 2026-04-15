@@ -1,13 +1,13 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.0
-milestone_name: milestone
-status: complete
-stopped_at: Completed 03-02-PLAN.md — Phase 03 fully complete, all plans done
-last_updated: "2026-04-15T07:00:00.000Z"
+milestone_name: MVP
+status: archived
+stopped_at: v1.0 milestone archived — 3 phases, 6 plans, all 17 requirements shipped
+last_updated: "2026-04-15T00:00:00.000Z"
 progress:
   total_phases: 3
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 6
   completed_plans: 6
   percent: 100
@@ -21,8 +21,10 @@ progress:
 
 ## Project Reference
 
-**Core Value:** Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
-**Current Focus:** Phase 03 — Export & Storage
+See: .planning/PROJECT.md (updated 2026-04-15)
+
+**Core value:** Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
+**Current focus:** Planning next milestone — run `/gsd-new-milestone`
 
 ---
 
@@ -32,7 +34,7 @@ Phase: 03 (Export & Storage) — EXECUTING
 Plan: 1 of 2
 **Phase:** 2 — Editor, Parsing & Live Preview
 **Plan:** 02-02 complete — all tasks done, human verification approved
-**Status:** Executing Phase 03
+**Status:** v1.0 milestone complete
 **Progress:** [██████████] 100% (of planned phases 1-2)
 
 | Phase | Status |
