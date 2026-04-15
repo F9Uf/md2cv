@@ -54,6 +54,21 @@ function App() {
     }, 150)
   }, [])
 
+  // Download current markdown content as a .md file (per D-06, D-07, D-08)
+  const handleDownloadMd = useCallback(() => {
+    const slug = resumeData.name
+      ? resumeData.name.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+      : 'resume'
+    const filename = (slug || 'resume') + '.md'
+    const blob = new Blob([markdownContent], { type: 'text/markdown' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = filename
+    a.click()
+    URL.revokeObjectURL(url)
+  }, [markdownContent, resumeData.name])
+
   // Persist template selection (per D-09)
   const handleTemplateChange = useCallback((template: TemplateName) => {
     setSelectedTemplate(template)
@@ -70,7 +85,7 @@ function App() {
 
   return (
     <div className="h-screen bg-gray-50 flex flex-col overflow-hidden">
-      <Header selectedTemplate={selectedTemplate} onTemplateChange={handleTemplateChange} />
+      <Header selectedTemplate={selectedTemplate} onTemplateChange={handleTemplateChange} onDownloadMd={handleDownloadMd} />
       <main className="flex-1 flex min-h-0">
         {isDesktop ? (
           <SplitPane
