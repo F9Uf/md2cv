@@ -1,5 +1,6 @@
 import type { ResumeData } from '../types/resume'
-import { TEMPLATE_STYLES, type TemplateName } from '../lib/templateStyles'
+import type { TemplateName } from '../lib/templateStyles'
+import { TEMPLATE_INLINE_STYLES } from '../lib/templateInlineStyles'
 
 interface ExportTargetProps {
   resumeData: ResumeData
@@ -7,7 +8,7 @@ interface ExportTargetProps {
 }
 
 export default function ExportTarget({ resumeData, template }: ExportTargetProps) {
-  const styles = TEMPLATE_STYLES[template]
+  const s = TEMPLATE_INLINE_STYLES[template]
 
   return (
     <div
@@ -17,41 +18,43 @@ export default function ExportTarget({ resumeData, template }: ExportTargetProps
         left: '-9999px',
         top: 0,
         width: '794px',
-        backgroundColor: 'white',
+        backgroundColor: '#ffffff',
       }}
     >
-      <div className={styles.container}>
+      <div style={s.container}>
         {resumeData.name && (
-          <h1 className={styles.name}>{resumeData.name}</h1>
+          <h1 style={{ ...s.name, margin: 0, marginBottom: '4px' }}>{resumeData.name}</h1>
         )}
         {resumeData.preamble && (
           <div
-            className={styles.preamble}
+            style={s.preamble}
             dangerouslySetInnerHTML={{ __html: resumeData.preamble }}
           />
         )}
         {resumeData.sections.map((section, si) => (
           <div key={si} style={{ pageBreakInside: 'avoid' }}>
-            <h2 className={styles.sectionHeading}>{section.heading}</h2>
+            <h2 style={{ ...s.sectionHeading, margin: 0, marginTop: si === 0 ? '24px' : s.sectionHeading.marginTop, marginBottom: s.sectionHeading.marginBottom }}>
+              {section.heading}
+            </h2>
             {section.extra && (
               <div
-                className={styles.extra}
+                style={s.extra}
                 dangerouslySetInnerHTML={{ __html: section.extra }}
               />
             )}
             {section.entries.map((entry, ei) => (
               <div key={ei} style={{ pageBreakInside: 'avoid' }}>
-                <h3 className={styles.entryTitle}>{entry.title}</h3>
+                <h3 style={{ ...s.entryTitle, margin: 0, marginTop: s.entryTitle.marginTop }}>{entry.title}</h3>
                 {entry.extra && (
                   <div
-                    className={styles.extra}
+                    style={s.extra}
                     dangerouslySetInnerHTML={{ __html: entry.extra }}
                   />
                 )}
                 {entry.details.length > 0 && (
-                  <ul className={styles.detailList}>
+                  <ul style={{ ...s.detailList, margin: 0, marginTop: '4px', padding: 0, paddingLeft: s.detailList.paddingLeft }}>
                     {entry.details.map((detail, di) => (
-                      <li key={di} className={styles.entryDetail}>{detail}</li>
+                      <li key={di} style={s.entryDetail}>{detail}</li>
                     ))}
                   </ul>
                 )}
