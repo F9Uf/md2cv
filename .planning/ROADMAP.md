@@ -54,7 +54,11 @@ Plans:
   3. After closing and reopening the app, the editor content from the previous session is restored automatically
   4. User can import a .md file from disk and the editor is populated with its contents
 
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — localStorage auto-save/restore and Download MD button
+- [ ] 03-02-PLAN.md — PDF export via html2pdf.js and Import MD file picker
 
 ---
 
@@ -64,9 +68,9 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation & Layout | 2/2 | Complete | 2026-04-14 |
 | 2. Editor, Parsing & Live Preview | 1/2 | In Progress|  |
-| 3. Export & Storage | 0/? | Not started | - |
+| 3. Export & Storage | 0/2 | Not started | - |
 
 ---
 
 *Created: 2026-04-14*
-*Last updated: 2026-04-14 after phase 1 planning*
+*Last updated: 2026-04-15 after phase 3 planning*
