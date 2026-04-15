@@ -23,11 +23,23 @@ function App() {
     return 'classic'
   })
 
-  // Markdown content state (initialized with sample resume per D-02)
-  const [markdownContent, setMarkdownContent] = useState<string>(SAMPLE_RESUME)
+  // Markdown content state — restored from localStorage on init, fallback to sample (per D-11)
+  const [markdownContent, setMarkdownContent] = useState<string>(() => {
+    try {
+      const stored = localStorage.getItem('md2cv-content')
+      if (stored !== null) return stored
+    } catch { /* ignore */ }
+    return SAMPLE_RESUME
+  })
 
-  // Debounced resume data for preview (per D-06)
-  const [resumeData, setResumeData] = useState<ResumeData>(() => parseResume(SAMPLE_RESUME))
+  // Debounced resume data for preview — initialized from same source as markdownContent
+  const [resumeData, setResumeData] = useState<ResumeData>(() => {
+    try {
+      const stored = localStorage.getItem('md2cv-content')
+      if (stored !== null) return parseResume(stored)
+    } catch { /* ignore */ }
+    return parseResume(SAMPLE_RESUME)
+  })
 
   // Debounce timer ref
   const debounceRef = useRef<ReturnType<typeof setTimeout>>()
@@ -38,6 +50,7 @@ function App() {
     if (debounceRef.current) clearTimeout(debounceRef.current)
     debounceRef.current = setTimeout(() => {
       setResumeData(parseResume(value))
+      try { localStorage.setItem('md2cv-content', value) } catch { /* ignore */ }
     }, 150)
   }, [])
 
