@@ -22,15 +22,15 @@ export const TEMPLATE_STYLES: Record<TemplateName, TemplateClasses> = {
     detailList: 'list-disc pl-2 mt-1 space-y-0.5',
     extra: 'text-xs text-gray-700 mt-1 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5',
   },
-  modern: {
+   modern: {
     container: 'font-sans max-w-[800px] mx-auto p-8 leading-relaxed',
-    name: 'text-3xl font-bold mb-1',
-    preamble: 'text-sm text-gray-500 mb-8',
-    sectionHeading: 'text-base font-bold border-l-4 border-gray-800 pl-3 mt-8 mb-4 uppercase tracking-wide',
-    entryTitle: 'text-base font-semibold mt-4',
-    entryDetail: 'text-sm ml-4 text-gray-700',
-    detailList: 'list-disc pl-6 mt-1 space-y-1',
-    extra: 'text-sm text-gray-600 mt-1 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5',
+    name: 'text-2xl font-bold mb-1',
+    preamble: 'text-xs text-gray-500 mb-6',
+    sectionHeading: 'text-base font-bold border-l-4 border-gray-800 pl-3 mt-4 mb-2 uppercase tracking-wide',
+    entryTitle: 'text-base font-semibold mt-2',
+    entryDetail: 'text-xs ml-4 text-gray-700',
+    detailList: 'list-disc pl-2 mt-1 space-y-1',
+    extra: 'text-xs text-gray-600 mt-1 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5',
   },
   minimal: {
     container: 'font-sans max-w-[800px] mx-auto p-10 leading-loose font-light',
