@@ -1,50 +1,49 @@
-# React + TypeScript + Vite
+# md2cv
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal single-page web app that lets you write your resume in Markdown and instantly see it rendered as a styled resume. All client-side — no server, no backend, no login required.
 
-Currently, two official plugins are available:
+![md2cv preview](./preview.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What it does
 
-## Expanding the ESLint configuration
+- **Write in Markdown** — uses a familiar syntax to describe your resume structure
+- **Live preview** — see the rendered resume update in real time as you type
+- **Multiple templates** — switch between styled resume templates
+- **Export to PDF** — download your resume directly from the browser
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Markdown structure
 
-- Configure the top-level `parserOptions` property like this:
+The parser maps Markdown elements to resume sections:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+| Markdown | Resume element |
+|----------|---------------|
+| `# Name` | Your name / header |
+| `## Section` | Section heading (Experience, Education, etc.) |
+| `### Entry` | Job title, degree, or other entry |
+| `- bullet` | Detail or description |
+
+## Tech stack
+
+- **React + Vite** — UI framework and build tool
+- **TypeScript** — type safety throughout
+- **Tailwind CSS** — utility-first styling
+- **CodeMirror** — in-browser Markdown editor
+- **markdown-it** — Markdown parsing
+- **html2pdf.js / jsPDF** — client-side PDF export
+
+## Development
+
+```bash
+npm install
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Open `http://localhost:5173` in your browser.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Build
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm run build
 ```
+
+Output is in `dist/` — a fully static site you can host anywhere.
