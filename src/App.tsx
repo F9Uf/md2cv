@@ -87,7 +87,13 @@ function App() {
         margin: [15, 15, 15, 15],
         filename,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          onclone: (_clonedDoc: Document, element: HTMLElement) => {
+            element.style.visibility = 'visible'
+          },
+        },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       })
       .from(element as HTMLElement)
