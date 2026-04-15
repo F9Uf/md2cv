@@ -1,1 +1,38 @@
 @import "tailwindcss";
+
+@media print {
+  /* Hide the entire app shell (header, editor, splitter) */
+  #app-shell {
+    display: none !important;
+  }
+
+  /* Hide the hidden file input */
+  input[type="file"] {
+    display: none !important;
+  }
+
+  /* Show only the print area */
+  #print-area {
+    display: block !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Reset page for A4 */
+  @page {
+    size: A4 portrait;
+    margin: 15mm;
+  }
+
+  body {
+    background: white !important;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* Hide print area from screen */
+#print-area {
+  display: none;
+}

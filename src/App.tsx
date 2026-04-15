@@ -1,12 +1,10 @@
 import './App.css'
 import { useState, useCallback, useEffect, useRef } from 'react'
-import html2pdf from 'html2pdf.js'
 import Header from './components/Header'
 import SplitPane from './components/SplitPane'
 import MobileTabs from './components/MobileTabs'
 import Editor from './components/Editor'
 import Preview from './components/Preview'
-import ExportTarget from './components/ExportTarget'
 import { useMediaQuery } from './hooks/useMediaQuery'
 import { parseResume } from './lib/parseResume'
 import { SAMPLE_RESUME } from './lib/sampleResume'
@@ -74,25 +72,10 @@ function App() {
     URL.revokeObjectURL(url)
   }, [markdownContent, resumeData.name])
 
-  // Export current resume as PDF via html2pdf.js (per D-01, D-02, D-04)
-  const handleExportPdf = useCallback(async () => {
-    const element = document.getElementById('export-target')
-    if (!element) return
-    const slug = resumeData.name
-      ? resumeData.name.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-      : 'resume'
-    const filename = (slug || 'resume') + '.pdf'
-    await html2pdf()
-      .set({
-        margin: [15, 15, 15, 15],
-        filename,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      })
-      .from(element as HTMLElement)
-      .save()
-  }, [resumeData.name])
+  // Export PDF via browser print dialog — @media print CSS hides everything except preview
+  const handleExportPdf = useCallback(() => {
+    window.print()
+  }, [])
 
   // Import .md file via native file picker (per D-13, D-14, D-15)
   const handleImportMd = useCallback(() => {
@@ -130,7 +113,7 @@ function App() {
 
   return (
     <>
-      <div className="h-screen bg-gray-50 flex flex-col overflow-hidden">
+      <div className="h-screen bg-gray-50 flex flex-col overflow-hidden" id="app-shell">
         <Header
           selectedTemplate={selectedTemplate}
           onTemplateChange={handleTemplateChange}
@@ -152,7 +135,9 @@ function App() {
           )}
         </main>
       </div>
-      <ExportTarget resumeData={resumeData} template={selectedTemplate} />
+      <div id="print-area">
+        <Preview resumeData={resumeData} template={selectedTemplate} />
+      </div>
       <input
         ref={fileInputRef}
         type="file"
