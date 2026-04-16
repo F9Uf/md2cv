@@ -59,7 +59,7 @@ const ExportTarget = forwardRef<HTMLDivElement, ExportTargetProps>(
                   {entry.details.length > 0 && (
                     <ul style={{ ...s.detailList, margin: 0, marginTop: '4px', padding: 0, paddingLeft: s.detailList.paddingLeft }}>
                       {entry.details.map((detail, di) => (
-                        <li key={di} style={s.entryDetail}>{detail}</li>
+                        <li key={di} style={s.entryDetail} dangerouslySetInnerHTML={{ __html: detail }} />
                       ))}
                     </ul>
                   )}

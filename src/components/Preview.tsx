@@ -51,7 +51,7 @@ export default function Preview({ resumeData, template }: PreviewProps) {
               {entry.details.length > 0 && (
                 <ul className={styles.detailList}>
                   {entry.details.map((detail, di) => (
-                    <li key={di} className={styles.entryDetail}>{detail}</li>
+                    <li key={di} className={styles.entryDetail} dangerouslySetInnerHTML={{ __html: detail }} />
                   ))}
                 </ul>
               )}
