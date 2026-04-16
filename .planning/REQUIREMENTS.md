@@ -42,11 +42,11 @@
 
 | REQ-ID | Phase | Plan |
 |--------|-------|------|
-| STYLE-01 | TBD | TBD |
-| STYLE-02 | TBD | TBD |
-| STYLE-03 | TBD | TBD |
-| STYLE-04 | TBD | TBD |
-| STYLE-05 | TBD | TBD |
-| HTML-01 | TBD | TBD |
-| HTML-02 | TBD | TBD |
-| HTML-03 | TBD | TBD |
+| STYLE-01 | Phase 4 | TBD |
+| STYLE-02 | Phase 4 | TBD |
+| STYLE-03 | Phase 4 | TBD |
+| STYLE-04 | Phase 4 | TBD |
+| STYLE-05 | Phase 5 | TBD |
+| HTML-01 | Phase 4 | TBD |
+| HTML-02 | Phase 4 | TBD |
+| HTML-03 | Phase 5 | TBD |
