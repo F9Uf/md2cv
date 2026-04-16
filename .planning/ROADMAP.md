@@ -46,7 +46,9 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. Exported PDF preserves bold, italic, inline code, and link formatting from bullet points
   2. Exported PDF renders inline and block HTML content correctly (not as escaped text)
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+- [ ] 05-01-PLAN.md — Add print CSS for inline elements and delete orphaned ExportTarget dead code
 
 ## Progress
 
@@ -56,7 +58,7 @@ Plans:
 | 2. Editor, Parsing & Live Preview | v1.0 | 2/2 | Complete | 2026-04-15 |
 | 3. Export & Storage | v1.0 | 2/2 | Complete | 2026-04-15 |
 | 4. Inline Styles & HTML Preview | v1.1.0 | 0/2 | Not started | - |
-| 5. Export Correctness | v1.1.0 | 0/? | Not started | - |
+| 5. Export Correctness | v1.1.0 | 0/1 | Not started | - |
 
 ---
-*Last updated: 2026-04-16 — Phase 4 planned (2 plans)*
+*Last updated: 2026-04-16 — Phase 5 planned (1 plan)*
