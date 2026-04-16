@@ -34,9 +34,12 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 
 ### Active
 
-- Inline markdown styles in bullet points (bold, italic, inline code, links) rendered in preview and PDF export — v1.1.0
-- Full HTML rendering everywhere via `html: true` on markdown-it — v1.1.0
 - ExportTarget (PDF path) updated to handle HTML content correctly — v1.1.0
+
+### Validated in Phase 04: inline-styles-html-preview
+
+- ✓ Inline markdown styles in bullet points (bold, italic, inline code, links) rendered in preview and PDF export — v1.1.0
+- ✓ Full HTML rendering everywhere via `html: true` on markdown-it — v1.1.0
 
 ### Out of Scope
 
@@ -92,4 +95,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-16 — Milestone v1.1.0 started*
+*Last updated: 2026-04-16 — Phase 04 complete: inline styles & HTML rendering in preview/export*
