@@ -33,7 +33,10 @@
   3. User writes `[text](url)` in a bullet and sees a rendered link in the preview
   4. User writes inline HTML (e.g. `<br>`, `<span style="...">`) and sees it rendered — not escaped — in the preview
   5. User writes block HTML (e.g. `<div>`, `<table>`) and sees it rendered in the preview
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 04-01-PLAN.md — Enable html:true in parser and render bullet details as inline HTML
+- [ ] 04-02-PLAN.md — Wire dangerouslySetInnerHTML in Preview and ExportTarget for detail items
 **UI hint**: yes
 
 ### Phase 5: Export Correctness
@@ -52,8 +55,8 @@
 | 1. Foundation & Layout | v1.0 | 2/2 | Complete | 2026-04-14 |
 | 2. Editor, Parsing & Live Preview | v1.0 | 2/2 | Complete | 2026-04-15 |
 | 3. Export & Storage | v1.0 | 2/2 | Complete | 2026-04-15 |
-| 4. Inline Styles & HTML Preview | v1.1.0 | 0/? | Not started | - |
+| 4. Inline Styles & HTML Preview | v1.1.0 | 0/2 | Not started | - |
 | 5. Export Correctness | v1.1.0 | 0/? | Not started | - |
 
 ---
-*Last updated: 2026-04-16 — v1.1.0 roadmap created*
+*Last updated: 2026-04-16 — Phase 4 planned (2 plans)*
