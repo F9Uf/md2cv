@@ -35,8 +35,8 @@
   5. User writes block HTML (e.g. `<div>`, `<table>`) and sees it rendered in the preview
 **Plans**: 2 plans
 Plans:
-- [ ] 04-01-PLAN.md — Enable html:true in parser and render bullet details as inline HTML
-- [ ] 04-02-PLAN.md — Wire dangerouslySetInnerHTML in Preview and ExportTarget for detail items
+- [x] 04-01-PLAN.md — Enable html:true in parser and render bullet details as inline HTML
+- [x] 04-02-PLAN.md — Wire dangerouslySetInnerHTML in Preview and ExportTarget for detail items
 **UI hint**: yes
 
 ### Phase 5: Export Correctness
