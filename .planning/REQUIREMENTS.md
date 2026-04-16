@@ -10,16 +10,16 @@
 
 ### Inline Styles in Bullets
 
-- [ ] **STYLE-01**: User can write `**bold**` in a bullet point and see it rendered bold in the preview
-- [ ] **STYLE-02**: User can write `*italic*` in a bullet point and see it rendered italic in the preview
-- [ ] **STYLE-03**: User can write `` `code` `` in a bullet point and see it rendered as inline code in the preview
-- [ ] **STYLE-04**: User can write `[text](url)` in a bullet point and see it rendered as a clickable link in the preview
+- [x] **STYLE-01**: User can write `**bold**` in a bullet point and see it rendered bold in the preview
+- [x] **STYLE-02**: User can write `*italic*` in a bullet point and see it rendered italic in the preview
+- [x] **STYLE-03**: User can write `` `code` `` in a bullet point and see it rendered as inline code in the preview
+- [x] **STYLE-04**: User can write `[text](url)` in a bullet point and see it rendered as a clickable link in the preview
 - [ ] **STYLE-05**: All inline styles in bullets (bold, italic, inline code, links) render correctly in the exported PDF
 
 ### HTML Support
 
-- [ ] **HTML-01**: User can write inline HTML (e.g. `<br>`, `<span>`) anywhere in the markdown and see it rendered in the preview
-- [ ] **HTML-02**: User can write block HTML (e.g. `<div>`, `<table>`) anywhere in the markdown and see it rendered in the preview
+- [x] **HTML-01**: User can write inline HTML (e.g. `<br>`, `<span>`) anywhere in the markdown and see it rendered in the preview
+- [x] **HTML-02**: User can write block HTML (e.g. `<div>`, `<table>`) anywhere in the markdown and see it rendered in the preview
 - [ ] **HTML-03**: HTML content renders correctly in the exported PDF
 
 ---
