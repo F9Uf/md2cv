@@ -30,21 +30,6 @@
     margin: 0;
     padding: 0;
   }
-
-  /* Suppress URL display after links in print */
-  #print-area a[href]::after {
-    content: none !important;
-  }
-
-  /* Style inline code in print */
-  #print-area code {
-    font-family: monospace;
-    background-color: #f3f4f6;
-    padding: 1px 3px;
-    border-radius: 2px;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
 }
 
 /* Hide print area from screen */

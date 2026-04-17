@@ -1,6 +1,6 @@
 export interface ResumeEntry {
   title: string        // from h3
-  details: string[]    // from bullet list items under the h3
+  details: string[]    // from bullet list items under the h3, stored as rendered HTML (via md.renderInline)
   extra: string        // any non-bullet content directly under h3 (paragraphs, inline markup), rendered as raw HTML
 }
 
