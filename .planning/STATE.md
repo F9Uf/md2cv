@@ -1,16 +1,15 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.1.0
-milestone_name: — Support text styles & HTML
-status: planning
-stopped_at: Phase 5 context gathered
-last_updated: "2026-04-16T08:18:33.886Z"
-last_activity: 2026-04-16
+milestone: v1.0
+milestone_name: MVP
+status: archived
+stopped_at: v1.0 milestone archived — 3 phases, 6 plans, all 17 requirements shipped
+last_updated: "2026-04-15T00:00:00.000Z"
 progress:
-  total_phases: 2
-  completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  total_phases: 3
+  completed_phases: 3
+  total_plans: 6
+  completed_plans: 6
   percent: 100
 ---
 
@@ -22,21 +21,35 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-16)
+See: .planning/PROJECT.md (updated 2026-04-15)
 
 **Core value:** Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
-**Current focus:** Milestone v1.1.0 — Support text styles & HTML
+**Current focus:** Planning next milestone — run `/gsd-new-milestone`
 
 ---
 
 ## Current Position
 
-Phase: 5
-Plan: Not started
-Status: Roadmap complete, ready to plan Phase 4
-Last activity: 2026-04-16
+Phase: 03 (Export & Storage) — EXECUTING
+Plan: 1 of 2
+**Phase:** 2 — Editor, Parsing & Live Preview
+**Plan:** 02-02 complete — all tasks done, human verification approved
+**Status:** v1.0 milestone complete
+**Progress:** [██████████] 100% (of planned phases 1-2)
 
-Progress: [----------] 0% (0/2 phases complete)
+| Phase | Status |
+|-------|--------|
+| 1. Foundation & Layout | Complete (2/2 plans) |
+| 2. Editor, Parsing & Live Preview | Complete (2/2 plans) |
+| 3. Export & Storage | Complete (2/2 plans) |
+
+---
+
+## Performance Metrics
+
+- Phases complete: 1/3
+- Plans complete: 2
+- Requirements delivered: 7/17 (LAYO-01, LAYO-02, LAYO-03, EDIT-02, PREV-01, PREV-02, PREV-03)
 
 ---
 
@@ -53,7 +66,7 @@ Progress: [----------] 0% (0/2 phases complete)
 - **D-07:** Default split ratio is 50/50 on first load
 - **D-08:** Minimum pane width is 20% each side (max 80%) to prevent pane collapse
 - **D-09:** Split ratio persisted to localStorage under key 'md2cv-split-ratio'; range-validated on read (NaN rejected, fallback 0.5)
-- **D-10:** MarkdownIt() instantiated without html:true — XSS mitigation; extra fields contain escaped HTML only (NOTE: v1.1.0 will enable html:true — personal tool, no other users)
+- **D-10:** MarkdownIt() instantiated without html:true — XSS mitigation; extra fields contain escaped HTML only
 - **D-11:** CodeMirror Editor uses isInternalChange ref to guard external prop sync, preventing cursor-jumping loops
 - **D-12:** Bullet list items extracted at level=2 (list_item > paragraph > inline nesting in markdown-it token tree)
 - **D-13:** Three templates implemented as Tailwind class maps keyed by TemplateName union ('classic'|'modern'|'minimal') — no separate component files per template
@@ -75,10 +88,10 @@ Progress: [----------] 0% (0/2 phases complete)
 
 ## Session Continuity
 
-**Last session:** 2026-04-16T08:18:33.878Z
-**Stopped at:** Phase 5 context gathered
-**Next action:** `/gsd-plan-phase 4`
+**Last session:** 2026-04-15T07:00:00Z
+**Stopped at:** Completed 03-02-PLAN.md — all phases complete, v1 milestone done
+**Next action:** None — project complete
 
 ---
 
-*Last updated: 2026-04-16 — v1.1.0 roadmap created*
+*Last updated: 2026-04-14 after Phase 2 context discussion*
