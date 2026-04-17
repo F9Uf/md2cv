@@ -48,7 +48,7 @@ Plans:
   2. Exported PDF renders inline and block HTML content correctly (not as escaped text)
 **Plans**: 1 plan
 Plans:
-- [ ] 05-01-PLAN.md — Add print CSS for inline elements and delete orphaned ExportTarget dead code
+- [x] 05-01-PLAN.md — Add print CSS for inline elements and delete orphaned ExportTarget dead code
 
 ## Progress
 
