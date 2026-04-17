@@ -8,6 +8,15 @@ md2cv is a personal single-page web application that lets you write your resume 
 
 Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
 
+## Current Milestone: v1.1.0 Support text styles & HTML
+
+**Goal:** Enable inline markdown styles in bullet points and full HTML rendering throughout the resume markdown.
+
+**Target features:**
+- Inline styles in bullets: bold, italic, inline code, links rendered in preview and PDF export
+- Full HTML support everywhere: enable `html: true` on markdown-it so any inline or block HTML renders in preview and export
+- ExportTarget (PDF path) updated to handle HTML content correctly
+
 ## Requirements
 
 ### Validated
@@ -25,7 +34,12 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 
 ### Active
 
-(No active requirements — plan next milestone with `/gsd-new-milestone`)
+- ExportTarget (PDF path) updated to handle HTML content correctly — v1.1.0
+
+### Validated in Phase 04: inline-styles-html-preview
+
+- ✓ Inline markdown styles in bullet points (bold, italic, inline code, links) rendered in preview and PDF export — v1.1.0
+- ✓ Full HTML rendering everywhere via `html: true` on markdown-it — v1.1.0
 
 ### Out of Scope
 
@@ -63,5 +77,22 @@ Shipped v1.0 MVP with ~1,050 LOC TypeScript/TSX.
 | Three templates as Tailwind class maps | Simpler than separate component files | ✓ Good — but ExportTarget needs parallel inline-style map |
 | Vite 5 (not latest) | Node.js v20.11.0 engine constraint | ✓ Correct — stable LTS-track version |
 
+## Evolution
+
+This document evolves at phase transitions and milestone boundaries.
+
+**After each phase transition** (via `/gsd-transition`):
+1. Requirements invalidated? → Move to Out of Scope with reason
+2. Requirements validated? → Move to Validated with phase reference
+3. New requirements emerged? → Add to Active
+4. Decisions to log? → Add to Key Decisions
+5. "What This Is" still accurate? → Update if drifted
+
+**After each milestone** (via `/gsd-complete-milestone`):
+1. Full review of all sections
+2. Core Value check — still the right priority?
+3. Audit Out of Scope — reasons still valid?
+4. Update Context with current state
+
 ---
-*Last updated: 2026-04-15 after v1.0 milestone*
+*Last updated: 2026-04-16 — Phase 04 complete: inline styles & HTML rendering in preview/export*

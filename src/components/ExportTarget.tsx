@@ -38,7 +38,7 @@ const ExportTarget = forwardRef<HTMLDivElement, ExportTargetProps>(
           )}
           {resumeData.sections.map((section, si) => (
             <div key={si} style={{ pageBreakInside: 'avoid' }}>
-              <h2 style={{ ...s.sectionHeading, margin: 0, marginTop: si === 0 ? '24px' : s.sectionHeading.marginTop, marginBottom: s.sectionHeading.marginBottom }}>
+              <h2 style={{ ...s.sectionHeading, margin: 0, marginTop: si === 0 ? '24px' : (s.sectionHeading.marginTop ?? '16px'), marginBottom: s.sectionHeading.marginBottom }}>
                 {section.heading}
               </h2>
               {section.extra && (
@@ -49,7 +49,7 @@ const ExportTarget = forwardRef<HTMLDivElement, ExportTargetProps>(
               )}
               {section.entries.map((entry, ei) => (
                 <div key={ei} style={{ pageBreakInside: 'avoid' }}>
-                  <h3 style={{ ...s.entryTitle, margin: 0, marginTop: s.entryTitle.marginTop }}>{entry.title}</h3>
+                  <h3 style={{ ...s.entryTitle, margin: 0, marginTop: s.entryTitle.marginTop ?? '8px' }}>{entry.title}</h3>
                   {entry.extra && (
                     <div
                       style={s.extra}
@@ -59,7 +59,7 @@ const ExportTarget = forwardRef<HTMLDivElement, ExportTargetProps>(
                   {entry.details.length > 0 && (
                     <ul style={{ ...s.detailList, margin: 0, marginTop: '4px', padding: 0, paddingLeft: s.detailList.paddingLeft }}>
                       {entry.details.map((detail, di) => (
-                        <li key={di} style={s.entryDetail}>{detail}</li>
+                        <li key={di} style={s.entryDetail} dangerouslySetInnerHTML={{ __html: detail }} />
                       ))}
                     </ul>
                   )}

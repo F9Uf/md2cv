@@ -2,8 +2,8 @@ import MarkdownIt from 'markdown-it'
 import type Token from 'markdown-it/lib/token.mjs'
 import type { ResumeData, ResumeSection, ResumeEntry } from '../types/resume'
 
-// Singleton MarkdownIt instance — html: false (default) per threat model T-02-04
-const md = new MarkdownIt()
+// Singleton MarkdownIt instance — html: true enabled for v1.1.0 (personal tool, single user, T-04-01 accepted)
+const md = new MarkdownIt({ html: true })
 
 export function parseResume(markdownText: string): ResumeData {
   const tokens = md.parse(markdownText, {})
@@ -95,6 +95,8 @@ export function parseResume(markdownText: string): ResumeData {
 
     // Handle bullet lists
     if (token.type === 'bullet_list_open') {
+      // Capture base level of the bullet_list_open token for relative-level matching
+      const baseLevel = token.level
       // Collect all tokens until matching bullet_list_close
       const listTokens: Token[] = [token]
       let depth = 1
@@ -110,10 +112,10 @@ export function parseResume(markdownText: string): ResumeData {
       if (context === 'entry' && currentEntry) {
         // Extract list item text into details[]
         for (const t of listTokens) {
-          if (t.type === 'inline' && (t.level === 2 || t.level === 3)) {
-            // level 2 = tight list (list_item > inline)
-            // level 3 = loose list (list_item > paragraph > inline)
-            currentEntry.details.push(t.content)
+          if (t.type === 'inline' && (t.level === baseLevel + 2 || t.level === baseLevel + 3)) {
+            // baseLevel+2 = tight list (list_item > inline)
+            // baseLevel+3 = loose list (list_item > paragraph > inline)
+            currentEntry.details.push(md.renderInline(t.content))
           }
         }
       } else {
