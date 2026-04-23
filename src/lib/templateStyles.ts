@@ -20,7 +20,7 @@ export const TEMPLATE_STYLES: Record<TemplateName, TemplateClasses> = {
     entryTitle: 'text-sm font-semibold mt-3',
     entryDetail: 'text-xs ml-4',
     detailList: 'list-disc pl-2 mt-1 space-y-0.5',
-    extra: 'text-xs text-gray-700 mt-1 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5',
+    extra: 'text-xs mt-1 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5',
   },
    modern: {
     container: 'font-sans max-w-[800px] mx-auto p-8 leading-relaxed',
