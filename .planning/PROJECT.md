@@ -2,20 +2,15 @@
 
 ## What This Is
 
-md2cv is a personal single-page web application that lets you write your resume in Markdown and instantly see it rendered as a styled resume. It parses markdown structure (h1 = name, h2 = sections, h3 = entries, bullets = details) into a live preview with three switchable templates (Classic, Modern, Minimal), and exports the result as a PDF or .md file — all in the browser, no server needed.
+md2cv is a personal single-page web application that lets you write your resume in Markdown and instantly see it rendered as a styled resume. It parses markdown structure (h1 = name, h2 = sections, h3 = entries, bullets = details) into a live preview with three switchable templates (Classic, Modern, Minimal), and exports the result as a PDF or .md file — all in the browser, no server needed. Bullet points and inline text support full markdown formatting (bold, italic, code, links) and arbitrary HTML.
 
 ## Core Value
 
 Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
 
-## Current Milestone: v1.1.0 Support text styles & HTML
+## Current State
 
-**Goal:** Enable inline markdown styles in bullet points and full HTML rendering throughout the resume markdown.
-
-**Target features:**
-- Inline styles in bullets: bold, italic, inline code, links rendered in preview and PDF export
-- Full HTML support everywhere: enable `html: true` on markdown-it so any inline or block HTML renders in preview and export
-- ExportTarget (PDF path) updated to handle HTML content correctly
+**Shipped:** v1.1.0 — Support text styles & HTML (2026-04-24)
 
 ## Requirements
 
@@ -31,15 +26,12 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 - ✓ Export current markdown as .md file (h1-derived filename) — v1.0
 - ✓ Responsive layout: side-by-side on desktop, tabbed Editor/Preview on mobile — v1.0
 - ✓ Draggable split pane separator with localStorage ratio persistence — v1.0
+- ✓ Inline markdown styles in bullet points (bold, italic, inline code, links) rendered in preview — v1.1.0
+- ✓ Full HTML rendering everywhere via `html: true` on markdown-it — v1.1.0
 
 ### Active
 
-- ExportTarget (PDF path) updated to handle HTML content correctly — v1.1.0
-
-### Validated in Phase 04: inline-styles-html-preview
-
-- ✓ Inline markdown styles in bullet points (bold, italic, inline code, links) rendered in preview and PDF export — v1.1.0
-- ✓ Full HTML rendering everywhere via `html: true` on markdown-it — v1.1.0
+*(None — clean slate for next milestone)*
 
 ### Out of Scope
 
@@ -47,16 +39,18 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 - Server-side rendering — 100% client-side by design
 - Custom template builder — three fixed templates is sufficient for v1
 - Real-time collaboration — single-user personal tool
+- Sanitizing/restricting HTML — personal tool, single user, no XSS concern
+- PDF export correctness for inline styles/HTML (STYLE-05, HTML-03) — dropped with Phase 5
 
 ## Context
 
-Shipped v1.0 MVP with ~1,050 LOC TypeScript/TSX.
+Shipped v1.1.0 with ~1,100 LOC TypeScript/TSX.
 
 **Tech stack:** Vite 5, React 18, TypeScript, Tailwind CSS v4, CodeMirror 6, markdown-it, html2pdf.js
 
 **Known technical debt:**
 - html2pdf.js uses an old html2canvas that crashes on oklch color functions — worked around by creating a parallel `templateInlineStyles.ts` with hex/rgb CSSProperties for the ExportTarget component. If Tailwind or the template styles change significantly, ExportTarget must be kept in sync manually.
-- Plan 02-02 has `**Plans**: TBD` in the ROADMAP archive (was set before planning ran) — cosmetic only.
+- Dark mode for CodeMirror editor — quick task dropped from v1.1.0, carry forward if desired.
 
 ## Constraints
 
@@ -76,6 +70,9 @@ Shipped v1.0 MVP with ~1,050 LOC TypeScript/TSX.
 | Tailwind CSS v4 via @tailwindcss/vite | No postcss.config.js needed | ✓ Good — clean setup |
 | Three templates as Tailwind class maps | Simpler than separate component files | ✓ Good — but ExportTarget needs parallel inline-style map |
 | Vite 5 (not latest) | Node.js v20.11.0 engine constraint | ✓ Correct — stable LTS-track version |
+| html: true on MarkdownIt | Enable inline HTML and proper inline style rendering | ✓ Good — XSS accepted (personal tool) |
+| md.renderInline() for bullet details | Converts inline markdown to HTML without wrapping `<p>` tags | ✓ Good — clean output for list items |
+| dangerouslySetInnerHTML for detail `<li>` | Consistent with existing `extra` field pattern in Preview/ExportTarget | ✓ Good |
 
 ## Evolution
 
@@ -95,4 +92,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-16 — Phase 04 complete: inline styles & HTML rendering in preview/export*
+*Last updated: 2026-04-24 after v1.1.0 milestone*

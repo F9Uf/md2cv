@@ -14,3 +14,16 @@
 - PDF export (html2pdf.js from hidden ExportTarget) and .md file import via FileReader API
 
 ---
+
+## v1.1.0 Support text styles & HTML (Shipped: 2026-04-24)
+
+**Phases completed:** 1 phase, 2 plans, 2 tasks
+
+**Key accomplishments:**
+
+- MarkdownIt configured with `html: true` and bullet details stored as rendered HTML strings via `md.renderInline()` — supports bold, italic, code, and link formatting in bullet points
+- Preview.tsx and ExportTarget.tsx updated to render bullet detail items using `dangerouslySetInnerHTML`, consuming HTML strings from the parser
+
+**Known deferred items at close: 4 (see STATE.md Deferred Items)**
+
+---

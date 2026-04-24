@@ -1,11 +1,11 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.1.0
-milestone_name: — Support text styles & HTML
-status: planning
-stopped_at: Phase 5 context gathered
-last_updated: "2026-04-17T17:50:05.705Z"
-last_activity: 2026-04-16
+milestone_name: Support text styles & HTML
+status: complete
+stopped_at: Milestone v1.1.0 closed
+last_updated: "2026-04-24T00:00:00.000Z"
+last_activity: 2026-04-24
 progress:
   total_phases: 1
   completed_phases: 1
@@ -22,21 +22,25 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-16)
+See: .planning/PROJECT.md (updated 2026-04-24)
 
 **Core value:** Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
-**Current focus:** Milestone v1.1.0 — Support text styles & HTML
+**Current focus:** Planning next milestone
 
 ---
 
-## Current Position
+## Deferred Items
 
-Phase: 5
-Plan: Not started
-Status: Roadmap complete, ready to plan Phase 4
-Last activity: 2026-04-16
+Items acknowledged and deferred at milestone close on 2026-04-24:
 
-Progress: [----------] 0% (0/2 phases complete)
+| Category | Item | Status |
+|----------|------|--------|
+| verification | Phase 04: 04-VERIFICATION.md | human_needed |
+| quick_task | 260415-05x-add-dark-mode-styling-to-the-codemirror | missing |
+| requirement | STYLE-05 — Inline styles in PDF export | dropped with Phase 5 |
+| requirement | HTML-03 — HTML renders in PDF export | dropped with Phase 5 |
+
+Known deferred items at close: 4 (see above)
 
 ---
 
@@ -53,7 +57,7 @@ Progress: [----------] 0% (0/2 phases complete)
 - **D-07:** Default split ratio is 50/50 on first load
 - **D-08:** Minimum pane width is 20% each side (max 80%) to prevent pane collapse
 - **D-09:** Split ratio persisted to localStorage under key 'md2cv-split-ratio'; range-validated on read (NaN rejected, fallback 0.5)
-- **D-10:** MarkdownIt() instantiated without html:true — XSS mitigation; extra fields contain escaped HTML only (NOTE: v1.1.0 will enable html:true — personal tool, no other users)
+- **D-10:** MarkdownIt() instantiated with `html: true` — XSS accepted (personal tool, no other users)
 - **D-11:** CodeMirror Editor uses isInternalChange ref to guard external prop sync, preventing cursor-jumping loops
 - **D-12:** Bullet list items extracted at level=2 (list_item > paragraph > inline nesting in markdown-it token tree)
 - **D-13:** Three templates implemented as Tailwind class maps keyed by TemplateName union ('classic'|'modern'|'minimal') — no separate component files per template
@@ -62,6 +66,7 @@ Progress: [----------] 0% (0/2 phases complete)
 - **D-16:** resumeData initialized with parseResume(SAMPLE_RESUME) to prevent empty-state flash on first load
 - **D-17:** ExportTarget uses inline CSSProperties (hex/rgb only) instead of Tailwind classes to avoid oklch color function errors in html2canvas
 - **D-18:** templateInlineStyles.ts is a separate file from templateStyles.ts — Preview keeps Tailwind classes, ExportTarget uses inline styles
+- **D-19:** `md.renderInline()` used to convert bullet detail content to HTML strings — dangerouslySetInnerHTML used in Preview and ExportTarget to render them
 
 ### Active Todos
 
@@ -75,10 +80,10 @@ Progress: [----------] 0% (0/2 phases complete)
 
 ## Session Continuity
 
-**Last session:** 2026-04-16T08:18:33.878Z
-**Stopped at:** Phase 5 context gathered
-**Next action:** `/gsd-plan-phase 4`
+**Last session:** 2026-04-24
+**Stopped at:** Milestone v1.1.0 closed
+**Next action:** `/gsd-new-milestone` to start next milestone
 
 ---
 
-*Last updated: 2026-04-16 — v1.1.0 roadmap created*
+*Last updated: 2026-04-24 — v1.1.0 milestone closed*
