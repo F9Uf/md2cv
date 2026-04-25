@@ -41,10 +41,10 @@
 
 | REQ-ID | Phase | Status |
 |--------|-------|--------|
-| PARSER-01 | — | pending |
-| PARSER-02 | — | pending |
-| TMPL-01 | — | pending |
-| TMPL-02 | — | pending |
-| PREV-01 | — | pending |
-| PREV-02 | — | pending |
-| PREV-03 | — | pending |
+| PARSER-01 | Phase 5 | pending |
+| PARSER-02 | Phase 5 | pending |
+| TMPL-01 | Phase 5 | pending |
+| TMPL-02 | Phase 5 | pending |
+| PREV-01 | Phase 6 | pending |
+| PREV-02 | Phase 6 | pending |
+| PREV-03 | Phase 6 | pending |

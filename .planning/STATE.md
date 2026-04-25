@@ -3,11 +3,11 @@ gsd_state_version: 1.0
 milestone: v1.2.0
 milestone_name: Support render HTML with Tailwind classes
 status: in_progress
-stopped_at: Defining requirements
+stopped_at: Roadmap created — ready for Phase 5 planning
 last_updated: "2026-04-25T00:00:00.000Z"
 last_activity: 2026-04-25
 progress:
-  total_phases: 0
+  total_phases: 2
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -26,6 +26,18 @@ See: .planning/PROJECT.md (updated 2026-04-24)
 
 **Core value:** Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
 **Current focus:** Milestone v1.2.0 — Support render HTML with Tailwind classes
+
+---
+
+## Current Position
+
+**Phase:** 5 — Parser Simplification & Template Restructure
+**Plan:** TBD
+**Status:** Not started
+
+```
+Progress: [          ] 0% (0/2 phases)
+```
 
 ---
 
@@ -81,9 +93,9 @@ Known deferred items at close: 4 (see above)
 ## Session Continuity
 
 **Last session:** 2026-04-25
-**Stopped at:** Milestone v1.2.0 started — defining requirements
-**Next action:** Define requirements, then `/gsd-plan-phase 5`
+**Stopped at:** Roadmap created for v1.2.0 — Phases 5 and 6 defined
+**Next action:** `/gsd-plan-phase 5`
 
 ---
 
-*Last updated: 2026-04-25 — v1.2.0 milestone started*
+*Last updated: 2026-04-25 — v1.2.0 roadmap created*
