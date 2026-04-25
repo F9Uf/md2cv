@@ -5,12 +5,13 @@
 h1 { @apply theme-minimal:text-2xl theme-minimal:font-extralight theme-minimal:tracking-widest theme-minimal:mb-2; }
 h2 { @apply theme-minimal:text-xs theme-minimal:font-normal theme-minimal:uppercase theme-minimal:tracking-[0.25em] theme-minimal:text-gray-700 theme-minimal:mt-10 theme-minimal:mb-4; }
 h3 { @apply theme-minimal:text-sm theme-minimal:font-normal theme-minimal:mt-4; }
-p  { @apply theme-minimal:text-xs theme-minimal:text-gray-500 theme-minimal:mb-10 theme-minimal:tracking-wide; }
+p  { @apply theme-minimal:text-sm theme-minimal:text-gray-500 theme-minimal:tracking-wide; }
 ul { @apply theme-minimal:list-disc theme-minimal:pl-4 theme-minimal:mt-1 theme-minimal:space-y-1.5; }
 ol { @apply theme-minimal:list-decimal theme-minimal:pl-4 theme-minimal:mt-1 theme-minimal:space-y-1.5; }
 li { @apply theme-minimal:text-sm theme-minimal:ml-4 theme-minimal:text-gray-700 theme-minimal:font-light; }
 code { @apply theme-minimal:font-mono theme-minimal:text-xs theme-minimal:bg-gray-50 theme-minimal:px-0.5; }
 pre  { @apply theme-minimal:font-mono theme-minimal:text-xs theme-minimal:bg-gray-50 theme-minimal:p-4 theme-minimal:mt-2 theme-minimal:overflow-x-auto; }
-a    { @apply theme-minimal:text-gray-800 theme-minimal:underline theme-minimal:underline-offset-2; }
+a    { @apply theme-minimal:text-gray-500 theme-minimal:underline theme-minimal:underline-offset-2; }
 blockquote { @apply theme-minimal:border-l theme-minimal:border-gray-300 theme-minimal:pl-4 theme-minimal:text-sm theme-minimal:text-gray-400 theme-minimal:font-light theme-minimal:italic theme-minimal:my-3; }
 hr   { @apply theme-minimal:border-t theme-minimal:border-gray-100 theme-minimal:my-6; }
+strong { @apply theme-minimal:text-gray-700}
