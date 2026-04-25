@@ -18,7 +18,7 @@ export default function Preview({ htmlContent, template }: PreviewProps) {
 
   return (
     <div
-      className={styles.container}
+      className={`theme-${template} ${styles.container}`}
       dangerouslySetInnerHTML={{ __html: htmlContent }}
     />
   )
