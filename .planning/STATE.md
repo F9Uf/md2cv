@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.2.0
 milestone_name: Support render HTML with Tailwind classes
-status: executing
+status: milestone_complete
 stopped_at: Phase 6 UI-SPEC approved
 last_updated: "2026-04-25T16:35:04.616Z"
 progress:
   total_phases: 2
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 5
   completed_plans: 3
-  percent: 60
+  percent: 100
 ---
 
 # State: md2cv
@@ -32,9 +32,9 @@ See: .planning/PROJECT.md (updated 2026-04-24)
 
 Phase: --phase (06) — EXECUTING
 Plan: 1 of --name
-**Phase:** 6
-**Plan:** 2 plans ready (06-01, 06-02)
-**Status:** Executing Phase --phase
+**Phase:** 06
+**Plan:** Not started
+**Status:** Milestone complete
 
 ```
 Progress: [          ] 0% (0/2 phases)

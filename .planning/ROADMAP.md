@@ -58,8 +58,8 @@ Plans:
   4. The preview renders correctly for standard markdown content without visual regressions from previous milestone
 **Plans**: 2 plans
 Plans:
-- [ ] 06-01-PLAN.md — Create themes.css (@apply rules for all 3 themes), simplify templateStyles.ts, add Play CDN to index.html
-- [ ] 06-02-PLAN.md — Update Preview.tsx to apply theme-{template} class + browser verification checkpoint
+- [x] 06-01-PLAN.md — Create themes.css (@apply rules for all 3 themes), simplify templateStyles.ts, add Play CDN to index.html
+- [x] 06-02-PLAN.md — Update Preview.tsx to apply theme-{template} class + browser verification checkpoint
 **UI hint**: yes
 
 ## Progress
