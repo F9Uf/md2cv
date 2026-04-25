@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.2.0
 milestone_name: Support render HTML with Tailwind classes
 status: planning
-stopped_at: Phase 6 UI-SPEC approved
-last_updated: "2026-04-25T09:48:47.561Z"
+stopped_at: Phase 6 plans created — ready to execute
+last_updated: "2026-04-25T00:00:00.000Z"
 progress:
   total_phases: 2
   completed_phases: 1
@@ -33,8 +33,8 @@ See: .planning/PROJECT.md (updated 2026-04-24)
 Phase: --phase (05) — EXECUTING
 Plan: 1 of --name
 **Phase:** 6
-**Plan:** Not started
-**Status:** Ready to plan
+**Plan:** 2 plans ready (06-01, 06-02)
+**Status:** Ready to execute
 
 ```
 Progress: [          ] 0% (0/2 phases)
@@ -95,7 +95,7 @@ Known deferred items at close: 4 (see above)
 
 **Last session:** --stopped-at
 **Stopped at:** Phase 6 UI-SPEC approved
-**Next action:** `/gsd-plan-phase 5`
+**Next action:** `/gsd-execute-phase 6`
 
 ---
 
