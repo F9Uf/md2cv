@@ -27,3 +27,19 @@
 **Known deferred items at close: 4 (see STATE.md Deferred Items)**
 
 ---
+
+## v1.2.0 Support render HTML with Tailwind classes (Shipped: 2026-04-26)
+
+**Phases completed:** 2 phases, 5 plans
+
+**Key accomplishments:**
+
+- Token-walking parser replaced with `md.render()` — parseResume.ts reduced from ~120 lines to 5; ResumeData type eliminated entirely
+- Template styles restructured from semantic keys to HTML element tags (h1, h2, h3, ul, li, code, a, etc.) across all three templates
+- CSS theme architecture using Tailwind v4 `@custom-variant` — per-template scoped element styles in three CSS files
+- Tailwind Play CDN added for runtime utility class resolution; DOMPurify configured with `ADD_ATTR: ['class']` to preserve user-authored classes
+- Full browser verification: Classic/Modern/Minimal templates visually distinct; user-authored Tailwind classes render correctly
+
+**Known deferred items at close: 1 (false positive — see STATE.md Deferred Items)**
+
+---

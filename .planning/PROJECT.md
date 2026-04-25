@@ -41,6 +41,8 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 
 ### Active
 
+*(None — next milestone TBD via `/gsd-new-milestone`)*
+
 ### Validated in Phase 06: tailwind-powered-preview-rendering
 
 - ✓ Preview applies Tailwind classes to elements by tag type (via @custom-variant scoped CSS) — v1.2.0
@@ -62,7 +64,7 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 
 ## Context
 
-Shipped v1.1.0 with ~1,100 LOC TypeScript/TSX.
+Shipped v1.2.0 with ~633 LOC TypeScript/TSX (reduced from ~1,100 in v1.1.0 — parser simplification removed significant code).
 
 **Tech stack:** Vite 5, React 18, TypeScript, Tailwind CSS v4, CodeMirror 6, markdown-it, html2pdf.js
 
@@ -91,6 +93,10 @@ Shipped v1.1.0 with ~1,100 LOC TypeScript/TSX.
 | html: true on MarkdownIt | Enable inline HTML and proper inline style rendering | ✓ Good — XSS accepted (personal tool) |
 | md.renderInline() for bullet details | Converts inline markdown to HTML without wrapping `<p>` tags | ✓ Good — clean output for list items |
 | dangerouslySetInnerHTML for detail `<li>` | Consistent with existing `extra` field pattern in Preview/ExportTarget | ✓ Good |
+| md.render() replaces token-walker (v1.2.0) | Dramatically simpler pipeline; HTML string as the single data format eliminates ResumeData type | ✓ Good — parseResume.ts went from ~120 to 5 lines |
+| Tailwind v4 `@custom-variant` for theme CSS (v1.2.0) | Discovered during build as valid alternative to `@layer base`; scopes element styles to `.theme-{template}` container | ✓ Good — production verified |
+| Play CDN for runtime Tailwind (v1.2.0) | Enables arbitrary user-authored utility classes without build-time scanning | ✓ Good — required for user-authored HTML classes |
+| DOMPurify `ADD_ATTR: ['class']` (v1.2.0) | Required to let user class attributes survive sanitization before CDN resolves them | ✓ Good — PREV-03 blocker fix |
 
 ## Evolution
 
@@ -110,4 +116,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-25 after Phase 05 (parser-simplification-template-restructure)*
+*Last updated: 2026-04-26 after v1.2.0 milestone*

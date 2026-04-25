@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.2.0
 milestone_name: Support render HTML with Tailwind classes
-status: milestone_complete
-stopped_at: Phase 6 UI-SPEC approved
-last_updated: "2026-04-25T16:35:04.616Z"
+status: archived
+stopped_at: v1.2.0 milestone archived
+last_updated: "2026-04-26T00:00:00.000Z"
 progress:
   total_phases: 2
   completed_phases: 2
@@ -21,10 +21,10 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-24)
+See: .planning/PROJECT.md (updated 2026-04-26)
 
 **Core value:** Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
-**Current focus:** Phase --phase — 06
+**Current focus:** Planning next milestone (v1.3.0 TBD)
 
 ---
 
@@ -53,7 +53,9 @@ Items acknowledged and deferred at milestone close on 2026-04-24:
 | requirement | STYLE-05 — Inline styles in PDF export | dropped with Phase 5 |
 | requirement | HTML-03 — HTML renders in PDF export | dropped with Phase 5 |
 
-Known deferred items at close: 4 (see above)
+| quick_task | 260415-05x-add-dark-mode-styling-to-the-codemirror (v1.2.0) | false positive — SUMMARY.md exists, task complete |
+
+Known deferred items at close: 5 (see above)
 
 ---
 
