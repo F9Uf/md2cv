@@ -20,7 +20,7 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 
 ## Current State
 
-**Shipped:** v1.1.0 — Support text styles & HTML (2026-04-24)
+**Shipped:** v1.2.0 — Support render HTML with Tailwind classes (2026-04-26). Phase 06 complete.
 
 ## Requirements
 
@@ -41,8 +41,10 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 
 ### Active
 
-- [ ] Preview applies Tailwind classes to elements by tag type — v1.2.0
-- [ ] Tailwind runtime support so user-authored HTML classes work in preview — v1.2.0
+### Validated in Phase 06: tailwind-powered-preview-rendering
+
+- ✓ Preview applies Tailwind classes to elements by tag type (via @custom-variant scoped CSS) — v1.2.0
+- ✓ Tailwind runtime support so user-authored HTML classes work in preview (Play CDN + DOMPurify with ADD_ATTR: ['class']) — v1.2.0
 
 ### Validated in Phase 05: parser-simplification-template-restructure
 
