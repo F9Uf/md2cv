@@ -42,9 +42,9 @@
   4. All three templates (Classic, Modern, Minimal) are expressed in the new element-keyed format with no regressions in visual output
 **Plans**: 3 plans
 Plans:
-- [ ] 05-01-PLAN.md — Rewrite parseResume.test.ts for HTML string output + snapshot baseline (test-first per D-08, D-09)
-- [ ] 05-02-PLAN.md — Restructure templateStyles.ts to element-keyed format (D-05, D-06, D-07)
-- [ ] 05-03-PLAN.md — Replace parseResume() body with md.render(), simplify Preview.tsx stub, update App.tsx (D-01, D-02, D-03)
+- [x] 05-01-PLAN.md — Rewrite parseResume.test.ts for HTML string output + snapshot baseline (test-first per D-08, D-09)
+- [x] 05-02-PLAN.md — Restructure templateStyles.ts to element-keyed format (D-05, D-06, D-07)
+- [x] 05-03-PLAN.md — Replace parseResume() body with md.render(), simplify Preview.tsx stub, update App.tsx (D-01, D-02, D-03)
 **UI hint**: yes
 
 ### Phase 6: Tailwind-Powered Preview Rendering
