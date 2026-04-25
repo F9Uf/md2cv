@@ -1,4 +1,6 @@
+import DOMPurify from 'dompurify'
 import { TEMPLATE_STYLES, type TemplateName } from '../lib/templateStyles'
+import '../styles/themes.css'
 
 interface PreviewProps {
   htmlContent: string
@@ -6,7 +8,7 @@ interface PreviewProps {
 }
 
 export default function Preview({ htmlContent, template }: PreviewProps) {
-  const styles = TEMPLATE_STYLES[template]
+  const styles = TEMPLATE_STYLES[template] ?? TEMPLATE_STYLES['classic']
 
   if (!htmlContent.trim()) {
     return (
@@ -19,7 +21,7 @@ export default function Preview({ htmlContent, template }: PreviewProps) {
   return (
     <div
       className={`theme-${template} ${styles.container}`}
-      dangerouslySetInnerHTML={{ __html: htmlContent }}
+      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(htmlContent) }}
     />
   )
 }
