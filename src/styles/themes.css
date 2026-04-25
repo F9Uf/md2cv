@@ -1,42 +1,77 @@
 @reference "tailwindcss";
 
-@layer base {
-  .theme-classic h1 { @apply text-xl font-bold text-center mb-1; }
-  .theme-classic h2 { @apply text-base font-bold uppercase border-b border-black pb-1 mt-4 mb-3; }
-  .theme-classic h3 { @apply text-sm font-semibold mt-3; }
-  .theme-classic p  { @apply text-center text-xs text-gray-600 mb-4; }
-  .theme-classic ul { @apply list-disc pl-2 mt-1 space-y-0.5; }
-  .theme-classic ol { @apply list-decimal pl-2 mt-1 space-y-0.5; }
-  .theme-classic li { @apply text-xs ml-4; }
-  .theme-classic code { @apply font-mono text-xs bg-gray-100 px-0.5 rounded; }
-  .theme-classic pre  { @apply font-mono text-xs bg-gray-100 p-3 rounded mt-2 overflow-x-auto; }
-  .theme-classic a    { @apply text-blue-700 underline; }
-  .theme-classic blockquote { @apply border-l-2 border-gray-400 pl-3 text-xs text-gray-600 italic my-2; }
-  .theme-classic hr { @apply border-t border-gray-300 my-4; }
+@custom-variant theme-classic (.theme-classic &);
+@custom-variant theme-modern (.theme-modern &);
+@custom-variant theme-minimal (.theme-minimal &);
 
-  .theme-modern h1 { @apply text-2xl font-bold mb-1; }
-  .theme-modern h2 { @apply text-base font-bold border-l-4 border-gray-800 pl-3 mt-4 mb-2 uppercase tracking-wide; }
-  .theme-modern h3 { @apply text-base font-semibold mt-2; }
-  .theme-modern p  { @apply text-xs text-gray-500 mb-6; }
-  .theme-modern ul { @apply list-disc pl-2 mt-1 space-y-1; }
-  .theme-modern ol { @apply list-decimal pl-2 mt-1 space-y-1; }
-  .theme-modern li { @apply text-xs ml-4 text-gray-700; }
-  .theme-modern code { @apply font-mono text-xs bg-gray-100 px-0.5 rounded; }
-  .theme-modern pre  { @apply font-mono text-xs bg-gray-100 p-3 rounded mt-2 overflow-x-auto; }
-  .theme-modern a    { @apply text-blue-600 underline hover:text-blue-800; }
-  .theme-modern blockquote { @apply border-l-4 border-gray-300 pl-3 text-xs text-gray-500 italic my-2; }
-  .theme-modern hr { @apply border-t border-gray-200 my-4; }
+h1 {
+  @apply theme-classic:text-xl theme-classic:font-bold theme-classic:text-center theme-classic:mb-1;
+  @apply theme-modern:text-2xl theme-modern:font-bold theme-modern:mb-1;
+  @apply theme-minimal:text-2xl theme-minimal:font-extralight theme-minimal:tracking-widest theme-minimal:mb-2;
+}
 
-  .theme-minimal h1 { @apply text-2xl font-extralight tracking-widest mb-2; }
-  .theme-minimal h2 { @apply text-xs font-normal uppercase tracking-[0.25em] text-gray-700 mt-10 mb-4; }
-  .theme-minimal h3 { @apply text-sm font-normal mt-4; }
-  .theme-minimal p  { @apply text-xs text-gray-500 mb-10 tracking-wide; }
-  .theme-minimal ul { @apply list-disc pl-4 mt-1 space-y-1.5; }
-  .theme-minimal ol { @apply list-decimal pl-4 mt-1 space-y-1.5; }
-  .theme-minimal li { @apply text-sm ml-4 text-gray-700 font-light; }
-  .theme-minimal code { @apply font-mono text-xs bg-gray-50 px-0.5; }
-  .theme-minimal pre  { @apply font-mono text-xs bg-gray-50 p-4 mt-2 overflow-x-auto; }
-  .theme-minimal a    { @apply text-gray-800 underline underline-offset-2; }
-  .theme-minimal blockquote { @apply border-l border-gray-300 pl-4 text-sm text-gray-400 font-light italic my-3; }
-  .theme-minimal hr { @apply border-t border-gray-100 my-6; }
+h2 {
+  @apply theme-classic:text-base theme-classic:font-bold theme-classic:uppercase theme-classic:border-b theme-classic:border-black theme-classic:pb-1 theme-classic:mt-4 theme-classic:mb-3;
+  @apply theme-modern:text-base theme-modern:font-bold theme-modern:border-l-4 theme-modern:border-gray-800 theme-modern:pl-3 theme-modern:mt-4 theme-modern:mb-2 theme-modern:uppercase theme-modern:tracking-wide;
+  @apply theme-minimal:text-xs theme-minimal:font-normal theme-minimal:uppercase theme-minimal:tracking-[0.25em] theme-minimal:text-gray-700 theme-minimal:mt-10 theme-minimal:mb-4;
+}
+
+h3 {
+  @apply theme-classic:text-sm theme-classic:font-semibold theme-classic:mt-3;
+  @apply theme-modern:text-base theme-modern:font-semibold theme-modern:mt-2;
+  @apply theme-minimal:text-sm theme-minimal:font-normal theme-minimal:mt-4;
+}
+
+p {
+  @apply theme-classic:text-center theme-classic:text-xs theme-classic:text-gray-600 theme-classic:mb-4;
+  @apply theme-modern:text-xs theme-modern:text-gray-500 theme-modern:mb-6;
+  @apply theme-minimal:text-xs theme-minimal:text-gray-500 theme-minimal:mb-10 theme-minimal:tracking-wide;
+}
+
+ul {
+  @apply theme-classic:list-disc theme-classic:pl-2 theme-classic:mt-1 theme-classic:space-y-0.5;
+  @apply theme-modern:list-disc theme-modern:pl-2 theme-modern:mt-1 theme-modern:space-y-1;
+  @apply theme-minimal:list-disc theme-minimal:pl-4 theme-minimal:mt-1 theme-minimal:space-y-1.5;
+}
+
+ol {
+  @apply theme-classic:list-decimal theme-classic:pl-2 theme-classic:mt-1 theme-classic:space-y-0.5;
+  @apply theme-modern:list-decimal theme-modern:pl-2 theme-modern:mt-1 theme-modern:space-y-1;
+  @apply theme-minimal:list-decimal theme-minimal:pl-4 theme-minimal:mt-1 theme-minimal:space-y-1.5;
+}
+
+li {
+  @apply theme-classic:text-xs theme-classic:ml-4;
+  @apply theme-modern:text-xs theme-modern:ml-4 theme-modern:text-gray-700;
+  @apply theme-minimal:text-sm theme-minimal:ml-4 theme-minimal:text-gray-700 theme-minimal:font-light;
+}
+
+code {
+  @apply theme-classic:font-mono theme-classic:text-xs theme-classic:bg-gray-100 theme-classic:px-0.5 theme-classic:rounded;
+  @apply theme-modern:font-mono theme-modern:text-xs theme-modern:bg-gray-100 theme-modern:px-0.5 theme-modern:rounded;
+  @apply theme-minimal:font-mono theme-minimal:text-xs theme-minimal:bg-gray-50 theme-minimal:px-0.5;
+}
+
+pre {
+  @apply theme-classic:font-mono theme-classic:text-xs theme-classic:bg-gray-100 theme-classic:p-3 theme-classic:rounded theme-classic:mt-2 theme-classic:overflow-x-auto;
+  @apply theme-modern:font-mono theme-modern:text-xs theme-modern:bg-gray-100 theme-modern:p-3 theme-modern:rounded theme-modern:mt-2 theme-modern:overflow-x-auto;
+  @apply theme-minimal:font-mono theme-minimal:text-xs theme-minimal:bg-gray-50 theme-minimal:p-4 theme-minimal:mt-2 theme-minimal:overflow-x-auto;
+}
+
+a {
+  @apply theme-classic:text-blue-700 theme-classic:underline;
+  @apply theme-modern:text-blue-600 theme-modern:underline hover:theme-modern:text-blue-800;
+  @apply theme-minimal:text-gray-800 theme-minimal:underline theme-minimal:underline-offset-2;
+}
+
+blockquote {
+  @apply theme-classic:border-l-2 theme-classic:border-gray-400 theme-classic:pl-3 theme-classic:text-xs theme-classic:text-gray-600 theme-classic:italic theme-classic:my-2;
+  @apply theme-modern:border-l-4 theme-modern:border-gray-300 theme-modern:pl-3 theme-modern:text-xs theme-modern:text-gray-500 theme-modern:italic theme-modern:my-2;
+  @apply theme-minimal:border-l theme-minimal:border-gray-300 theme-minimal:pl-4 theme-minimal:text-sm theme-minimal:text-gray-400 theme-minimal:font-light theme-minimal:italic theme-minimal:my-3;
+}
+
+hr {
+  @apply theme-classic:border-t theme-classic:border-gray-300 theme-classic:my-4;
+  @apply theme-modern:border-t theme-modern:border-gray-200 theme-modern:my-4;
+  @apply theme-minimal:border-t theme-minimal:border-gray-100 theme-minimal:my-6;
 }
