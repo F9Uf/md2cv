@@ -1,0 +1,42 @@
+@reference "tailwindcss";
+
+@layer base {
+  .theme-classic h1 { @apply text-xl font-bold text-center mb-1; }
+  .theme-classic h2 { @apply text-base font-bold uppercase border-b border-black pb-1 mt-4 mb-3; }
+  .theme-classic h3 { @apply text-sm font-semibold mt-3; }
+  .theme-classic p  { @apply text-center text-xs text-gray-600 mb-4; }
+  .theme-classic ul { @apply list-disc pl-2 mt-1 space-y-0.5; }
+  .theme-classic ol { @apply list-decimal pl-2 mt-1 space-y-0.5; }
+  .theme-classic li { @apply text-xs ml-4; }
+  .theme-classic code { @apply font-mono text-xs bg-gray-100 px-0.5 rounded; }
+  .theme-classic pre  { @apply font-mono text-xs bg-gray-100 p-3 rounded mt-2 overflow-x-auto; }
+  .theme-classic a    { @apply text-blue-700 underline; }
+  .theme-classic blockquote { @apply border-l-2 border-gray-400 pl-3 text-xs text-gray-600 italic my-2; }
+  .theme-classic hr { @apply border-t border-gray-300 my-4; }
+
+  .theme-modern h1 { @apply text-2xl font-bold mb-1; }
+  .theme-modern h2 { @apply text-base font-bold border-l-4 border-gray-800 pl-3 mt-4 mb-2 uppercase tracking-wide; }
+  .theme-modern h3 { @apply text-base font-semibold mt-2; }
+  .theme-modern p  { @apply text-xs text-gray-500 mb-6; }
+  .theme-modern ul { @apply list-disc pl-2 mt-1 space-y-1; }
+  .theme-modern ol { @apply list-decimal pl-2 mt-1 space-y-1; }
+  .theme-modern li { @apply text-xs ml-4 text-gray-700; }
+  .theme-modern code { @apply font-mono text-xs bg-gray-100 px-0.5 rounded; }
+  .theme-modern pre  { @apply font-mono text-xs bg-gray-100 p-3 rounded mt-2 overflow-x-auto; }
+  .theme-modern a    { @apply text-blue-600 underline hover:text-blue-800; }
+  .theme-modern blockquote { @apply border-l-4 border-gray-300 pl-3 text-xs text-gray-500 italic my-2; }
+  .theme-modern hr { @apply border-t border-gray-200 my-4; }
+
+  .theme-minimal h1 { @apply text-2xl font-extralight tracking-widest mb-2; }
+  .theme-minimal h2 { @apply text-xs font-normal uppercase tracking-[0.25em] text-gray-700 mt-10 mb-4; }
+  .theme-minimal h3 { @apply text-sm font-normal mt-4; }
+  .theme-minimal p  { @apply text-xs text-gray-500 mb-10 tracking-wide; }
+  .theme-minimal ul { @apply list-disc pl-4 mt-1 space-y-1.5; }
+  .theme-minimal ol { @apply list-decimal pl-4 mt-1 space-y-1.5; }
+  .theme-minimal li { @apply text-sm ml-4 text-gray-700 font-light; }
+  .theme-minimal code { @apply font-mono text-xs bg-gray-50 px-0.5; }
+  .theme-minimal pre  { @apply font-mono text-xs bg-gray-50 p-4 mt-2 overflow-x-auto; }
+  .theme-minimal a    { @apply text-gray-800 underline underline-offset-2; }
+  .theme-minimal blockquote { @apply border-l border-gray-300 pl-4 text-sm text-gray-400 font-light italic my-3; }
+  .theme-minimal hr { @apply border-t border-gray-100 my-6; }
+}
