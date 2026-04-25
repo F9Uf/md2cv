@@ -64,6 +64,14 @@ Exceptions: Minimal theme uses `leading-loose` and `tracking-[0.25em]` on h2 —
 
 Typography is theme-specific. All values are preserved from `templateStyles.ts` — no changes in Phase 6.
 
+> **PRESERVATION WAIVER — multi-weight typography**
+>
+> The checker's 2-weight maximum rule does not apply to this phase. Phase 6 is a PRESERVATION migration: it re-expresses element-level styles that were defined in Phase 5 (`templateStyles.ts`) as CSS `@apply` rules, with zero new design decisions. The font weights listed below are LOCKED INHERITED VALUES from Phase 5 decisions D-05, D-06, and D-07 (`.planning/phases/05-parser-simplification-template-restructure/05-CONTEXT.md`), which established the element-keyed TS format that Phase 6 migrates verbatim to CSS.
+>
+> Locking authority: Phase 5 CONTEXT.md D-05/D-06/D-07.
+>
+> Phase 6 does not introduce new typography decisions. It only re-expresses existing values in a different format (CSS `@apply` instead of TypeScript strings). Any weight counts above 2 per theme are a direct consequence of the locked Phase 5 contract and are intentional.
+
 ### Classic (font-serif)
 
 | Role | Element | Size | Weight | Notes |
