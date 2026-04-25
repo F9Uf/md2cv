@@ -21,7 +21,7 @@ export default function Preview({ htmlContent, template }: PreviewProps) {
   return (
     <div
       className={`theme-${template} ${styles.container}`}
-      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(htmlContent) }}
+      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(htmlContent, { ADD_ATTR: ['class'] }) }}
     />
   )
 }
