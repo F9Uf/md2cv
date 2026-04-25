@@ -2,6 +2,11 @@
 
 @custom-variant theme-minimal (.theme-minimal &);
 
+header {
+    p {
+        @apply theme-minimal:text-xs
+    }
+}
 h1 { @apply theme-minimal:text-2xl theme-minimal:font-extralight theme-minimal:tracking-widest theme-minimal:mb-2; }
 h2 { @apply theme-minimal:text-xs theme-minimal:font-normal theme-minimal:uppercase theme-minimal:tracking-[0.25em] theme-minimal:text-gray-700 theme-minimal:mt-10 theme-minimal:mb-4; }
 h3 { @apply theme-minimal:text-sm theme-minimal:font-normal theme-minimal:mt-4; }

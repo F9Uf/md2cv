@@ -2,7 +2,15 @@
 
 @custom-variant theme-classic (.theme-classic &);
 
-h1 { @apply theme-classic:text-xl theme-classic:font-bold theme-classic:text-center theme-classic:mb-1; }
+header {
+    h1 {
+        @apply theme-classic:text-center
+    }
+    p {
+        @apply theme-classic:text-center
+    }
+}
+h1 { @apply theme-classic:text-xl theme-classic:font-bold theme-classic:mb-1; }
 h2 { @apply theme-classic:text-base theme-classic:font-bold theme-classic:uppercase theme-classic:border-b theme-classic:border-black theme-classic:pb-1 theme-classic:mt-4 theme-classic:mb-3; }
 h3 { @apply theme-classic:text-sm theme-classic:font-semibold theme-classic:mt-3; }
 p  { @apply theme-classic:text-xs; }

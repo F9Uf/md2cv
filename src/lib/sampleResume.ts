@@ -1,6 +1,11 @@
-export const SAMPLE_RESUME = `# Jane Smith
+export const SAMPLE_RESUME = `
+<header>
+
+# Jane Smith
 
 Software Engineer | jane@example.com | github.com/janesmith
+
+</header>
 
 ## Experience
 
