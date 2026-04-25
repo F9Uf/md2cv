@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.1.0
-milestone_name: Support text styles & HTML
-status: complete
-stopped_at: Milestone v1.1.0 closed
-last_updated: "2026-04-24T00:00:00.000Z"
-last_activity: 2026-04-24
+milestone: v1.2.0
+milestone_name: Support render HTML with Tailwind classes
+status: in_progress
+stopped_at: Defining requirements
+last_updated: "2026-04-25T00:00:00.000Z"
+last_activity: 2026-04-25
 progress:
-  total_phases: 1
-  completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # State: md2cv
@@ -25,7 +25,7 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-24)
 
 **Core value:** Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
-**Current focus:** Planning next milestone
+**Current focus:** Milestone v1.2.0 — Support render HTML with Tailwind classes
 
 ---
 
@@ -80,10 +80,10 @@ Known deferred items at close: 4 (see above)
 
 ## Session Continuity
 
-**Last session:** 2026-04-24
-**Stopped at:** Milestone v1.1.0 closed
-**Next action:** `/gsd-new-milestone` to start next milestone
+**Last session:** 2026-04-25
+**Stopped at:** Milestone v1.2.0 started — defining requirements
+**Next action:** Define requirements, then `/gsd-plan-phase 5`
 
 ---
 
-*Last updated: 2026-04-24 — v1.1.0 milestone closed*
+*Last updated: 2026-04-25 — v1.2.0 milestone started*

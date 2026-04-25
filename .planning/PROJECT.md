@@ -8,6 +8,16 @@ md2cv is a personal single-page web application that lets you write your resume 
 
 Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
 
+## Current Milestone: v1.2.0 Support render HTML with Tailwind classes
+
+**Goal:** Users can write HTML elements with Tailwind utility classes directly in their markdown and have them render correctly in the live preview.
+
+**Target features:**
+- `parseResume.ts` simplified to use `md.render()` — outputs raw HTML string
+- `templateStyles.ts` re-keyed by HTML element tag (`h1`, `h2`, `h3`, `ul`, `li`, `code`, `a`, etc.)
+- Preview updated to apply Tailwind classes to elements by tag type and render user-authored HTML with working Tailwind classes
+- Tailwind available at runtime in the preview so arbitrary user-authored classes work correctly
+
 ## Current State
 
 **Shipped:** v1.1.0 — Support text styles & HTML (2026-04-24)
@@ -31,7 +41,10 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 
 ### Active
 
-*(None — clean slate for next milestone)*
+- [ ] Use `md.render()` for HTML output instead of token-walking parser — v1.2.0
+- [ ] Template styles keyed by HTML element tag (h1, h2, h3, ul, li, code, a, etc.) — v1.2.0
+- [ ] Preview applies Tailwind classes to elements by tag type — v1.2.0
+- [ ] Tailwind runtime support so user-authored HTML classes work in preview — v1.2.0
 
 ### Out of Scope
 
