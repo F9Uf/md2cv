@@ -1,0 +1,16 @@
+@reference "tailwindcss";
+
+@custom-variant theme-classic (.theme-classic &);
+
+h1 { @apply theme-classic:text-xl theme-classic:font-bold theme-classic:text-center theme-classic:mb-1; }
+h2 { @apply theme-classic:text-base theme-classic:font-bold theme-classic:uppercase theme-classic:border-b theme-classic:border-black theme-classic:pb-1 theme-classic:mt-4 theme-classic:mb-3; }
+h3 { @apply theme-classic:text-sm theme-classic:font-semibold theme-classic:mt-3; }
+p  { @apply theme-classic:text-xs; }
+ul { @apply theme-classic:list-disc theme-classic:pl-2 theme-classic:mt-1 theme-classic:space-y-0.5; }
+ol { @apply theme-classic:list-decimal theme-classic:pl-2 theme-classic:mt-1 theme-classic:space-y-0.5; }
+li { @apply theme-classic:text-xs theme-classic:ml-4; }
+code { @apply theme-classic:font-mono theme-classic:text-xs theme-classic:bg-gray-100 theme-classic:px-0.5 theme-classic:rounded; }
+pre  { @apply theme-classic:font-mono theme-classic:text-xs theme-classic:bg-gray-100 theme-classic:p-3 theme-classic:rounded theme-classic:mt-2 theme-classic:overflow-x-auto; }
+a    { @apply theme-classic:underline; }
+blockquote { @apply theme-classic:border-l-2 theme-classic:border-gray-400 theme-classic:pl-3 theme-classic:text-xs theme-classic:text-gray-600 theme-classic:italic theme-classic:my-2; }
+hr   { @apply theme-classic:border-t theme-classic:border-gray-300 theme-classic:my-4; }
