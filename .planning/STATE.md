@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.2.0
 milestone_name: Support render HTML with Tailwind classes
-status: planning
-stopped_at: Phase 6 plans created — ready to execute
-last_updated: "2026-04-25T00:00:00.000Z"
+status: executing
+stopped_at: Phase 6 UI-SPEC approved
+last_updated: "2026-04-25T16:35:04.616Z"
 progress:
   total_phases: 2
   completed_phases: 1
-  total_plans: 3
+  total_plans: 5
   completed_plans: 3
-  percent: 100
+  percent: 60
 ---
 
 # State: md2cv
@@ -24,17 +24,17 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-24)
 
 **Core value:** Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
-**Current focus:** Phase --phase — 05
+**Current focus:** Phase --phase — 06
 
 ---
 
 ## Current Position
 
-Phase: --phase (05) — EXECUTING
+Phase: --phase (06) — EXECUTING
 Plan: 1 of --name
 **Phase:** 6
 **Plan:** 2 plans ready (06-01, 06-02)
-**Status:** Ready to execute
+**Status:** Executing Phase --phase
 
 ```
 Progress: [          ] 0% (0/2 phases)
