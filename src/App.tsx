@@ -9,7 +9,6 @@ import { useMediaQuery } from './hooks/useMediaQuery'
 import { parseResume } from './lib/parseResume'
 import { SAMPLE_RESUME } from './lib/sampleResume'
 import type { TemplateName } from './lib/templateStyles'
-import type { ResumeData } from './types/resume'
 
 function App() {
   const isDesktop = useMediaQuery('(min-width: 768px)')
@@ -32,8 +31,8 @@ function App() {
     return SAMPLE_RESUME
   })
 
-  // Debounced resume data for preview — initialized from same source as markdownContent
-  const [resumeData, setResumeData] = useState<ResumeData>(() => {
+  // Debounced HTML content for preview — initialized from same source as markdownContent
+  const [htmlContent, setHtmlContent] = useState<string>(() => {
     try {
       const stored = localStorage.getItem('md2cv-content')
       if (stored !== null) return parseResume(stored)
@@ -52,17 +51,14 @@ function App() {
     setMarkdownContent(value)
     if (debounceRef.current) clearTimeout(debounceRef.current)
     debounceRef.current = setTimeout(() => {
-      setResumeData(parseResume(value))
+      setHtmlContent(parseResume(value))
       try { localStorage.setItem('md2cv-content', value) } catch { /* ignore */ }
     }, 150)
   }, [])
 
   // Download current markdown content as a .md file (per D-06, D-07, D-08)
   const handleDownloadMd = useCallback(() => {
-    const slug = resumeData.name
-      ? resumeData.name.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-      : 'resume'
-    const filename = (slug || 'resume') + '.md'
+    const filename = 'resume.md'
     const blob = new Blob([markdownContent], { type: 'text/markdown' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
@@ -70,7 +66,7 @@ function App() {
     a.download = filename
     a.click()
     URL.revokeObjectURL(url)
-  }, [markdownContent, resumeData.name])
+  }, [markdownContent])
 
   // Export PDF via browser print dialog — @media print CSS hides everything except preview
   const handleExportPdf = useCallback(() => {
@@ -109,7 +105,7 @@ function App() {
   }, [])
 
   const editor = <Editor value={markdownContent} onChange={handleMarkdownChange} />
-  const preview = <Preview resumeData={resumeData} template={selectedTemplate} />
+  const preview = <Preview htmlContent={htmlContent} template={selectedTemplate} />
 
   return (
     <>
@@ -136,7 +132,7 @@ function App() {
         </main>
       </div>
       <div id="print-area">
-        <Preview resumeData={resumeData} template={selectedTemplate} />
+        <Preview htmlContent={htmlContent} template={selectedTemplate} />
       </div>
       <input
         ref={fileInputRef}

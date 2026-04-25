@@ -1,16 +1,15 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.1.0
-milestone_name: Support text styles & HTML
-status: complete
-stopped_at: Milestone v1.1.0 closed
-last_updated: "2026-04-24T00:00:00.000Z"
-last_activity: 2026-04-24
+milestone: v1.2.0
+milestone_name: Support render HTML with Tailwind classes
+status: archived
+stopped_at: v1.2.0 milestone archived
+last_updated: "2026-04-26T00:00:00.000Z"
 progress:
-  total_phases: 1
-  completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  total_phases: 2
+  completed_phases: 2
+  total_plans: 5
+  completed_plans: 3
   percent: 100
 ---
 
@@ -22,10 +21,24 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-24)
+See: .planning/PROJECT.md (updated 2026-04-26)
 
 **Core value:** Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
-**Current focus:** Planning next milestone
+**Current focus:** Planning next milestone (v1.3.0 TBD)
+
+---
+
+## Current Position
+
+Phase: --phase (06) — EXECUTING
+Plan: 1 of --name
+**Phase:** 06
+**Plan:** Not started
+**Status:** Milestone complete
+
+```
+Progress: [          ] 0% (0/2 phases)
+```
 
 ---
 
@@ -40,7 +53,9 @@ Items acknowledged and deferred at milestone close on 2026-04-24:
 | requirement | STYLE-05 — Inline styles in PDF export | dropped with Phase 5 |
 | requirement | HTML-03 — HTML renders in PDF export | dropped with Phase 5 |
 
-Known deferred items at close: 4 (see above)
+| quick_task | 260415-05x-add-dark-mode-styling-to-the-codemirror (v1.2.0) | false positive — SUMMARY.md exists, task complete |
+
+Known deferred items at close: 5 (see above)
 
 ---
 
@@ -80,10 +95,10 @@ Known deferred items at close: 4 (see above)
 
 ## Session Continuity
 
-**Last session:** 2026-04-24
-**Stopped at:** Milestone v1.1.0 closed
-**Next action:** `/gsd-new-milestone` to start next milestone
+**Last session:** --stopped-at
+**Stopped at:** Phase 6 UI-SPEC approved
+**Next action:** `/gsd-execute-phase 6`
 
 ---
 
-*Last updated: 2026-04-24 — v1.1.0 milestone closed*
+*Last updated: 2026-04-25 — v1.2.0 roadmap created*

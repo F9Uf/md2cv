@@ -1,0 +1,16 @@
+@reference "tailwindcss";
+
+@custom-variant theme-modern (.theme-modern &);
+
+h1 { @apply theme-modern:text-2xl theme-modern:font-bold theme-modern:mb-1; }
+h2 { @apply theme-modern:text-base theme-modern:font-bold theme-modern:border-l-4 theme-modern:border-gray-800 theme-modern:pl-3 theme-modern:mt-4 theme-modern:mb-2 theme-modern:uppercase theme-modern:tracking-wide; }
+h3 { @apply theme-modern:text-base theme-modern:font-semibold theme-modern:mt-2; }
+p  { @apply theme-modern:text-xs theme-modern:text-gray-600; }
+ul { @apply theme-modern:list-disc theme-modern:pl-2 theme-modern:mt-1 theme-modern:space-y-1; }
+ol { @apply theme-modern:list-decimal theme-modern:pl-2 theme-modern:mt-1 theme-modern:space-y-1; }
+li { @apply theme-modern:text-xs theme-modern:ml-4 theme-modern:text-gray-700; }
+code { @apply theme-modern:font-mono theme-modern:text-xs theme-modern:bg-gray-100 theme-modern:px-0.5 theme-modern:rounded; }
+pre  { @apply theme-modern:font-mono theme-modern:text-xs theme-modern:bg-gray-100 theme-modern:p-3 theme-modern:rounded theme-modern:mt-2 theme-modern:overflow-x-auto; }
+a    { @apply theme-modern:text-gray-500 theme-modern:underline theme-modern:hover:text-blue-800; }
+blockquote { @apply theme-modern:border-l-4 theme-modern:border-gray-300 theme-modern:pl-3 theme-modern:text-xs theme-modern:text-gray-500 theme-modern:italic theme-modern:my-2; }
+hr   { @apply theme-modern:border-t theme-modern:border-gray-200 theme-modern:my-4; }
