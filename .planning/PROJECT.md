@@ -41,10 +41,13 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 
 ### Active
 
-- [ ] Use `md.render()` for HTML output instead of token-walking parser — v1.2.0
-- [ ] Template styles keyed by HTML element tag (h1, h2, h3, ul, li, code, a, etc.) — v1.2.0
 - [ ] Preview applies Tailwind classes to elements by tag type — v1.2.0
 - [ ] Tailwind runtime support so user-authored HTML classes work in preview — v1.2.0
+
+### Validated in Phase 05: parser-simplification-template-restructure
+
+- ✓ Use `md.render()` for HTML output instead of token-walking parser — v1.2.0
+- ✓ Template styles keyed by HTML element tag (h1, h2, h3, ul, li, code, a, etc.) — v1.2.0
 
 ### Out of Scope
 
@@ -105,4 +108,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-24 after v1.1.0 milestone*
+*Last updated: 2026-04-25 after Phase 05 (parser-simplification-template-restructure)*
