@@ -40,7 +40,11 @@
   2. User can write raw HTML tags directly in markdown and see them appear in the preview
   3. A developer (or Claude) can look up the Tailwind classes for any element tag (h1, h2, ul, li, code, a, etc.) for each of the three templates
   4. All three templates (Classic, Modern, Minimal) are expressed in the new element-keyed format with no regressions in visual output
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 05-01-PLAN.md — Rewrite parseResume.test.ts for HTML string output + snapshot baseline (test-first per D-08, D-09)
+- [ ] 05-02-PLAN.md — Restructure templateStyles.ts to element-keyed format (D-05, D-06, D-07)
+- [ ] 05-03-PLAN.md — Replace parseResume() body with md.render(), simplify Preview.tsx stub, update App.tsx (D-01, D-02, D-03)
 **UI hint**: yes
 
 ### Phase 6: Tailwind-Powered Preview Rendering
@@ -63,5 +67,5 @@
 | 2. Editor, Parsing & Live Preview | v1.0 | 2/2 | Complete | 2026-04-15 |
 | 3. Export & Storage | v1.0 | 2/2 | Complete | 2026-04-15 |
 | 4. Inline Styles & HTML Preview | v1.1.0 | 2/2 | Complete | 2026-04-16 |
-| 5. Parser Simplification & Template Restructure | v1.2.0 | 0/? | Not started | - |
+| 5. Parser Simplification & Template Restructure | v1.2.0 | 0/3 | Not started | - |
 | 6. Tailwind-Powered Preview Rendering | v1.2.0 | 0/? | Not started | - |
