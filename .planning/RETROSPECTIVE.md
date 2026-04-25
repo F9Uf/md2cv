@@ -40,6 +40,69 @@
 
 ---
 
+## Milestone: v1.1.0 — Support text styles & HTML
+
+**Shipped:** 2026-04-24
+**Phases:** 1 | **Plans:** 2
+
+### What Was Built
+- MarkdownIt configured with `html: true` for full HTML pass-through
+- Bullet details stored as HTML strings via `md.renderInline()` — bold, italic, code, links in bullet points
+- Preview.tsx and ExportTarget.tsx updated to render detail items via `dangerouslySetInnerHTML`
+
+### What Worked
+- Single-phase milestone kept scope tight and execution fast
+- renderInline() was the right call — wraps no `<p>` tags, clean output for list items
+
+### What Was Inefficient
+- Verification status left as `human_needed` — carried forward until v1.2.0 close rather than resolved promptly
+
+### Patterns Established
+- `html: true` as the MarkdownIt default for personal tools (XSS accepted, no multi-user surface)
+- `dangerouslySetInnerHTML` pattern for `<li>` detail items — consistent with existing `extra` field pattern
+
+### Key Lessons
+1. **Close human verification prompts at the end of the session** — leaving them as `human_needed` creates noise at milestone close.
+
+---
+
+## Milestone: v1.2.0 — Support render HTML with Tailwind classes
+
+**Shipped:** 2026-04-26
+**Phases:** 2 | **Plans:** 5
+
+### What Was Built
+- Token-walking parser replaced with `md.render()` — parseResume.ts reduced from ~120 lines to 5; ResumeData type eliminated
+- Template styles restructured from semantic keys to HTML element tags (13-key TemplateClasses interface)
+- CSS theme architecture with Tailwind v4 `@custom-variant` for scoped per-template element styles
+- Tailwind Play CDN for runtime utility class resolution; DOMPurify configured with `ADD_ATTR: ['class']`
+
+### What Worked
+- Test-first (Plan 05-01 wrote failing tests before implementation) gave a clear RED → GREEN signal for the parser swap
+- Discovering `@custom-variant` as the correct Tailwind v4 mechanism early prevented wasted time on `@layer base`
+- Human browser verification checkpoint at plan 06-02 caught style tuning opportunities before ship
+
+### What Was Inefficient
+- DOMPurify stripping `class` attributes was caught only at verification, not during planning — should have been a noted risk in the Phase 6 plan
+- `@reference "tailwindcss"` directive needed for `@apply` in separate CSS files wasn't documented in the plan; discovered during build
+
+### Patterns Established
+- `@custom-variant theme-X (.theme-X &)` for scoped Tailwind v4 CSS — valid alternative to `@layer base` descendant selectors
+- `DOMPurify.sanitize(html, { ADD_ATTR: ['class'] })` when sanitizing user HTML that needs class passthrough
+- Play CDN in `<head>` (synchronous, no defer) for runtime Tailwind class resolution
+
+### Key Lessons
+1. **Plan for DOMPurify attribute stripping** when wiring user-authored HTML through sanitization — `class`, `style`, and `href` are commonly stripped.
+2. **Check Tailwind v4 `@apply` requirements upfront** — `@apply` in separate CSS files requires `@reference "tailwindcss"` directive.
+3. **Test-first pays off for pipeline rewrites** — writing the HTML string contract tests before changing `parseResume.ts` made the migration mechanical and confident.
+
+### Cost Observations
+- Model mix: sonnet-dominant
+- Sessions: ~4
+- Notable: Phase 5 plan granularity (3 plans) was appropriate; Phase 6 (2 plans) was tight but executed cleanly
+
+---
+
 ## Cross-Milestone Trends
 
 ### Process Evolution
@@ -47,14 +110,20 @@
 | Milestone | Sessions | Phases | Key Change |
 |-----------|----------|--------|------------|
 | v1.0 | 2 | 3 | Initial project — baseline established |
+| v1.1.0 | 1 | 1 | Inline HTML/markdown rendering in bullets |
+| v1.2.0 | ~4 | 2 | Parser rewrite + Tailwind CSS runtime |
 
 ### Cumulative Quality
 
-| Milestone | Tests | Coverage | Zero-Dep Additions |
-|-----------|-------|----------|-------------------|
-| v1.0 | 0 | 0% | 0 |
+| Milestone | Tests | LOC (src) | Notes |
+|-----------|-------|-----------|-------|
+| v1.0 | 0 | ~1,100 | Baseline |
+| v1.1.0 | 0 | ~1,100 | Minimal code change |
+| v1.2.0 | 15 | ~633 | Parser simplification reduced LOC significantly |
 
 ### Top Lessons (Verified Across Milestones)
 
 1. Test PDF/canvas-based exports early — third-party rendering libraries have CSS compatibility constraints that surface late.
 2. Keep requirement tracking live during execution — stale checkboxes create unnecessary review work at milestone close.
+3. Close human verification prompts within the same session — leaving them open carries noise into future milestone close.
+4. DOMPurify strips `class` and other attributes by default — plan for this when sanitizing user-authored HTML that needs passthrough.
