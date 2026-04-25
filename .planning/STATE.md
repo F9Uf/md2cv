@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.2.0
 milestone_name: Support render HTML with Tailwind classes
 status: planning
-stopped_at: Phase 6 context gathered
-last_updated: "2026-04-25T09:30:27.033Z"
+stopped_at: Phase 6 UI-SPEC approved
+last_updated: "2026-04-25T09:48:47.561Z"
 progress:
   total_phases: 2
   completed_phases: 1
@@ -94,7 +94,7 @@ Known deferred items at close: 4 (see above)
 ## Session Continuity
 
 **Last session:** --stopped-at
-**Stopped at:** Phase 6 context gathered
+**Stopped at:** Phase 6 UI-SPEC approved
 **Next action:** `/gsd-plan-phase 5`
 
 ---

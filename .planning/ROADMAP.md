@@ -56,7 +56,10 @@ Plans:
   2. A user who writes `<div class="text-red-500">` in their markdown sees red text in the preview
   3. A user who writes `<span class="font-bold underline">` sees bold underlined text — arbitrary Tailwind utility classes work, not just build-time scanned ones
   4. The preview renders correctly for standard markdown content without visual regressions from previous milestone
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 06-01-PLAN.md — Create themes.css (@apply rules for all 3 themes), simplify templateStyles.ts, add Play CDN to index.html
+- [ ] 06-02-PLAN.md — Update Preview.tsx to apply theme-{template} class + browser verification checkpoint
 **UI hint**: yes
 
 ## Progress
@@ -68,4 +71,4 @@ Plans:
 | 3. Export & Storage | v1.0 | 2/2 | Complete | 2026-04-15 |
 | 4. Inline Styles & HTML Preview | v1.1.0 | 2/2 | Complete | 2026-04-16 |
 | 5. Parser Simplification & Template Restructure | v1.2.0 | 0/3 | Not started | - |
-| 6. Tailwind-Powered Preview Rendering | v1.2.0 | 0/? | Not started | - |
+| 6. Tailwind-Powered Preview Rendering | v1.2.0 | 0/2 | Not started | - |
