@@ -68,10 +68,15 @@ function App() {
     URL.revokeObjectURL(url)
   }, [markdownContent])
 
-  // Export PDF via browser print dialog — @media print CSS hides everything except preview
+  // Export PDF via browser print dialog — sets document.title to name from markdown so the
+  // browser uses it as the default PDF filename, then restores the original title after print.
   const handleExportPdf = useCallback(() => {
+    const nameMatch = markdownContent.match(/^#\s+(.+)/m)
+    const originalTitle = document.title
+    if (nameMatch) document.title = nameMatch[1].trim()
     window.print()
-  }, [])
+    document.title = originalTitle
+  }, [markdownContent])
 
   // Import .md file via native file picker (per D-13, D-14, D-15)
   const handleImportMd = useCallback(() => {
