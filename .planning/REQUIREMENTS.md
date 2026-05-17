@@ -60,21 +60,21 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PREV-01 | TBD | Pending |
-| PREV-02 | TBD | Pending |
-| PREV-03 | TBD | Pending |
-| MARG-01 | TBD | Pending |
-| MARG-02 | TBD | Pending |
-| MARG-03 | TBD | Pending |
-| ZOOM-01 | TBD | Pending |
-| PDFX-01 | TBD | Pending |
-| PDFX-02 | TBD | Pending |
+| PREV-01 | Phase 7 — Page Chrome & Auto Pagination | Pending |
+| PREV-02 | Phase 7 — Page Chrome & Auto Pagination | Pending |
+| PREV-03 | Phase 7 — Page Chrome & Auto Pagination | Pending |
+| MARG-01 | Phase 8 — Configurable Margins | Pending |
+| MARG-02 | Phase 8 — Configurable Margins | Pending |
+| MARG-03 | Phase 8 — Configurable Margins | Pending |
+| ZOOM-01 | Phase 9 — Responsive Auto-Fit Zoom | Pending |
+| PDFX-01 | Phase 10 — Unified Pixel-Perfect PDF Pipeline | Pending |
+| PDFX-02 | Phase 10 — Unified Pixel-Perfect PDF Pipeline | Pending |
 
 **Coverage:**
 - v1.3.0 requirements: 9 total
-- Mapped to phases: 0 (roadmap pending)
-- Unmapped: 9 ⚠️ (will be resolved by roadmapper)
+- Mapped to phases: 9 ✓
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-05-18*
-*Last updated: 2026-05-18 — milestone v1.3.0 initial definition*
+*Last updated: 2026-05-18 — roadmap created, all 9 requirements mapped to Phases 7–10*
