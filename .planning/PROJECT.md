@@ -8,19 +8,22 @@ md2cv is a personal single-page web application that lets you write your resume 
 
 Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
 
-## Current Milestone: v1.2.0 Support render HTML with Tailwind classes
+## Current Milestone: v1.3.0 Support preview with realistic page
 
-**Goal:** Users can write HTML elements with Tailwind utility classes directly in their markdown and have them render correctly in the live preview.
+**Goal:** Preview the resume as a real A4 page with margins, auto page breaks, and a page count — and have the exported PDF match the preview pixel-for-pixel.
 
 **Target features:**
-- `parseResume.ts` simplified to use `md.render()` — outputs raw HTML string
-- `templateStyles.ts` re-keyed by HTML element tag (`h1`, `h2`, `h3`, `ul`, `li`, `code`, `a`, etc.)
-- Preview updated to apply Tailwind classes to elements by tag type and render user-authored HTML with working Tailwind classes
-- Tailwind available at runtime in the preview so arbitrary user-authored classes work correctly
+- Preview pane renders as A4-sized page rectangle(s) with visible margins (replacing today's continuous flowing div)
+- Content overflowing one page auto-flows onto a new page rectangle below (multi-page rendering)
+- User-configurable margins via four numeric inputs (top / bottom / left / right), persisted to localStorage
+- Page count indicator ("Page X of N") visible in the UI
+- Pixel-perfect WYSIWYG between preview and exported PDF — single rendering path. Likely retires the `templateInlineStyles.ts` parallel-map workaround and/or replaces html2pdf.js with a print-CSS / browser-native print pipeline so the PDF is produced from the same DOM the user sees.
 
 ## Current State
 
 **Shipped:** v1.2.0 — Support render HTML with Tailwind classes (2026-04-26). Phase 06 complete.
+
+**In flight:** v1.3.0 — defining requirements and roadmap.
 
 ## Requirements
 
@@ -39,9 +42,14 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 - ✓ Inline markdown styles in bullet points (bold, italic, inline code, links) rendered in preview — v1.1.0
 - ✓ Full HTML rendering everywhere via `html: true` on markdown-it — v1.1.0
 
-### Active
+### Active (v1.3.0)
 
-*(None — next milestone TBD via `/gsd-new-milestone`)*
+- [ ] Preview pane renders content inside A4-sized page rectangle(s) with visible margins
+- [ ] Multi-page preview: content overflowing one page auto-flows onto additional page rectangles
+- [ ] User can configure page margins via four numeric inputs (top/bottom/left/right); persisted to localStorage
+- [ ] UI shows current page count ("Page X of N") that updates live as user types
+- [ ] Exported PDF visually matches preview pixel-for-pixel (page size, margins, page break positions, fonts, colors)
+- [ ] Unified rendering path — Preview and PDF export consume the same DOM/styles (eliminate `templateInlineStyles.ts` parallel-map workaround)
 
 ### Validated in Phase 06: tailwind-powered-preview-rendering
 
@@ -116,4 +124,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-26 after v1.2.0 milestone*
+*Last updated: 2026-05-18 after starting v1.3.0 milestone*

@@ -1,16 +1,16 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.2.0
-milestone_name: Support render HTML with Tailwind classes
-status: archived
-stopped_at: v1.2.0 milestone archived
-last_updated: "2026-04-26T00:00:00.000Z"
+milestone: v1.3.0
+milestone_name: Support preview with realistic page
+status: active
+stopped_at: defining requirements
+last_updated: "2026-05-18T00:00:00.000Z"
 progress:
-  total_phases: 2
-  completed_phases: 2
-  total_plans: 5
-  completed_plans: 3
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # State: md2cv
@@ -21,23 +21,22 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-26)
+See: .planning/PROJECT.md (updated 2026-05-18)
 
 **Core value:** Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
-**Current focus:** Planning next milestone (v1.3.0 TBD)
+**Current focus:** v1.3.0 — Support preview with realistic page (defining requirements)
 
 ---
 
 ## Current Position
 
-Phase: --phase (06) — EXECUTING
-Plan: 1 of --name
-**Phase:** 06
-**Plan:** Not started
-**Status:** Milestone complete
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-05-18 — Milestone v1.3.0 started
 
 ```
-Progress: [          ] 0% (0/2 phases)
+Progress: [          ] 0% (milestone v1.3.0 starting)
 ```
 
 ---
@@ -95,10 +94,10 @@ Known deferred items at close: 5 (see above)
 
 ## Session Continuity
 
-**Last session:** --stopped-at
-**Stopped at:** Phase 6 UI-SPEC approved
-**Next action:** `/gsd-execute-phase 6`
+**Last session:** 2026-05-18
+**Stopped at:** Defining v1.3.0 requirements
+**Next action:** `/gsd-plan-phase 7` (after roadmap approval)
 
 ---
 
-*Last updated: 2026-04-25 — v1.2.0 roadmap created*
+*Last updated: 2026-05-18 — v1.3.0 milestone started*
