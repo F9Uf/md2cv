@@ -1,3 +1,5 @@
+import { DEFAULT_MARGINS } from '../lib/constants'
+
 export interface MarginValues {
   top: number
   right: number
@@ -19,7 +21,7 @@ export default function MarginControls({ margins, onMarginsChange }: MarginContr
   }
 
   const handleReset = () => {
-    ;(['top', 'right', 'bottom', 'left'] as const).forEach(side => onMarginsChange(side, 15))
+    ;(['top', 'right', 'bottom', 'left'] as const).forEach(side => onMarginsChange(side, DEFAULT_MARGINS[side]))
   }
 
   const sides: { key: keyof MarginValues; label: string }[] = [
