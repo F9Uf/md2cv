@@ -1,6 +1,3 @@
-import { useState, useEffect } from 'react'
-import { DEFAULT_MARGINS } from '../lib/constants'
-
 export interface MarginValues {
   top: number
   right: number
@@ -14,43 +11,15 @@ interface MarginControlsProps {
 }
 
 export default function MarginControls({ margins, onMarginsChange }: MarginControlsProps) {
-  const [inputValues, setInputValues] = useState<Record<keyof MarginValues, string>>({
-    top: String(margins.top),
-    right: String(margins.right),
-    bottom: String(margins.bottom),
-    left: String(margins.left),
-  })
-
-  // Sync local display state when external margins change (e.g. after reset)
-  useEffect(() => {
-    setInputValues({
-      top: String(margins.top),
-      right: String(margins.right),
-      bottom: String(margins.bottom),
-      left: String(margins.left),
-    })
-  }, [margins])
-
   const handleChange = (side: keyof MarginValues) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValues(prev => ({ ...prev, [side]: e.target.value }))
-  }
-
-  const handleBlur = (side: keyof MarginValues) => () => {
-    const raw = inputValues[side]
-    const parsed = Number(raw)
-    if (raw === '' || isNaN(parsed)) {
-      // Reset display to the current committed value
-      setInputValues(prev => ({ ...prev, [side]: String(margins[side]) }))
-      return
-    }
+    const parsed = Number(e.target.value)
+    if (!e.target.value || isNaN(parsed)) return
     const clamped = Math.min(50, Math.max(0, parsed))
     onMarginsChange(side, clamped)
   }
 
   const handleReset = () => {
-    ;(['top', 'right', 'bottom', 'left'] as const).forEach(side =>
-      onMarginsChange(side, DEFAULT_MARGINS[side])
-    )
+    ;(['top', 'right', 'bottom', 'left'] as const).forEach(side => onMarginsChange(side, 15))
   }
 
   const sides: { key: keyof MarginValues; label: string }[] = [
@@ -77,9 +46,8 @@ export default function MarginControls({ margins, onMarginsChange }: MarginContr
               min="0"
               max="50"
               step="1"
-              value={inputValues[key]}
+              value={margins[key]}
               onChange={handleChange(key)}
-              onBlur={handleBlur(key)}
               className="w-full h-9 px-2 bg-gray-600 text-white text-sm text-center border-0 focus:outline-none focus:ring-1 focus:ring-inset focus:ring-blue-400"
               aria-label={`${label} margin in millimetres`}
             />
