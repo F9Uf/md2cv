@@ -3,6 +3,7 @@ import DOMPurify from 'dompurify'
 import { Previewer } from 'pagedjs'
 import { TEMPLATE_STYLES, type TemplateName } from '../lib/templateStyles'
 import { type MarginValues } from './MarginControls'
+import { DEFAULT_MARGINS } from '../lib/constants'
 import '../styles/themes.css'
 
 interface PreviewProps {
@@ -18,7 +19,7 @@ export default function Preview({
   template,
   enablePagination = true,
   onPageCountChange,
-  margins = { top: 15, right: 15, bottom: 15, left: 15 },
+  margins = DEFAULT_MARGINS,
 }: PreviewProps) {
   const styles = TEMPLATE_STYLES[template] ?? TEMPLATE_STYLES['classic']
   const previewerRootRef = useRef<HTMLDivElement>(null)

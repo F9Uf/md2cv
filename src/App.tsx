@@ -10,6 +10,7 @@ import { parseResume } from './lib/parseResume'
 import { SAMPLE_RESUME } from './lib/sampleResume'
 import type { TemplateName } from './lib/templateStyles'
 import MarginControls, { type MarginValues } from './components/MarginControls'
+import { DEFAULT_MARGINS } from './lib/constants'
 
 function App() {
   const isDesktop = useMediaQuery('(min-width: 768px)')
@@ -31,8 +32,6 @@ function App() {
     } catch { /* ignore */ }
     return SAMPLE_RESUME
   })
-
-  const DEFAULT_MARGINS: MarginValues = { top: 15, right: 15, bottom: 15, left: 15 }
 
   const [margins, setMargins] = useState<MarginValues>(() => {
     try {
