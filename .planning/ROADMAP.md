@@ -68,7 +68,9 @@
   1. User sees four numeric inputs (top, bottom, left, right) for page margins in the UI and can edit each independently.
   2. Changing a margin value updates the visible margin band of every A4 page rectangle in real time, without a page reload, and pagination re-flows accordingly.
   3. After a browser refresh, the previously entered margin values are restored from localStorage and applied to the preview.
-**Plans**: TBD
+**Plans**: 2 plans
+  - [ ] 08-01-PLAN.md — MarginControls component + App.tsx state wiring (Wave 1)
+  - [ ] 08-02-PLAN.md — Preview.tsx dynamic @page CSS + human verification (Wave 2)
 **UI hint**: yes
 
 ### Phase 9: Responsive Auto-Fit Zoom
@@ -79,7 +81,9 @@
   1. When the preview pane is narrower than the A4 page width, the page rectangle scales down to fit the pane width and the full page is visible with no horizontal scrollbar.
   2. When the preview pane is wider than the A4 page width, the page is shown at 1:1 (100%) and is not enlarged beyond actual size.
   3. Dragging the split-pane separator to resize the preview pane updates the auto-fit scale smoothly without clipping content or introducing horizontal scroll.
-**Plans**: TBD
+**Plans**: 2 plans
+  - [ ] 08-01-PLAN.md — MarginControls component + App.tsx state wiring (Wave 1)
+  - [ ] 08-02-PLAN.md — Preview.tsx dynamic @page CSS + human verification (Wave 2)
 **UI hint**: yes
 
 ### Phase 10: Unified Pixel-Perfect PDF Pipeline
@@ -91,7 +95,9 @@
   2. Colors, fonts, headings, bullet styles, and any user-authored Tailwind classes shown in the preview render identically (no color shifts, font fallback, or layout drift) in the exported PDF.
   3. Switching between the three templates (Classic, Modern, Minimal) before export results in PDFs that match each template's preview without any per-template inline-style adjustments.
   4. The codebase contains a single rendering path for preview and export — the `templateInlineStyles.ts` parallel hex-color map and the hidden `ExportTarget` workaround have been retired (or replaced by a single shared component).
-**Plans**: TBD
+**Plans**: 2 plans
+  - [ ] 08-01-PLAN.md — MarginControls component + App.tsx state wiring (Wave 1)
+  - [ ] 08-02-PLAN.md — Preview.tsx dynamic @page CSS + human verification (Wave 2)
 **UI hint**: yes
 
 ## Progress
@@ -105,6 +111,6 @@
 | 5. Parser Simplification & Template Restructure | v1.2.0 | 3/3 | Complete | 2026-04-25 |
 | 6. Tailwind-Powered Preview Rendering | v1.2.0 | 2/2 | Complete | 2026-04-26 |
 | 7. Page Chrome & Auto Pagination | v1.3.0 | 3/3 | Complete | 2026-05-18 |
-| 8. Configurable Margins | v1.3.0 | 0/0 | Not started | — |
+| 8. Configurable Margins | v1.3.0 | 0/2 | In progress | — |
 | 9. Responsive Auto-Fit Zoom | v1.3.0 | 0/0 | Not started | — |
 | 10. Unified Pixel-Perfect PDF Pipeline | v1.3.0 | 0/0 | Not started | — |
