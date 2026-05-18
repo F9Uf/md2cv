@@ -54,7 +54,10 @@
   2. As the user types past one page worth of content, a second A4 page rectangle appears below and additional content flows into it automatically.
   3. The UI displays a "Page X of N" indicator that updates live (within ~150ms debounce) as the user types and content reflows across pages.
   4. Removing content so it fits a single page collapses the preview back to one page rectangle and the indicator updates to "Page 1 of 1".
-**Plans**: TBD
+**Plans**: 3 plans
+  - [ ] 07-01-PLAN.md — Install pagedjs dependency + minimal TS ambient declaration (Wave 1)
+  - [ ] 07-02-PLAN.md — Create src/styles/pages.css page chrome + import from main.tsx (Wave 1)
+  - [ ] 07-03-PLAN.md — Preview.tsx paged.js integration + Page X of N pill + App.tsx enablePagination wiring (Wave 2)
 **UI hint**: yes
 
 ### Phase 8: Configurable Margins
