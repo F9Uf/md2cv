@@ -39,10 +39,14 @@ export default function Preview({
     setHasError(false)
 
     ;(async () => {
-      // StrictMode dev double-mount safety: if cleanup already fired (cancelled=true)
-      // before this microtask runs, bail out before paged.js mutates the DOM. Without
-      // this, Previewer.preview() resolves and appends a second .pagedjs_pages stack
-      // (Chunker.setup appends, doesn't replace — see 07-RESEARCH §Pitfall 3).
+      // StrictMode dev double-mount safety. The async IIFE otherwise runs synchronously
+      // up to `await previewer.preview(...)` — past `new Previewer()` and past the point
+      // where paged.js starts mounting `.pagedjs_pages` — *before* React has a chance to
+      // invoke cleanup. By yielding here first we let the full setup → cleanup → setup
+      // cycle complete; only then do we check `cancelled` and bail. The earlier (now-
+      // discarded) run sees `cancelled === true` and exits without ever touching the DOM,
+      // leaving the surviving run as the sole previewer that mounts.
+      await Promise.resolve()
       if (cancelled) return
       try {
         // Wrap content in a div that carries the theme class so the .theme-X ancestor
