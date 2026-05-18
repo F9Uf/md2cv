@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.3.0
 milestone_name: Support preview with realistic page
-status: executing
+status: ready_to_plan
 stopped_at: Phase 8 UI-SPEC approved
 last_updated: "2026-05-18T16:11:17.479Z"
 last_activity: 2026-05-18 -- Phase --phase execution started
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 5
   completed_plans: 3
-  percent: 60
+  percent: 50
 ---
 
 # State: md2cv
@@ -31,11 +31,11 @@ See: .planning/PROJECT.md (updated 2026-05-18)
 
 ## Current Position
 
-Phase: --phase (08) — EXECUTING
-Plan: 1 of --name
+Phase: 9
+Plan: Not started
 Plans: 2 plans ready
-Status: Executing Phase --phase
-Last activity: 2026-05-18 -- Phase --phase execution started
+Status: Ready to plan
+Last activity: 2026-05-18
 
 ```
 Progress: [          ] 0% (0/4 phases complete in v1.3.0)

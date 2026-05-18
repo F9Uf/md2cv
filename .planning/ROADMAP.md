@@ -69,8 +69,8 @@
   2. Changing a margin value updates the visible margin band of every A4 page rectangle in real time, without a page reload, and pagination re-flows accordingly.
   3. After a browser refresh, the previously entered margin values are restored from localStorage and applied to the preview.
 **Plans**: 2 plans
-  - [ ] 08-01-PLAN.md — MarginControls component + App.tsx state wiring (Wave 1)
-  - [ ] 08-02-PLAN.md — Preview.tsx dynamic @page CSS + human verification (Wave 2)
+  - [x] 08-01-PLAN.md — MarginControls component + App.tsx state wiring (Wave 1)
+  - [x] 08-02-PLAN.md — Preview.tsx dynamic @page CSS + human verification (Wave 2)
 **UI hint**: yes
 
 ### Phase 9: Responsive Auto-Fit Zoom
