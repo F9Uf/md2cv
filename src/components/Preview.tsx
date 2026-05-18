@@ -39,6 +39,11 @@ export default function Preview({
     setHasError(false)
 
     ;(async () => {
+      // StrictMode dev double-mount safety: if cleanup already fired (cancelled=true)
+      // before this microtask runs, bail out before paged.js mutates the DOM. Without
+      // this, Previewer.preview() resolves and appends a second .pagedjs_pages stack
+      // (Chunker.setup appends, doesn't replace — see 07-RESEARCH §Pitfall 3).
+      if (cancelled) return
       try {
         // Wrap content in a div that carries the theme class so the .theme-X ancestor
         // selector survives inside each .pagedjs_page paged.js emits.
