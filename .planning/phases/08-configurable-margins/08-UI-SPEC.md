@@ -142,7 +142,7 @@ The new `<MarginControls>` strip is inserted between `<Header>` and `<main>` in 
    ↑ label above    ↑ label above       ↑ label above    ↑ label above    ↑ optional
 ```
 
-Each margin unit is a `<div class="flex flex-col items-center gap-0.5">`:
+Each margin unit is a `<div class="flex flex-col items-center gap-1">`:
 - Row 1: `<label>` (`text-xs font-medium text-gray-300`)
 - Row 2: `<div class="flex items-center gap-1">` containing `<input>` + `<span class="mm label">`
 
@@ -215,7 +215,7 @@ All styles should be applied via Tailwind utility classes directly on JSX elemen
 |---------|-----------------|
 | Strip container | `h-9 bg-gray-900 border-b border-gray-700 flex items-center px-4 shrink-0` |
 | Inputs group (flex row) | `flex items-center gap-2` |
-| Individual margin unit (label + input row) | `flex flex-col items-center gap-0.5` |
+| Individual margin unit (label + input row) | `flex flex-col items-center gap-1` |
 | Field label | `text-xs font-medium text-gray-300 leading-tight` |
 | Input + unit inline wrapper | `flex items-center gap-1` |
 | Number input | `h-7 w-14 px-1.5 rounded bg-gray-700 text-white text-[13px] border border-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-400 text-center` |
