@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import DOMPurify from 'dompurify'
 import { Previewer } from 'pagedjs'
 import { TEMPLATE_STYLES, type TemplateName } from '../lib/templateStyles'
+import { type MarginValues } from './MarginControls'
 import '../styles/themes.css'
 
 interface PreviewProps {
@@ -9,6 +10,7 @@ interface PreviewProps {
   template: TemplateName
   enablePagination?: boolean
   onPageCountChange?: (n: number) => void
+  margins?: MarginValues
 }
 
 export default function Preview({
@@ -16,6 +18,7 @@ export default function Preview({
   template,
   enablePagination = true,
   onPageCountChange,
+  margins = { top: 15, right: 15, bottom: 15, left: 15 },
 }: PreviewProps) {
   const styles = TEMPLATE_STYLES[template] ?? TEMPLATE_STYLES['classic']
   const previewerRootRef = useRef<HTMLDivElement>(null)
@@ -63,7 +66,7 @@ export default function Preview({
         // in pagedjs src/polyfill/previewer.js lines 187-189).
         const flow = await previewer.preview(
           wrapper,
-          [{ pagedjs_inline: '@page { size: A4 portrait; margin: 15mm; }' }],
+          [{ pagedjs_inline: `@page { size: A4 portrait; margin: ${margins.top}mm ${margins.right}mm ${margins.bottom}mm ${margins.left}mm; }` }],
           root,
         )
         if (cancelled) return
@@ -84,7 +87,7 @@ export default function Preview({
         try { activePreviewer.chunker?.destroy() } catch { /* ignore */ }
       }
     }
-  }, [htmlContent, template, enablePagination, styles.container, onPageCountChange])
+  }, [htmlContent, template, enablePagination, styles.container, onPageCountChange, margins])
 
   // Empty state — preserved verbatim from prior Preview.tsx
   if (!htmlContent.trim()) {
