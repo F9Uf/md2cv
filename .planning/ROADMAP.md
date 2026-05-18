@@ -36,7 +36,7 @@
 <details open>
 <summary>🚧 v1.3.0 Support preview with realistic page (Phases 7–10) — IN FLIGHT</summary>
 
-- [ ] **Phase 7: Page Chrome & Auto Pagination** — A4 page rectangle(s) with margins, multi-page auto-flow, live "Page X of N" indicator
+- [x] **Phase 7: Page Chrome & Auto Pagination** — A4 page rectangle(s) with margins, multi-page auto-flow, live "Page X of N" indicator (completed 2026-05-18)
 - [ ] **Phase 8: Configurable Margins** — Four numeric margin inputs with localStorage persistence and real-time update
 - [ ] **Phase 9: Responsive Auto-Fit Zoom** — Preview page auto-fits to pane width when pane is narrower than page
 - [ ] **Phase 10: Unified Pixel-Perfect PDF Pipeline** — Single rendering path so exported PDF matches preview 1:1; retire `templateInlineStyles.ts`
@@ -104,7 +104,7 @@
 | 4. Inline Styles & HTML Preview | v1.1.0 | 2/2 | Complete | 2026-04-16 |
 | 5. Parser Simplification & Template Restructure | v1.2.0 | 3/3 | Complete | 2026-04-25 |
 | 6. Tailwind-Powered Preview Rendering | v1.2.0 | 2/2 | Complete | 2026-04-26 |
-| 7. Page Chrome & Auto Pagination | v1.3.0 | 0/0 | Not started | — |
+| 7. Page Chrome & Auto Pagination | v1.3.0 | 3/3 | Complete | 2026-05-18 |
 | 8. Configurable Margins | v1.3.0 | 0/0 | Not started | — |
 | 9. Responsive Auto-Fit Zoom | v1.3.0 | 0/0 | Not started | — |
 | 10. Unified Pixel-Perfect PDF Pipeline | v1.3.0 | 0/0 | Not started | — |
