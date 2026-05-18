@@ -4,7 +4,7 @@ milestone: v1.3.0
 milestone_name: Support preview with realistic page
 status: planning
 stopped_at: Phase 8 UI-SPEC approved
-last_updated: "2026-05-18T11:04:45.000Z"
+last_updated: "2026-05-18T15:50:00.000Z"
 last_activity: 2026-05-18
 progress:
   total_phases: 4
@@ -98,6 +98,12 @@ Known deferred items at close: 5 (see above)
 
 *(None)*
 
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260518-vgl | Fix duplicate first page bug on initial mount / refresh (pagedjs + React 18 StrictMode) | 2026-05-18 | c3924c2 | [260518-vgl-fix-duplicate-first-page-bug-on-page-ref](./quick/260518-vgl-fix-duplicate-first-page-bug-on-page-ref/) |
+
 ---
 
 ## Session Continuity
@@ -108,6 +114,6 @@ Known deferred items at close: 5 (see above)
 
 ---
 
-*Last updated: 2026-05-18 — v1.3.0 roadmap defined (Phases 7–10)*
+*Last updated: 2026-05-18 — quick task 260518-vgl completed (paged.js StrictMode duplicate-page fix)*
 
 **Planned Phase:** 07 (page-chrome-auto-pagination) — 3 plans — 2026-05-18T04:11:03.710Z
