@@ -82,8 +82,8 @@
   2. When the preview pane is wider than the A4 page width, the page is shown at 1:1 (100%) and is not enlarged beyond actual size.
   3. Dragging the split-pane separator to resize the preview pane updates the auto-fit scale smoothly without clipping content or introducing horizontal scroll.
 **Plans**: 2 plans
-  - [ ] 08-01-PLAN.md — MarginControls component + App.tsx state wiring (Wave 1)
-  - [ ] 08-02-PLAN.md — Preview.tsx dynamic @page CSS + human verification (Wave 2)
+  - [ ] 09-01-PLAN.md — Preview.tsx ResizeObserver auto-fit scale + pages.css print reset (Wave 1)
+  - [ ] 09-02-PLAN.md — Human verification of auto-fit zoom behavior (Wave 2)
 **UI hint**: yes
 
 ### Phase 10: Unified Pixel-Perfect PDF Pipeline
