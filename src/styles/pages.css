@@ -1,0 +1,39 @@
+/* Page chrome for on-screen paged.js preview.
+ * Styles paged.js's emitted .pagedjs_page and .pagedjs_pages containers.
+ * A4 width/height and the 15mm inner margin are supplied by the @page rule
+ * passed as the inline `stylesheets` argument to Previewer.preview() in
+ * src/components/Preview.tsx — do NOT set page dimensions here.
+ *
+ * Phase 7 — on-screen only. The existing @media print block in src/index.css
+ * remains the source of truth for the browser-print path. */
+
+.pagedjs_pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pagedjs_page {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.06);
+  margin-bottom: 16px;
+}
+
+.pagedjs_page:last-child {
+  margin-bottom: 0;
+}
+
+/* Belt-and-suspenders: if paged.js chrome ever leaks into a print context,
+ * strip the on-screen-only visuals. The existing #app-shell { display: none }
+ * rule in src/index.css already hides the entire paginated preview during
+ * print, so this rule is defensive. */
+@media print {
+  .pagedjs_page {
+    box-shadow: none;
+    border: none;
+    margin-bottom: 0;
+  }
+}
