@@ -9,6 +9,7 @@ import { useMediaQuery } from './hooks/useMediaQuery'
 import { parseResume } from './lib/parseResume'
 import { SAMPLE_RESUME } from './lib/sampleResume'
 import type { TemplateName } from './lib/templateStyles'
+import MarginControls, { type MarginValues } from './components/MarginControls'
 
 function App() {
   const isDesktop = useMediaQuery('(min-width: 768px)')
@@ -29,6 +30,23 @@ function App() {
       if (stored !== null) return stored
     } catch { /* ignore */ }
     return SAMPLE_RESUME
+  })
+
+  const DEFAULT_MARGINS: MarginValues = { top: 15, right: 15, bottom: 15, left: 15 }
+
+  const [margins, setMargins] = useState<MarginValues>(() => {
+    try {
+      const stored = localStorage.getItem('md2cv-margins')
+      if (stored) {
+        const parsed = JSON.parse(stored) as Record<string, unknown>
+        const top    = typeof parsed.top    === 'number' && parsed.top    >= 0 && parsed.top    <= 50 ? parsed.top    : 15
+        const right  = typeof parsed.right  === 'number' && parsed.right  >= 0 && parsed.right  <= 50 ? parsed.right  : 15
+        const bottom = typeof parsed.bottom === 'number' && parsed.bottom >= 0 && parsed.bottom <= 50 ? parsed.bottom : 15
+        const left   = typeof parsed.left   === 'number' && parsed.left   >= 0 && parsed.left   <= 50 ? parsed.left   : 15
+        return { top, right, bottom, left }
+      }
+    } catch { /* ignore */ }
+    return DEFAULT_MARGINS
   })
 
   // Debounced HTML content for preview — initialized from same source as markdownContent
@@ -104,13 +122,21 @@ function App() {
     try { localStorage.setItem('md2cv-template', template) } catch { /* ignore */ }
   }, [])
 
+  const handleMarginChange = useCallback((side: keyof MarginValues, value: number) => {
+    setMargins(prev => {
+      const next = { ...prev, [side]: value }
+      try { localStorage.setItem('md2cv-margins', JSON.stringify(next)) } catch { /* ignore */ }
+      return next
+    })
+  }, [])
+
   // Cleanup debounce on unmount
   useEffect(() => {
     return () => { if (debounceRef.current) clearTimeout(debounceRef.current) }
   }, [])
 
   const editor = <Editor value={markdownContent} onChange={handleMarkdownChange} />
-  const preview = <Preview htmlContent={htmlContent} template={selectedTemplate} />
+  const preview = <Preview htmlContent={htmlContent} template={selectedTemplate} margins={margins} />
 
   return (
     <>
@@ -122,6 +148,7 @@ function App() {
           onExportPdf={handleExportPdf}
           onImportMd={handleImportMd}
         />
+        <MarginControls margins={margins} onMarginsChange={handleMarginChange} />
         <main className="flex-1 flex min-h-0">
           {isDesktop ? (
             <SplitPane
@@ -137,7 +164,7 @@ function App() {
         </main>
       </div>
       <div id="print-area">
-        <Preview htmlContent={htmlContent} template={selectedTemplate} enablePagination={false} />
+        <Preview htmlContent={htmlContent} template={selectedTemplate} enablePagination={false} margins={margins} />
       </div>
       <input
         ref={fileInputRef}
