@@ -40,10 +40,11 @@ export default function Preview({
 
     ;(async () => {
       try {
-        // Theme class on the SOURCE wrapper (NOT the renderTo mount) — RESEARCH.md §Pattern 1
+        // Wrap content in a div that carries the theme class so the .theme-X ancestor
+        // selector survives inside each .pagedjs_page paged.js emits.
+        const safeHtml = DOMPurify.sanitize(htmlContent, { ADD_ATTR: ['class'] })
         const wrapper = document.createElement('div')
-        wrapper.className = `theme-${template} ${styles.container}`
-        wrapper.innerHTML = DOMPurify.sanitize(htmlContent, { ADD_ATTR: ['class'] })
+        wrapper.innerHTML = `<div class="theme-${template} ${styles.container}">${safeHtml}</div>`
 
         const previewer = new Previewer()
         activePreviewer = previewer
