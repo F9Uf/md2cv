@@ -23,41 +23,55 @@ export default function MarginControls({ margins, onMarginsChange }: MarginContr
   }
 
   const sides: { key: keyof MarginValues; label: string }[] = [
-    { key: 'top', label: 'Top' },
-    { key: 'bottom', label: 'Bottom' },
-    { key: 'left', label: 'Left' },
-    { key: 'right', label: 'Right' },
+    { key: 'top', label: 'TOP' },
+    { key: 'right', label: 'RIGHT' },
+    { key: 'bottom', label: 'BOTTOM' },
+    { key: 'left', label: 'LEFT' },
   ]
 
   return (
-    <div className="h-9 bg-gray-900 border-b border-gray-700 flex items-center px-4 shrink-0">
-      <div role="group" aria-label="Page margins" className="flex items-center gap-2">
-        {sides.map(({ key, label }) => (
-          <label key={key} className="flex flex-col items-center gap-1 cursor-pointer">
-            <span className="text-xs font-medium text-gray-300 leading-tight">{label}</span>
-            <div className="flex items-center gap-1">
-              <input
-                type="number"
-                min="0"
-                max="50"
-                step="1"
-                value={margins[key]}
-                onChange={handleChange(key)}
-                className="h-7 w-14 px-2 rounded bg-gray-700 text-white text-[13px] border border-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-400 text-center"
-                aria-label={`${label} margin in millimetres`}
-              />
-              <span className="text-xs text-gray-400 leading-tight">mm</span>
-            </div>
-          </label>
-        ))}
+    <div className="bg-gray-700 border-b border-gray-600 px-4 py-2 shrink-0">
+      {/* Header row */}
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-xs font-semibold text-teal-400 tracking-wide">Margin</span>
+        <span className="text-xs text-gray-400">mm</span>
       </div>
-      <button
-        onClick={handleReset}
-        className="h-7 px-2 rounded bg-gray-700 text-white text-xs font-medium border border-gray-600 hover:bg-gray-600 transition-colors ml-auto"
-        aria-label="Reset margins to default (15mm)"
-      >
-        Reset
-      </button>
+
+      {/* Inputs row */}
+      <div className="flex items-stretch" role="group" aria-label="Page margins">
+        {sides.map(({ key, label }, i) => (
+          <div key={key} className={`flex-1 flex flex-col ${i > 0 ? 'border-l border-gray-500' : ''}`}>
+            <input
+              type="number"
+              min="0"
+              max="50"
+              step="1"
+              value={margins[key]}
+              onChange={handleChange(key)}
+              className="w-full h-9 px-2 bg-gray-600 text-white text-sm text-center border-0 focus:outline-none focus:ring-1 focus:ring-inset focus:ring-blue-400"
+              aria-label={`${label} margin in millimetres`}
+            />
+            <span className="text-[10px] text-gray-400 text-center leading-tight py-0.5 tracking-widest">
+              {label}
+            </span>
+          </div>
+        ))}
+
+        {/* Reset icon button */}
+        <div className="border-l border-gray-500 flex items-center px-2">
+          <button
+            onClick={handleReset}
+            className="text-gray-400 hover:text-white transition-colors"
+            aria-label="Reset margins to default (15mm)"
+            title="Reset to 15mm"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

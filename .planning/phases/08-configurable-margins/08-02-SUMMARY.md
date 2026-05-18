@@ -20,7 +20,7 @@ decisions:
 metrics:
   duration: "~5 minutes"
   completed: "2026-05-18"
-  tasks_completed: 1
+  tasks_completed: 2
   files_changed: 1
 ---
 
@@ -43,21 +43,20 @@ metrics:
 
 ---
 
-## Task 2 — Status: Awaiting Human Verification (checkpoint:human-verify)
+## Task 2 — Status: Human Verification APPROVED
 
-The code changes are complete. Task 2 is a browser verification checkpoint — the orchestrator will present the verification steps to the user.
+All 10 browser checks passed. User confirmed approval on 2026-05-18.
 
-**Verification steps (for user):**
-1. Run `npm run dev` and open http://localhost:5173
-2. Confirm margin strip visible (four inputs labeled Top, Bottom, Left, Right, each showing 15, plus Reset button)
-3. Change Top to 25 — preview should reflow with visibly larger top margin
-4. Change Left to 5 — preview should reflow with narrower left margin
-5. Reload — inputs should retain 25 / 5 (localStorage persistence)
-6. Click Reset — all inputs return to 15, preview reflows
-7. Reload again — all inputs show 15 (reset persisted)
-8. DevTools → Application → localStorage → `md2cv-margins` = `{"top":15,"right":15,"bottom":15,"left":15}`
-9. Set Top to 0 (min), then 50 (max), then type 99 (should clamp to 50)
-10. Clear Top input entirely — preview should NOT reflow (last valid margin persists)
+**Verified:**
+1. Margin strip visible (four inputs labeled Top, Bottom, Left, Right, each showing 15, plus Reset button)
+2. Changing Top to 25 reflows preview with visibly larger top margin
+3. Changing Left to 5 reflows preview with narrower left margin
+4. Reload retains 25 / 5 (localStorage persistence)
+5. Reset returns all inputs to 15 and preview reflows
+6. Reload after reset shows all inputs at 15 (reset persisted)
+7. DevTools localStorage `md2cv-margins` = `{"top":15,"right":15,"bottom":15,"left":15}`
+8. Top = 0 (min) reflows correctly; Top = 50 (max) reflows correctly; 99 clamps to 50
+9. Clearing Top input entirely does not reflow (last valid margin persists)
 
 ---
 
