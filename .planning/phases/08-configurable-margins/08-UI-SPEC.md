@@ -164,7 +164,7 @@ Reset button dimensions: `h-7 px-2` (28px height, compact — smaller than the h
   step="1"
   value={margin.top}         // controlled
   onChange={handler}
-  className="h-7 w-14 px-1.5 rounded bg-gray-700 text-white text-[13px] border border-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-400 text-center"
+  className="h-7 w-14 px-2 rounded bg-gray-700 text-white text-[13px] border border-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-400 text-center"
   aria-label="Top margin in millimetres"
 />
 ```
@@ -218,7 +218,7 @@ All styles should be applied via Tailwind utility classes directly on JSX elemen
 | Individual margin unit (label + input row) | `flex flex-col items-center gap-1` |
 | Field label | `text-xs font-medium text-gray-300 leading-tight` |
 | Input + unit inline wrapper | `flex items-center gap-1` |
-| Number input | `h-7 w-14 px-1.5 rounded bg-gray-700 text-white text-[13px] border border-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-400 text-center` |
+| Number input | `h-7 w-14 px-2 rounded bg-gray-700 text-white text-[13px] border border-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-400 text-center` |
 | Unit label ("mm") | `text-xs text-gray-400 leading-tight` |
 | Reset button | `h-7 px-2 rounded bg-gray-700 text-white text-xs font-medium border border-gray-600 hover:bg-gray-600 transition-colors ml-auto` |
 
