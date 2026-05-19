@@ -168,6 +168,11 @@ export default function Preview({
   // The pill is ALWAYS visible (UI-SPEC §"Copywriting Contract" — even at "Page 1 of 1"; "Page – of –" before first flow resolves).
   const pillLabel = pageCount === null ? 'Page – of –' : `Page ${pageCount} of ${pageCount}`
 
+  // Apply mobile scale only after paged.js has finished rendering (pageCount !== null).
+  // Applying scale(0.5) before paged.js renders causes it to measure a scaled container
+  // and flow all content into 1 page instead of the correct page count.
+  const mobileScaleReady = isMobile && pageCount !== null
+
   // Mobile: apply scale directly — no clip container so paged.js absolute-positioned
   // pages are not clipped. overflow-x:hidden on the scroll container suppresses the
   // horizontal scrollbar caused by the 794px layout width at scale 0.5.
@@ -176,7 +181,7 @@ export default function Preview({
       <div ref={scrollContainerRef} className="relative h-full overflow-y-auto overflow-x-hidden bg-gray-100 px-4 py-6">
         <div
           className="pagedjs-scale-wrapper"
-          style={{ transform: 'scale(0.5)', transformOrigin: 'top left' }}
+          style={mobileScaleReady ? { transform: 'scale(0.5)', transformOrigin: 'top left' } : undefined}
         >
           <div ref={previewerRootRef} />
         </div>
