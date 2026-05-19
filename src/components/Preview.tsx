@@ -106,8 +106,12 @@ export default function Preview({
       if (!scrollContainerRef.current) return
       const containerRect = scrollContainerRef.current.getBoundingClientRect()
       const availableWidth = containerRect.width - 32 // px-4 left + right
-      const firstPage = scrollContainerRef.current.querySelector('.pagedjs_page')
-      const pageWidth = firstPage ? firstPage.getBoundingClientRect().width : 793.7
+      const firstPage = scrollContainerRef.current.querySelector('.pagedjs_page') as HTMLElement | null
+      // offsetWidth is unaffected by CSS transforms on ancestor elements.
+      // getBoundingClientRect().width would return the SCALED visual width
+      // after the scale wrapper transform is applied, creating a feedback loop
+      // where recompute() reads a scaled width and computes scale≈1 each time.
+      const pageWidth = firstPage ? firstPage.offsetWidth || 793.7 : 793.7
       if (pageWidth <= 0) return
       const nextScale = Math.min(availableWidth / pageWidth, 1)
 
