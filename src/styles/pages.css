@@ -43,6 +43,7 @@
    * when scale < 1 (i.e. only on screen during pane resize), so this rule
    * is purely defensive. */
   .pagedjs-scale-wrapper {
+    zoom: 1 !important;
     transform: none !important;
     height: auto !important;
   }
