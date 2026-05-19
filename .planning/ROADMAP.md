@@ -95,9 +95,10 @@
   2. Colors, fonts, headings, bullet styles, and any user-authored Tailwind classes shown in the preview render identically (no color shifts, font fallback, or layout drift) in the exported PDF.
   3. Switching between the three templates (Classic, Modern, Minimal) before export results in PDFs that match each template's preview without any per-template inline-style adjustments.
   4. The codebase contains a single rendering path for preview and export — the `templateInlineStyles.ts` parallel hex-color map and the hidden `ExportTarget` workaround have been retired (or replaced by a single shared component).
-**Plans**: 2 plans
-  - [ ] 08-01-PLAN.md — MarginControls component + App.tsx state wiring (Wave 1)
-  - [ ] 08-02-PLAN.md — Preview.tsx dynamic @page CSS + human verification (Wave 2)
+**Plans**: 3 plans
+  - [ ] 10-01-PLAN.md — App.tsx print-mount paged.js flip + index.css @page refactor + pages.css invariant verification (Wave 1)
+  - [ ] 10-02-PLAN.md — Remove html2pdf.js dead deps + update README.md and CLAUDE.md tech-stack lines (Wave 1)
+  - [ ] 10-03-PLAN.md — Human verification of preview ↔ PDF parity across 3 templates, mobile, and margin propagation (Wave 2)
 **UI hint**: yes
 
 ## Progress
@@ -113,4 +114,4 @@
 | 7. Page Chrome & Auto Pagination | v1.3.0 | 3/3 | Complete | 2026-05-18 |
 | 8. Configurable Margins | v1.3.0 | 0/2 | In progress | — |
 | 9. Responsive Auto-Fit Zoom | v1.3.0 | 0/0 | Not started | — |
-| 10. Unified Pixel-Perfect PDF Pipeline | v1.3.0 | 0/0 | Not started | — |
+| 10. Unified Pixel-Perfect PDF Pipeline | v1.3.0 | 0/3 | Not started | — |
