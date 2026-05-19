@@ -36,4 +36,14 @@
     border: none;
     margin-bottom: 0;
   }
+
+  /* Phase 9 (ZOOM-01) defensive reset: if the on-screen scale wrapper ever
+   * reaches a print context, strip the transform and computed height so the
+   * page prints at 1:1. The inline transform is applied by Preview.tsx only
+   * when scale < 1 (i.e. only on screen during pane resize), so this rule
+   * is purely defensive. */
+  .pagedjs-scale-wrapper {
+    transform: none !important;
+    height: auto !important;
+  }
 }
