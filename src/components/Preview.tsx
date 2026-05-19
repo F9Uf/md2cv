@@ -4,6 +4,7 @@ import { Previewer } from 'pagedjs'
 import { TEMPLATE_STYLES, type TemplateName } from '../lib/templateStyles'
 import { type MarginValues } from './MarginControls'
 import { DEFAULT_MARGINS } from '../lib/constants'
+import { useMediaQuery } from '../hooks/useMediaQuery'
 import '../styles/themes.css'
 
 interface PreviewProps {
@@ -25,6 +26,7 @@ export default function Preview({
   const previewerRootRef = useRef<HTMLDivElement>(null)
   const [pageCount, setPageCount] = useState<number | null>(null)
   const [hasError, setHasError] = useState(false)
+  const isMobile = useMediaQuery('(max-width: 767px)')
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(1)
   const [naturalHeightPx, setNaturalHeightPx] = useState(0)
@@ -164,26 +166,24 @@ export default function Preview({
   // Paginated path — paged.js mounts into previewerRootRef.
   // Pane background, scroll viewport, and the sticky page-counter pill live here.
   // The pill is ALWAYS visible (UI-SPEC §"Copywriting Contract" — even at "Page 1 of 1"; "Page – of –" before first flow resolves).
+  // Mobile uses a fixed scale(0.5) from top-left so the page fits without
+  // relying on ResizeObserver timing. Desktop uses the ResizeObserver-computed
+  // scale centered on the pane.
+  const effectiveScale = isMobile ? 0.5 : scale
+  const effectiveOrigin = isMobile ? 'top left' : 'top center'
+
   const pillLabel = pageCount === null ? 'Page – of –' : `Page ${pageCount} of ${pageCount}`
   return (
     <div ref={scrollContainerRef} className="relative h-full overflow-auto bg-gray-100 px-4 py-6">
-      {/*
-        Clip container: width:100% + overflow:hidden eliminates the horizontal scrollbar
-        that CSS transform alone cannot prevent (transform doesn't affect layout width).
-        Height is collapsed to the visual page height so the scroll container scrollbar
-        reflects the actual visible content length, not the untransformed 794px-wide layout.
-        flex + justifyContent:center keeps the scaled page horizontally centered.
-        When scale===1 this wrapper is absent (undefined style) — DOM is unchanged.
-      */}
       <div
         style={
-          scale < 1
+          effectiveScale < 1
             ? {
                 width: '100%',
-                height: naturalHeightPx > 0 ? `${naturalHeightPx * scale}px` : undefined,
+                height: !isMobile && naturalHeightPx > 0 ? `${naturalHeightPx * effectiveScale}px` : undefined,
                 overflow: 'hidden',
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: isMobile ? 'flex-start' : 'center',
               }
             : undefined
         }
@@ -191,10 +191,10 @@ export default function Preview({
         <div
           className="pagedjs-scale-wrapper"
           style={
-            scale < 1
+            effectiveScale < 1
               ? {
-                  transform: `scale(${scale})`,
-                  transformOrigin: 'top center',
+                  transform: `scale(${effectiveScale})`,
+                  transformOrigin: effectiveOrigin,
                   flexShrink: 0,
                 }
               : undefined
