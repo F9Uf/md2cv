@@ -166,24 +166,43 @@ export default function Preview({
   // Paginated path — paged.js mounts into previewerRootRef.
   // Pane background, scroll viewport, and the sticky page-counter pill live here.
   // The pill is ALWAYS visible (UI-SPEC §"Copywriting Contract" — even at "Page 1 of 1"; "Page – of –" before first flow resolves).
-  // Mobile uses a fixed scale(0.5) from top-left so the page fits without
-  // relying on ResizeObserver timing. Desktop uses the ResizeObserver-computed
-  // scale centered on the pane.
-  const effectiveScale = isMobile ? 0.5 : scale
-  const effectiveOrigin = isMobile ? 'top left' : 'top center'
-
   const pillLabel = pageCount === null ? 'Page – of –' : `Page ${pageCount} of ${pageCount}`
+
+  // Mobile: apply scale directly — no clip container so paged.js absolute-positioned
+  // pages are not clipped. overflow-x:hidden on the scroll container suppresses the
+  // horizontal scrollbar caused by the 794px layout width at scale 0.5.
+  if (isMobile) {
+    return (
+      <div ref={scrollContainerRef} className="relative h-full overflow-y-auto overflow-x-hidden bg-gray-100 px-4 py-6">
+        <div
+          className="pagedjs-scale-wrapper"
+          style={{ transform: 'scale(0.5)', transformOrigin: 'top left' }}
+        >
+          <div ref={previewerRootRef} />
+        </div>
+        <div
+          className="sticky bottom-4 right-4 ml-auto inline-block bg-gray-900/85 text-white text-xs font-medium leading-tight px-2 py-1 rounded-md"
+          aria-live="polite"
+        >
+          {pillLabel}
+        </div>
+      </div>
+    )
+  }
+
+  // Desktop: clip container (overflow:hidden + flex-center) prevents horizontal scrollbar
+  // bounce caused by CSS transform not affecting layout width.
   return (
     <div ref={scrollContainerRef} className="relative h-full overflow-auto bg-gray-100 px-4 py-6">
       <div
         style={
-          effectiveScale < 1
+          scale < 1
             ? {
                 width: '100%',
-                height: !isMobile && naturalHeightPx > 0 ? `${naturalHeightPx * effectiveScale}px` : undefined,
+                height: naturalHeightPx > 0 ? `${naturalHeightPx * scale}px` : undefined,
                 overflow: 'hidden',
                 display: 'flex',
-                justifyContent: isMobile ? 'flex-start' : 'center',
+                justifyContent: 'center',
               }
             : undefined
         }
@@ -191,12 +210,8 @@ export default function Preview({
         <div
           className="pagedjs-scale-wrapper"
           style={
-            effectiveScale < 1
-              ? {
-                  transform: `scale(${effectiveScale})`,
-                  transformOrigin: effectiveOrigin,
-                  flexShrink: 0,
-                }
+            scale < 1
+              ? { transform: `scale(${scale})`, transformOrigin: 'top center', flexShrink: 0 }
               : undefined
           }
         >
