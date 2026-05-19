@@ -28,6 +28,7 @@ export default function Preview({
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(1)
   const [naturalHeightPx, setNaturalHeightPx] = useState(0)
+  const recomputeRef = useRef<() => void>(() => {})
 
   // Paged.js render effect — runs only when pagination is enabled AND htmlContent is non-empty.
   // Reflow trigger: [htmlContent, template] per CONTEXT.md D-02 (piggybacks on App.tsx's existing 150ms debounce).
@@ -93,13 +94,9 @@ export default function Preview({
     }
   }, [htmlContent, template, enablePagination, styles.container, onPageCountChange, margins])
 
-  // ResizeObserver-driven auto-fit zoom (Phase 9 — ZOOM-01).
-  // Observes the outer scroll container; computes scale = min((paneWidth - 32) / pageWidthPx, 1).
-  // -32 accounts for the px-4 (16px each side) horizontal padding on the scroll container.
-  // pageWidthPx is read from the actual rendered .pagedjs_page element (tolerates browser zoom +
-  // real A4-to-px conversion); fallback 793.7px (210mm * 96/25.4) until first page renders.
-  // Dependency list intentionally EXCLUDES htmlContent, template, margins, styles.container,
-  // onPageCountChange per D-08 — never retrigger paged.js from this effect.
+  // Auto-fit zoom: ResizeObserver watches the scroll container width; also re-runs after
+  // paged.js finishes (via pageCount effect below) so mobile gets the correct scale on
+  // first render without needing a drag event.
   useEffect(() => {
     if (!enablePagination) return
     const container = scrollContainerRef.current
@@ -113,28 +110,31 @@ export default function Preview({
       const pageWidth = firstPage ? firstPage.getBoundingClientRect().width : 793.7
       if (pageWidth <= 0) return
       const nextScale = Math.min(availableWidth / pageWidth, 1)
-      setScale(nextScale)
 
-      // Natural (un-transformed) height of the page stack — measured from .pagedjs_pages
-      // so all stacked pages are accounted for. Used to compute the wrapper's compensated
-      // height so the scrollbar reflects actual visible content (D-03).
+      // offsetHeight is unaffected by CSS transforms on parent elements, so this
+      // gives the true layout height regardless of any scale already applied.
       const pagesEl = scrollContainerRef.current.querySelector('.pagedjs_pages') as HTMLElement | null
-      if (pagesEl) {
-        setNaturalHeightPx(pagesEl.getBoundingClientRect().height / (nextScale || 1))
-      }
+      const naturalH = pagesEl ? pagesEl.offsetHeight : 0
+
+      setScale(nextScale)
+      setNaturalHeightPx(naturalH)
     }
 
-    const observer = new ResizeObserver(() => {
-      recompute()
-    })
+    recomputeRef.current = recompute
+
+    const observer = new ResizeObserver(recompute)
     observer.observe(container)
-    // Also observe the paged.js pages container once it mounts so we recompute when
-    // page count changes (content grows from 1 to 2 pages, etc.). Re-query each tick
-    // via the outer observer is sufficient — no MutationObserver needed.
     recompute()
 
     return () => observer.disconnect()
   }, [enablePagination])
+
+  // Trigger recompute after paged.js finishes rendering (pageCount updates when flow resolves).
+  // Fixes mobile: the scroll container has fixed height so ResizeObserver never re-fires
+  // after paged.js mounts its pages — this effect bridges that gap.
+  useEffect(() => {
+    recomputeRef.current()
+  }, [pageCount])
 
   // Empty state — preserved verbatim from prior Preview.tsx
   if (!htmlContent.trim()) {
@@ -163,19 +163,41 @@ export default function Preview({
   const pillLabel = pageCount === null ? 'Page – of –' : `Page ${pageCount} of ${pageCount}`
   return (
     <div ref={scrollContainerRef} className="relative h-full overflow-auto bg-gray-100 px-4 py-6">
+      {/*
+        Clip container: width:100% + overflow:hidden eliminates the horizontal scrollbar
+        that CSS transform alone cannot prevent (transform doesn't affect layout width).
+        Height is collapsed to the visual page height so the scroll container scrollbar
+        reflects the actual visible content length, not the untransformed 794px-wide layout.
+        flex + justifyContent:center keeps the scaled page horizontally centered.
+        When scale===1 this wrapper is absent (undefined style) — DOM is unchanged.
+      */}
       <div
-        className="pagedjs-scale-wrapper"
         style={
           scale < 1
             ? {
-                transform: `scale(${scale})`,
-                transformOrigin: 'top center',
+                width: '100%',
                 height: naturalHeightPx > 0 ? `${naturalHeightPx * scale}px` : undefined,
+                overflow: 'hidden',
+                display: 'flex',
+                justifyContent: 'center',
               }
             : undefined
         }
       >
-        <div ref={previewerRootRef} />
+        <div
+          className="pagedjs-scale-wrapper"
+          style={
+            scale < 1
+              ? {
+                  transform: `scale(${scale})`,
+                  transformOrigin: 'top center',
+                  flexShrink: 0,
+                }
+              : undefined
+          }
+        >
+          <div ref={previewerRootRef} />
+        </div>
       </div>
       <div
         className="sticky bottom-4 right-4 ml-auto inline-block bg-gray-900/85 text-white text-xs font-medium leading-tight px-2 py-1 rounded-md"
