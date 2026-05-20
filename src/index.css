@@ -11,18 +11,24 @@
     display: none !important;
   }
 
-  /* Show only the print area */
+  /* Show the print-area in normal flow (neutralize the off-screen offset
+   * used on screen so paged.js has real layout to chunk against — see the
+   * screen-side rule below). Per D-03. */
   #print-area {
     display: block !important;
+    position: static;
+    left: auto;
     width: 100%;
     margin: 0;
     padding: 0;
   }
 
-  /* Reset page for A4 */
+  /* Tell the browser print engine the physical page is A4 with NO gutter.
+   * Paged.js already baked the user's per-side margins inside each
+   * .pagedjs_page; a non-zero gutter here would double them. Per D-04a. */
   @page {
     size: A4 portrait;
-    margin: 15mm;
+    margin: 0;
   }
 
   body {
@@ -32,7 +38,12 @@
   }
 }
 
-/* Hide print area from screen */
+/* Park the print-area off-screen on screen media. Paged.js needs the element
+ * to have real layout (not display:none) so it can measure .pagedjs_page
+ * dimensions correctly. Per D-03. */
 #print-area {
-  display: none;
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 210mm;
 }
