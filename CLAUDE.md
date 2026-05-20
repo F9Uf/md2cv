@@ -11,7 +11,7 @@ md2cv is a personal single-page web application that lets you write your resume 
 
 - **Client-side only**: No server, no backend — everything runs in the browser
 - **No auth**: Personal tool — no login, no user management
-- **Tech stack**: markdown-it for parsing, CodeMirror for editor, html2pdf.js or jsPDF for PDF export
+- **Tech stack**: markdown-it for parsing, CodeMirror for editor, paged.js for pagination, browser print for PDF export
 <!-- GSD:project-end -->
 
 <!-- GSD:stack-start source:STACK.md -->
