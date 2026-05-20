@@ -5,6 +5,7 @@ import SplitPane from './components/SplitPane'
 import MobileTabs from './components/MobileTabs'
 import Editor from './components/Editor'
 import Preview from './components/Preview'
+import PrintMount from './components/PrintMount'
 import { useMediaQuery } from './hooks/useMediaQuery'
 import { parseResume } from './lib/parseResume'
 import { SAMPLE_RESUME } from './lib/sampleResume'
@@ -163,7 +164,7 @@ function App() {
         </main>
       </div>
       <div id="print-area" aria-hidden="true">
-        <Preview htmlContent={htmlContent} template={selectedTemplate} enablePagination={true} margins={margins} />
+        <PrintMount htmlContent={htmlContent} template={selectedTemplate} margins={margins} />
       </div>
       <input
         ref={fileInputRef}

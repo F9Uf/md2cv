@@ -134,8 +134,8 @@ export default function Preview({
     )
   }
 
-  // Plain (non-paginated) path: used for the #print-area sibling (enablePagination={false})
-  // AND as the silent fallback if paged.js throws (hasError === true).
+  // Plain (non-paginated) path: silent fallback if paged.js throws (hasError === true)
+  // or when a caller opts out of pagination via enablePagination={false}.
   // This branch is the existing Phase 6 rendering path — preserved verbatim.
   if (!enablePagination || hasError) {
     return (
