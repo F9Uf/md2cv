@@ -162,8 +162,8 @@ function App() {
           )}
         </main>
       </div>
-      <div id="print-area">
-        <Preview htmlContent={htmlContent} template={selectedTemplate} enablePagination={false} margins={margins} />
+      <div id="print-area" aria-hidden="true">
+        <Preview htmlContent={htmlContent} template={selectedTemplate} enablePagination={true} margins={margins} />
       </div>
       <input
         ref={fileInputRef}
