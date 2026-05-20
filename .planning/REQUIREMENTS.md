@@ -27,8 +27,8 @@ Requirements for this milestone. Each maps to roadmap phases.
 
 ### PDF Parity
 
-- [ ] **PDFX-01**: User's exported PDF visually matches the preview pixel-for-pixel (at 1:1) — page size, margins, content positioning, fonts, and colors are identical
-- [ ] **PDFX-02**: Preview and PDF export share a single rendering path — the `templateInlineStyles.ts` parallel hex-color map workaround is eliminated
+- [x] **PDFX-01**: User's exported PDF visually matches the preview pixel-for-pixel (at 1:1) — page size, margins, content positioning, fonts, and colors are identical
+- [x] **PDFX-02**: Preview and PDF export share a single rendering path — the `templateInlineStyles.ts` parallel hex-color map workaround is eliminated
 
 ## Future Requirements
 
@@ -67,8 +67,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MARG-02 | Phase 8 — Configurable Margins | Pending |
 | MARG-03 | Phase 8 — Configurable Margins | Pending |
 | ZOOM-01 | Phase 9 — Responsive Auto-Fit Zoom | Pending |
-| PDFX-01 | Phase 10 — Unified Pixel-Perfect PDF Pipeline | Pending |
-| PDFX-02 | Phase 10 — Unified Pixel-Perfect PDF Pipeline | Pending |
+| PDFX-01 | Phase 10 — Unified Pixel-Perfect PDF Pipeline | Complete |
+| PDFX-02 | Phase 10 — Unified Pixel-Perfect PDF Pipeline | Complete |
 
 **Coverage:**
 - v1.3.0 requirements: 9 total

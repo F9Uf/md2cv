@@ -98,7 +98,7 @@
 **Plans**: 3 plans
   - [x] 10-01-PLAN.md — App.tsx print-mount paged.js flip + index.css @page refactor + pages.css invariant verification (Wave 1)
   - [x] 10-02-PLAN.md — Remove html2pdf.js dead deps + update README.md and CLAUDE.md tech-stack lines (Wave 1)
-  - [ ] 10-03-PLAN.md — Human verification of preview ↔ PDF parity across 3 templates, mobile, and margin propagation (Wave 2)
+  - [x] 10-03-PLAN.md — Human verification of preview ↔ PDF parity across 3 templates, mobile, and margin propagation (Wave 2)
 **UI hint**: yes
 
 ## Progress
@@ -114,4 +114,4 @@
 | 7. Page Chrome & Auto Pagination | v1.3.0 | 3/3 | Complete | 2026-05-18 |
 | 8. Configurable Margins | v1.3.0 | 0/2 | In progress | — |
 | 9. Responsive Auto-Fit Zoom | v1.3.0 | 0/0 | Not started | — |
-| 10. Unified Pixel-Perfect PDF Pipeline | v1.3.0 | 0/3 | Not started | — |
+| 10. Unified Pixel-Perfect PDF Pipeline | v1.3.0 | 3/3 | Complete    | 2026-05-20 |
