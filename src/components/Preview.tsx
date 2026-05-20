@@ -6,6 +6,7 @@ import { type MarginValues } from './MarginControls'
 import { DEFAULT_MARGINS } from '../lib/constants'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import '../styles/themes.css'
+import { sleep } from '../lib/time'
 
 interface PreviewProps {
   htmlContent: string
@@ -67,6 +68,9 @@ export default function Preview({
 
         const previewer = new Previewer()
         activePreviewer = previewer
+
+        // sleep to wait dom mount
+        await sleep(10)
 
         // Explicit non-null stylesheets argument — passing undefined here would strip
         // every <style> and <link> in the document (RESEARCH.md §Pitfall 2, verified
