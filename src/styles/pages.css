@@ -37,6 +37,17 @@
     margin-bottom: 0;
   }
 
+  /* Paged.js's polyfill injects `break-after: page; page-break-after: always`
+   * on EVERY .pagedjs_page in print context (paged.esm.js lines 27423-27431).
+   * That's correct for multi-page resumes (it chunks each .pagedjs_page to its
+   * own physical sheet), but on the LAST page it forces an extra blank
+   * physical page after the content. Override the trailing break — scoped to
+   * :last-child only so multi-page pagination is preserved. */
+  .pagedjs_page:last-child {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
   /* Phase 9 (ZOOM-01) defensive reset: if the on-screen scale wrapper ever
    * reaches a print context, strip the transform and computed height so the
    * page prints at 1:1. The inline transform is applied by Preview.tsx only

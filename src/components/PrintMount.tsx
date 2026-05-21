@@ -1,9 +1,8 @@
-import { useEffect, useRef } from 'react'
-import DOMPurify from 'dompurify'
-import { Previewer } from 'pagedjs'
+import { useRef } from 'react'
 import { TEMPLATE_STYLES, type TemplateName } from '../lib/templateStyles'
 import { type MarginValues } from './MarginControls'
 import { DEFAULT_MARGINS } from '../lib/constants'
+import { usePagedjsPreview } from '../hooks/usePagedjsPreview'
 import '../styles/themes.css'
 
 interface PrintMountProps {
@@ -24,45 +23,14 @@ export default function PrintMount({
   const styles = TEMPLATE_STYLES[template] ?? TEMPLATE_STYLES['classic']
   const rootRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    if (!htmlContent.trim()) return
-    const root = rootRef.current
-    if (!root) return
-
-    let cancelled = false
-    let activePreviewer: Previewer | null = null
-
-    root.innerHTML = ''
-
-    ;(async () => {
-      await Promise.resolve()
-      if (cancelled) return
-      try {
-        const safeHtml = DOMPurify.sanitize(htmlContent, { ADD_ATTR: ['class'] })
-        const wrapper = document.createElement('div')
-        wrapper.innerHTML = `<div class="theme-${template} ${styles.container}">${safeHtml}</div>`
-
-        const previewer = new Previewer()
-        activePreviewer = previewer
-
-        await previewer.preview(
-          wrapper,
-          [{ pagedjs_inline: `@page { size: A4 portrait; margin: ${margins.top}mm ${margins.right}mm ${margins.bottom}mm ${margins.left}mm; }` }],
-          root,
-        )
-      } catch (err) {
-        console.error('paged.js print-mount render failed', err)
-      }
-    })()
-
-    return () => {
-      cancelled = true
-      if (activePreviewer) {
-        try { activePreviewer.polisher?.destroy() } catch { /* ignore */ }
-        try { activePreviewer.chunker?.destroy() } catch { /* ignore */ }
-      }
-    }
-  }, [htmlContent, template, styles.container, margins])
+  usePagedjsPreview({
+    rootRef,
+    htmlContent,
+    template,
+    templateContainerClass: styles.container,
+    margins,
+    errorLogPrefix: 'paged.js print-mount render failed',
+  })
 
   return <div ref={rootRef} />
 }
