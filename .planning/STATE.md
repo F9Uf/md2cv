@@ -104,6 +104,7 @@ Known deferred items at close: 5 (see above)
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 260518-vgl | Fix duplicate first page bug on initial mount / refresh (pagedjs + React 18 StrictMode) | 2026-05-18 | c3924c2 | [260518-vgl-fix-duplicate-first-page-bug-on-page-ref](./quick/260518-vgl-fix-duplicate-first-page-bug-on-page-ref/) |
+| 260521-m56 | Fix preview blink during editor updates (zoom-fit reset on reflow) | 2026-05-21 | d4354fa | [260521-m56-fix-preview-blink-during-editor-updates-](./quick/260521-m56-fix-preview-blink-during-editor-updates-/) |
 
 ---
 
@@ -115,6 +116,6 @@ Known deferred items at close: 5 (see above)
 
 ---
 
-*Last updated: 2026-05-18 — quick task 260518-vgl completed (paged.js StrictMode duplicate-page fix)*
+*Last updated: 2026-05-21 — quick task 260521-m56 completed (preview blink fix — keep zoom applied across paged.js reflows)*
 
 **Planned Phase:** 10 (Unified Pixel-Perfect PDF Pipeline) — 3 plans — 2026-05-19T17:27:50.377Z
