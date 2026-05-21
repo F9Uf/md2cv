@@ -1,5 +1,25 @@
 # Milestones
 
+## v1.3.0 Support preview with realistic page (Shipped: 2026-05-21)
+
+**Phases completed:** 4 phases, 10 plans, 18 tasks (Phases 7–10)
+**Git range:** `fc2ba3c` (chore(07-01): install pagedjs) → `d4354fa` (fix(quick-260521-m56): keep zoom across reflows)
+**Timeline:** 2026-05-17 → 2026-05-21 (~4 days; 93 commits since v1.2.0)
+**Codebase:** ~990 LOC TS/TSX (1,184 LOC with CSS)
+
+**Key accomplishments:**
+
+- paged.js `Previewer` integrated in Preview.tsx — preview renders as one or more A4 page rectangles (210×297mm) with auto multi-page flow and a live "Page X of N" pill (Phase 7, PREV-01/02/03)
+- Four-input MarginControls strip (top/bottom/left/right, 0–50mm clamped) with localStorage persistence under `md2cv-margins`; margin changes inject a dynamic `@page` rule and trigger paged.js reflow (Phase 8, MARG-01/02/03)
+- ResizeObserver-driven CSS-`zoom` auto-fit — preview scales down to pane width on desktop and `zoom: 0.5` on mobile (≤767px); `pageCount` gate prevents pre-render measurement feedback loops (Phase 9, ZOOM-01)
+- Unified paged.js render path for preview *and* PDF export — dedicated `<PrintMount/>` in `#print-area`, `position:fixed; visibility:hidden` cloak keeps it in print flow, `@page { margin: 0 }` in print to avoid double gutter; retires `templateInlineStyles.ts`, `ExportTarget`, and `html2pdf.js` entirely (Phase 10, PDFX-01/02)
+- 21 dead transitive packages removed from `package-lock.json` (html2pdf.js + html2canvas + jspdf + canvg + pako + …); README.md and CLAUDE.md tech-stack lines updated to "paged.js + browser print"
+- Two regressions caught during human UAT (blank PDF pages from `overflow:auto` inside `#print-area`; `left:-9999px` removing print-area from print engine flow) — fixed inline in commit `738bea4` and re-verified before ship
+
+**Known deferred items at close: 5 (see STATE.md Deferred Items)**
+
+---
+
 ## v1.0 MVP (Shipped: 2026-04-15)
 
 **Phases completed:** 3 phases, 6 plans, 5 tasks

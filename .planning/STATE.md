@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.3.0
 milestone_name: Support preview with realistic page
-status: milestone_complete
+status: completed
 stopped_at: Phase 10 context gathered
-last_updated: "2026-05-20T18:10:43.277Z"
-last_activity: 2026-05-20 -- Phase --phase execution started
+last_updated: "2026-05-21T10:04:27.574Z"
+last_activity: 2026-05-21
 progress:
   total_phases: 4
   completed_phases: 4
   total_plans: 10
-  completed_plans: 9
+  completed_plans: 10
   percent: 100
 ---
 
@@ -22,37 +22,45 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-05-18)
+See: .planning/PROJECT.md (updated 2026-05-21 after v1.3.0 close)
 
 **Core value:** Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
-**Current focus:** Phase --phase — 10
+**Current focus:** Planning next milestone (v1.3.0 shipped 2026-05-21)
 
 ---
 
 ## Current Position
 
-Phase: 10
-Plan: Not started
-Plans: 2 plans ready
-Status: Milestone complete
-Last activity: 2026-05-20
+Milestone: v1.3.0 — SHIPPED 2026-05-21
+Status: Milestone complete; ready for `/gsd-new-milestone`
+Last activity: 2026-05-21
 
 ```
-Progress: [          ] 0% (0/4 phases complete in v1.3.0)
+v1.3.0 Progress: [██████████] 100% (4/4 phases, 10/10 plans complete)
 ```
 
-**v1.3.0 phase sequence:**
+**v1.3.0 phase sequence (shipped):**
 
-- Phase 7: Page Chrome & Auto Pagination (PREV-01, PREV-02, PREV-03)
-- Phase 8: Configurable Margins (MARG-01, MARG-02, MARG-03)
-- Phase 9: Responsive Auto-Fit Zoom (ZOOM-01)
-- Phase 10: Unified Pixel-Perfect PDF Pipeline (PDFX-01, PDFX-02)
+- ✅ Phase 7: Page Chrome & Auto Pagination — PREV-01/02/03
+- ✅ Phase 8: Configurable Margins — MARG-01/02/03
+- ✅ Phase 9: Responsive Auto-Fit Zoom — ZOOM-01
+- ✅ Phase 10: Unified Pixel-Perfect PDF Pipeline — PDFX-01/02
 
 ---
 
 ## Deferred Items
 
-Items acknowledged and deferred at milestone close on 2026-04-24:
+### Acknowledged at v1.3.0 close (2026-05-21)
+
+| Category | Item | Status |
+|----------|------|--------|
+| verification | Phase 08: 08-VERIFICATION.md | human_needed — cosmetic UI deviations only (`bg-gray-700` vs spec, label case, SVG vs text Reset); all 3 functional requirements MARG-01/02/03 SATISFIED; user accepted by shipping |
+| quick_task | 260518-vgl-fix-duplicate-first-page-bug-on-page-ref | complete — committed c3924c2; audit-open scan does not match its SUMMARY naming convention |
+| quick_task | 260521-m56-fix-preview-blink-during-editor-updates- | complete — committed d4354fa; same false-positive class as 260518-vgl |
+| quick_task | 260415-05x-add-dark-mode-styling-to-the-codemirror- | false positive — SUMMARY.md exists, previously acknowledged at v1.2.0 close |
+| housekeeping | Stray `.planning/phases/06-use-html2canvas-jspdf-...` (abandoned v1.2 work) | resolved — git rm during v1.3.0 close |
+
+### Acknowledged at v1.1.0 close (2026-04-24)
 
 | Category | Item | Status |
 |----------|------|--------|
@@ -60,10 +68,6 @@ Items acknowledged and deferred at milestone close on 2026-04-24:
 | quick_task | 260415-05x-add-dark-mode-styling-to-the-codemirror | missing |
 | requirement | STYLE-05 — Inline styles in PDF export | dropped with Phase 5 |
 | requirement | HTML-03 — HTML renders in PDF export | dropped with Phase 5 |
-
-| quick_task | 260415-05x-add-dark-mode-styling-to-the-codemirror (v1.2.0) | false positive — SUMMARY.md exists, task complete |
-
-Known deferred items at close: 5 (see above)
 
 ---
 
@@ -110,12 +114,10 @@ Known deferred items at close: 5 (see above)
 
 ## Session Continuity
 
-**Last session:** --stopped-at
-**Stopped at:** Phase 10 context gathered
-**Next action:** `/gsd-execute-phase 7` to execute Phase 7 (Page Chrome & Auto Pagination — PREV-01, PREV-02, PREV-03)
+**Last session:** v1.3.0 milestone close
+**Stopped at:** Milestone shipped, archived, tagged
+**Next action:** `/gsd-new-milestone` to scope v1.4.0
 
 ---
 
-*Last updated: 2026-05-21 — quick task 260521-m56 completed (preview blink fix — keep zoom applied across paged.js reflows)*
-
-**Planned Phase:** 10 (Unified Pixel-Perfect PDF Pipeline) — 3 plans — 2026-05-19T17:27:50.377Z
+*Last updated: 2026-05-21 — v1.3.0 milestone closed and archived (4 phases, 10 plans, 9/9 requirements satisfied)*

@@ -103,6 +103,53 @@
 
 ---
 
+## Milestone: v1.3.0 — Support preview with realistic page
+
+**Shipped:** 2026-05-21
+**Phases:** 4 | **Plans:** 10
+
+### What Was Built
+- paged.js `Previewer` integrated — preview renders as real A4 page rectangles with auto multi-page flow and a live "Page X of N" pill (Phase 7)
+- Four-input MarginControls strip with localStorage persistence and live `@page` reflow on margin change (Phase 8)
+- ResizeObserver-driven CSS `zoom` auto-fit — desktop and mobile (≤767px) preview always fits without horizontal scroll (Phase 9)
+- Unified paged.js render path for preview *and* PDF export via dedicated `<PrintMount/>` + `position: fixed; visibility: hidden` cloak; retired `templateInlineStyles.ts`, `ExportTarget`, and `html2pdf.js` (Phase 10)
+- 21 dead transitive packages dropped from `package-lock.json`; tech-stack docs reconciled with the new pipeline
+
+### What Worked
+- **Three-source cross-reference at audit time** (VERIFICATION.md / human UAT / REQUIREMENTS.md traceability) caught all stale checkboxes and a stray phase directory cleanly before close — the audit format paid for itself
+- **Phase 9's `pageCount !== null` gate** pattern (defer scale until after paged.js renders) was a discovery during human UAT that resolved both desktop blink and mobile feedback loop in one move
+- **`PrintMount` extraction at Phase 10-03** instead of CSS-resetting `<Preview/>` chrome in `@media print` removed the bleeding-chrome bug class entirely — a small refactor that resolved an entire failure mode
+- **Inline fix-during-verification** for the two Phase 10 regressions (commit `738bea4`) was the right judgment call — small, clearly belonged with Plan 10-01's core wiring, and avoided a discuss/plan/execute cycle for a ~50-line print-pipeline fix
+- **Quick-task discipline** held up well: `260518-vgl` (StrictMode duplicate first-page) and `260521-m56` (preview blink on reflow) were small, focused, and committed cleanly — neither bled into the milestone scope
+
+### What Was Inefficient
+- **REQUIREMENTS.md traceability checkboxes drifted again** (PREV-01/02/03, MARG-01/02/03, ZOOM-01 all stale at audit time despite being verified) — same v1.0 lesson resurfaced for the *third* milestone. The lesson is not "remember to update checkboxes"; it's "the workflow does not enforce checkbox sync at plan complete time."
+- **Stray phase 06 directory** (`06-use-html2canvas-jspdf-for-render-preview-and-exported-pdf-in/`) sat untracked in `.planning/phases/` from a v1.2 era abandoned approach — should have been deleted when that approach was discarded, not at v1.3.0 close
+- **Phase 7 frontmatter `status: complete` lagged body `human_needed`** even after `07-HUMAN-UAT.md` recorded all-pass approval — the body never got reconciled
+- **Phase 10 had no phase-level `10-VERIFICATION.md`** — sign-off lived only in plan-scoped `10-03-VERIFICATION.md`. The matrix is unambiguous but the artifact name breaks the per-phase convention
+- **CSS `zoom` rediscovered late** — started Phase 9 with `transform: scale()` + clip container, hit blink + multi-page clipping, rewrote to CSS `zoom`. The "zoom affects layout, transform doesn't" distinction would have been worth a planning-time spike (~10 min)
+
+### Patterns Established
+- **Two-Previewer pattern:** on-screen `<Preview/>` (full chrome) + off-screen `<PrintMount/>` (minimal mount) both running their own paged.js `Previewer` instances — single source of truth for paged.js rendering, zero on-screen chrome in PDFs
+- **`position: fixed; visibility: hidden` cloak** instead of `left: -9999px` for off-screen elements that must remain reachable by the browser print engine (the negative-offset technique removes the element from print flow)
+- **`@page { margin: 0 }` in `@media print`** when paged.js's per-page margins are already baked into `.pagedjs_page` — prevents the browser's print engine from double-gutterring
+- **`pageCount !== null` gate on layout-affecting scale** — paged.js measures the natural A4 size first; auto-fit zoom applies after pagination resolves
+- **Hardcoded reference width (793.7px for A4)** to break ResizeObserver feedback loops when an ancestor `transform`/`zoom` makes `getBoundingClientRect()` lie
+
+### Key Lessons
+1. **Verify the *full* path that ships** — preview-looks-right is not the same as PDF-looks-right. The Phase 10 regressions (bleeding chrome, `left: -9999px`) only surfaced when an actual PDF was generated and opened. Verification must hit the real Save-as-PDF dialog, not just the screen render.
+2. **Decouple "off-screen for paged.js measurement" from "off-screen for the user"** — those are two different requirements, and a single CSS technique can satisfy one while breaking the other. `position: fixed; visibility: hidden` separates them cleanly.
+3. **Spike CSS `zoom` vs `transform: scale` before committing to one** — they look interchangeable but `zoom` affects layout (so clip containers and ResizeObservers behave correctly), while `transform` is paint-only (so layout coordinates lie). 10-minute spike would have saved Phase 9's first-attempt rewrite.
+4. **The third recurrence of the same lesson is a workflow signal, not a memory issue** — REQUIREMENTS.md checkbox drift has now appeared at v1.0, v1.2.0, and v1.3.0 close. Worth a small workflow change at plan-completion time (e.g., `gsd-sdk query requirements.mark-complete REQ-IDs` in the plan-close template).
+5. **Inline fix-during-verification is acceptable when the fix is small, the bug clearly belongs to the plan being verified, and you re-run the full verification matrix after** — the alternative (defer to gap-closure plan) is expensive for ~50-line fixes.
+
+### Cost Observations
+- Model mix: opus-dominant for plan/discuss; sonnet-dominant for execute (balanced profile)
+- Sessions: ~5 (Phase 7 context → exec, Phase 8/9/10 each context → exec, plus 10-03 verification + bug-fix cycle)
+- Notable: Two regressions caught at verification time (cost ~25 minutes including re-verify) were cheaper than a full gap-closure phase would have been (~1 hour minimum)
+
+---
+
 ## Cross-Milestone Trends
 
 ### Process Evolution
@@ -112,18 +159,22 @@
 | v1.0 | 2 | 3 | Initial project — baseline established |
 | v1.1.0 | 1 | 1 | Inline HTML/markdown rendering in bullets |
 | v1.2.0 | ~4 | 2 | Parser rewrite + Tailwind CSS runtime |
+| v1.3.0 | ~5 | 4 | paged.js preview + unified PDF pipeline; html2pdf.js retired |
 
 ### Cumulative Quality
 
-| Milestone | Tests | LOC (src) | Notes |
+| Milestone | Tests | LOC (src TS/TSX) | Notes |
 |-----------|-------|-----------|-------|
 | v1.0 | 0 | ~1,100 | Baseline |
 | v1.1.0 | 0 | ~1,100 | Minimal code change |
 | v1.2.0 | 15 | ~633 | Parser simplification reduced LOC significantly |
+| v1.3.0 | 15 | ~990 | +`<MarginControls/>`, +`<PrintMount/>`, rewired Preview/App/CSS for paged.js — net +357 LOC for unified render path |
 
 ### Top Lessons (Verified Across Milestones)
 
-1. Test PDF/canvas-based exports early — third-party rendering libraries have CSS compatibility constraints that surface late.
-2. Keep requirement tracking live during execution — stale checkboxes create unnecessary review work at milestone close.
-3. Close human verification prompts within the same session — leaving them open carries noise into future milestone close.
-4. DOMPurify strips `class` and other attributes by default — plan for this when sanitizing user-authored HTML that needs passthrough.
+1. Test PDF/canvas-based exports early — third-party rendering libraries have CSS compatibility constraints that surface late. (v1.0 → v1.3.0)
+2. Keep requirement tracking live during execution — stale checkboxes create unnecessary review work at milestone close. (v1.0, v1.2.0, **v1.3.0 — third recurrence; now a workflow signal**)
+3. Close human verification prompts within the same session — leaving them open carries noise into future milestone close. (v1.1.0)
+4. DOMPurify strips `class` and other attributes by default — plan for this when sanitizing user-authored HTML that needs passthrough. (v1.2.0)
+5. Decouple "off-screen for the print engine" from "off-screen for the user" — different requirements, different CSS techniques. (v1.3.0)
+6. Spike CSS layout-affecting properties (`zoom`, `display: contents`, container queries) before committing — they often look interchangeable with paint-only counterparts (`transform`, `visibility`) but break differently. (v1.3.0)
