@@ -8,19 +8,11 @@ md2cv is a personal single-page web application that lets you write your resume 
 
 Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
 
-## Current Milestone: v1.2.0 Support render HTML with Tailwind classes
-
-**Goal:** Users can write HTML elements with Tailwind utility classes directly in their markdown and have them render correctly in the live preview.
-
-**Target features:**
-- `parseResume.ts` simplified to use `md.render()` — outputs raw HTML string
-- `templateStyles.ts` re-keyed by HTML element tag (`h1`, `h2`, `h3`, `ul`, `li`, `code`, `a`, etc.)
-- Preview updated to apply Tailwind classes to elements by tag type and render user-authored HTML with working Tailwind classes
-- Tailwind available at runtime in the preview so arbitrary user-authored classes work correctly
-
 ## Current State
 
-**Shipped:** v1.2.0 — Support render HTML with Tailwind classes (2026-04-26). Phase 06 complete.
+**Shipped:** v1.3.0 — Support preview with realistic page (2026-05-21). Phases 7–10 complete. Preview renders as paged.js-driven A4 pages with configurable margins, live "Page X of N", responsive auto-fit zoom on desktop and mobile; PDF export uses the same DOM the user sees via browser-native print over paged.js.
+
+**Next milestone:** Not yet defined. Run `/gsd-new-milestone` to scope v1.4.0.
 
 ## Requirements
 
@@ -41,7 +33,20 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 
 ### Active
 
-*(None — next milestone TBD via `/gsd-new-milestone`)*
+(No active requirements — v1.3.0 shipped 2026-05-21. Next milestone requirements will land here.)
+
+### Validated in Phase 10: unified-pixel-perfect-pdf-pipeline
+
+- ✓ Exported PDF visually matches preview pixel-for-pixel (page size, margins, page break positions, fonts, colors) — v1.3.0
+- ✓ Unified rendering path — both preview and PDF export consume the same paged.js DOM; `templateInlineStyles.ts` parallel-map workaround retired — v1.3.0
+
+### Validated in Phase 07–09 (v1.3.0)
+
+- ✓ Preview pane renders content inside A4-sized page rectangle(s) with visible margins — Phase 07
+- ✓ Multi-page preview: content overflowing one page auto-flows onto additional page rectangles — Phase 07
+- ✓ UI shows current page count ("Page X of N") that updates live as user types — Phase 07
+- ✓ User can configure page margins via four numeric inputs (top/bottom/left/right); persisted to localStorage — Phase 08
+- ✓ Responsive auto-fit zoom for the preview pane on desktop and mobile — Phase 09
 
 ### Validated in Phase 06: tailwind-powered-preview-rendering
 
@@ -64,13 +69,15 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 
 ## Context
 
-Shipped v1.2.0 with ~633 LOC TypeScript/TSX (reduced from ~1,100 in v1.1.0 — parser simplification removed significant code).
+Shipped v1.3.0 with ~990 LOC TS/TSX (1,184 LOC including CSS). v1.3.0 added `<MarginControls/>` + `<PrintMount/>` and rewired Preview/App/index.css/pages.css around the unified paged.js path; net codebase growth ≈360 LOC over v1.2.0.
 
-**Tech stack:** Vite 5, React 18, TypeScript, Tailwind CSS v4, CodeMirror 6, markdown-it, html2pdf.js
+**Tech stack:** Vite 5, React 18, TypeScript, Tailwind CSS v4, CodeMirror 6, markdown-it, DOMPurify, paged.js (pagination), browser-native print (PDF export)
 
 **Known technical debt:**
-- html2pdf.js uses an old html2canvas that crashes on oklch color functions — worked around by creating a parallel `templateInlineStyles.ts` with hex/rgb CSSProperties for the ExportTarget component. If Tailwind or the template styles change significantly, ExportTarget must be kept in sync manually.
 - Dark mode for CodeMirror editor — quick task dropped from v1.1.0, carry forward if desired.
+- `PrintMount` lacks a `hasError` fallback path (parity with `Preview.tsx`) — a paged.js render failure produces a silent blank PDF; surfaced in Phase 10 code review (WR-01). Track for follow-up.
+- Bundle size: pagedjs adds ~1.3MB to the largest chunk (`index-*.js: 1,320 kB minified / 391 kB gzip`). Acceptable for personal-tool scope; revisit with `await import('pagedjs')` code-split if first-paint matters later.
+- Phase 8 UI-SPEC cosmetic deviations (margin strip uses `bg-gray-700` vs spec `bg-gray-900`; UPPERCASE labels; SVG Reset icon vs text button) — accepted by shipping; only relevant if a future phase touches the margin strip visuals.
 
 ## Constraints
 
@@ -84,7 +91,10 @@ Shipped v1.2.0 with ~633 LOC TypeScript/TSX (reduced from ~1,100 in v1.1.0 — p
 |----------|-----------|---------|
 | markdown-it for parsing | Specified by user; well-maintained, extensible | ✓ Good — token walker works cleanly |
 | CodeMirror 6 for editor | Specified by user; syntax highlighting, markdown-aware | ✓ Good — controlled-ish pattern with isInternalChange ref works well |
-| Client-side PDF via html2pdf.js | No server dependency; mature option | ⚠ Revisit — oklch crash required inline style workaround; consider alternatives for v2 |
+| Client-side PDF via html2pdf.js | No server dependency; mature option | ✗ Retired in v1.3.0 — replaced with paged.js + browser print over the same DOM the preview uses |
+| paged.js + browser print for PDF export (v1.3.0) | Same DOM the user sees ⇒ pixel-perfect preview/PDF parity; no canvas rasterization, no oklch crash | ✓ Good — Phase 10 ships single rendering path; `templateInlineStyles.ts` workaround retired |
+| Dedicated `<PrintMount/>` for #print-area (Phase 10) | Reusing full `<Preview/>` for the off-screen print mount bled scroll-container / pill chrome into the PDF | ✓ Good — minimal mount with zero on-screen chrome avoids the bleeding-chrome bug class entirely |
+| `position: fixed; visibility: hidden` cloak for #print-area (Phase 10) | `position: absolute; left: -9999px` removed the element from the print engine's flow → blank PDF | ✓ Good — element stays in real layout for paged.js measurement and reachable for print |
 | LocalStorage + import/export | Best of both worlds — auto-persists and allows .md portability | ✓ Good |
 | Mobile: tabbed layout | Cleaner UX than vertical stack on small screens | ✓ Good — Editor default tab is correct |
 | Tailwind CSS v4 via @tailwindcss/vite | No postcss.config.js needed | ✓ Good — clean setup |
@@ -116,4 +126,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-26 after v1.2.0 milestone*
+*Last updated: 2026-05-21 after v1.3.0 milestone close*

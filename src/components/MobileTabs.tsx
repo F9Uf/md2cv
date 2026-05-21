@@ -11,7 +11,7 @@ export default function MobileTabs({ editorContent, previewContent }: MobileTabs
   return (
     <div className="flex flex-col flex-1 min-h-0">
       {/* Tab bar at top of viewport area per D-05 */}
-      <div className="flex border-b border-gray-200 bg-white shrink-0">
+      <div className="flex border-b border-gray-200 bg-white shrink-0 w-dvw">
         <button
           onClick={() => setActiveTab('editor')}
           className={`flex-1 py-2 text-sm font-medium text-center transition-colors ${

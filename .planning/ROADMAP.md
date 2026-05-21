@@ -5,6 +5,7 @@
 - ✅ **v1.0 MVP** — Phases 1–3 (shipped 2026-04-15) — [archive](milestones/v1.0-ROADMAP.md)
 - ✅ **v1.1.0 Support text styles & HTML** — Phase 4 (shipped 2026-04-24) — [archive](milestones/v1.1.0-ROADMAP.md)
 - ✅ **v1.2.0 Support render HTML with Tailwind classes** — Phases 5–6 (shipped 2026-04-26) — [archive](milestones/v1.2.0-ROADMAP.md)
+- ✅ **v1.3.0 Support preview with realistic page** — Phases 7–10 (shipped 2026-05-21) — [archive](milestones/v1.3.0-ROADMAP.md)
 
 ## Phases
 
@@ -32,6 +33,16 @@
 
 </details>
 
+<details>
+<summary>✅ v1.3.0 Support preview with realistic page (Phases 7–10) — SHIPPED 2026-05-21</summary>
+
+- [x] Phase 7: Page Chrome & Auto Pagination (3/3 plans) — completed 2026-05-18
+- [x] Phase 8: Configurable Margins (2/2 plans) — completed 2026-05-18
+- [x] Phase 9: Responsive Auto-Fit Zoom (2/2 plans) — completed 2026-05-19
+- [x] Phase 10: Unified Pixel-Perfect PDF Pipeline (3/3 plans) — completed 2026-05-21
+
+</details>
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -42,3 +53,7 @@
 | 4. Inline Styles & HTML Preview | v1.1.0 | 2/2 | Complete | 2026-04-16 |
 | 5. Parser Simplification & Template Restructure | v1.2.0 | 3/3 | Complete | 2026-04-25 |
 | 6. Tailwind-Powered Preview Rendering | v1.2.0 | 2/2 | Complete | 2026-04-26 |
+| 7. Page Chrome & Auto Pagination | v1.3.0 | 3/3 | Complete | 2026-05-18 |
+| 8. Configurable Margins | v1.3.0 | 2/2 | Complete | 2026-05-18 |
+| 9. Responsive Auto-Fit Zoom | v1.3.0 | 2/2 | Complete | 2026-05-19 |
+| 10. Unified Pixel-Perfect PDF Pipeline | v1.3.0 | 3/3 | Complete | 2026-05-21 |

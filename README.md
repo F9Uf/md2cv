@@ -29,7 +29,7 @@ The parser maps Markdown elements to resume sections:
 - **Tailwind CSS** — utility-first styling
 - **CodeMirror** — in-browser Markdown editor
 - **markdown-it** — Markdown parsing
-- **html2pdf.js / jsPDF** — client-side PDF export
+- **paged.js + browser print** — paginated DOM rendered in-browser, exported via the browser's native Save-as-PDF
 
 ## Development
 

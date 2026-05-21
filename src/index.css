@@ -11,18 +11,43 @@
     display: none !important;
   }
 
-  /* Show only the print area */
+  /* Show the print-area in normal flow (neutralize the screen-side `position:
+   * fixed; visibility: hidden` cloak so the print engine sees the paged.js
+   * output in normal document flow). Per D-03. */
   #print-area {
     display: block !important;
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
     width: 100%;
     margin: 0;
     padding: 0;
+    overflow: visible !important;
+    background: none !important;
+    height: auto !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    z-index: auto !important;
   }
 
-  /* Reset page for A4 */
+  /* Defensive reset: strip any layout/visual chrome from anything nested
+   * inside #print-area so only paged.js's .pagedjs_pages content reaches
+   * the print canvas. Without this, an `overflow: auto`/`h-full`/`bg-*`
+   * wrapper around the off-screen paged.js mount produces blank PDF pages. */
+  #print-area > div {
+    height: auto !important;
+    overflow: visible !important;
+    background: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Tell the browser print engine the physical page is A4 with NO gutter.
+   * Paged.js already baked the user's per-side margins inside each
+   * .pagedjs_page; a non-zero gutter here would double them. Per D-04a. */
   @page {
     size: A4 portrait;
-    margin: 15mm;
+    margin: 0;
   }
 
   body {
@@ -32,7 +57,20 @@
   }
 }
 
-/* Hide print area from screen */
+/* Hide the print-area on screen WITHOUT removing it from layout. Paged.js
+ * needs real layout (not display:none, not left:-9999px which removes the
+ * element from the printer's flow) to measure .pagedjs_page dimensions
+ * correctly. We use `position: fixed` (out of normal flow but with real box
+ * model) plus `visibility: hidden` (still measurable via getBoundingClientRect,
+ * but not painted on screen) so the on-screen UI is unaffected and paged.js
+ * still chunks to A4 reliably. Per D-03. */
 #print-area {
-  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 210mm;
+  height: auto;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: -1;
 }

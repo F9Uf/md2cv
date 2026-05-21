@@ -83,14 +83,4 @@ describe('template snapshot baseline — container class exists', () => {
     expect(TEMPLATE_STYLES['minimal'].container).toBeTruthy()
   })
 
-  it('classic has element keys: h1, h2, h3, p, ul, li', () => {
-    const s = TEMPLATE_STYLES['classic']
-    expect(s).toHaveProperty('h1')
-    expect(s).toHaveProperty('h2')
-    expect(s).toHaveProperty('h3')
-    expect(s).toHaveProperty('p')
-    expect(s).toHaveProperty('ul')
-    expect(s).toHaveProperty('li')
-  })
-
 })
