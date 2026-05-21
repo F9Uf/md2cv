@@ -6,7 +6,6 @@ import { type MarginValues } from './MarginControls'
 import { DEFAULT_MARGINS } from '../lib/constants'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import '../styles/themes.css'
-import { sleep } from '../lib/time'
 
 interface PreviewProps {
   htmlContent: string
@@ -47,7 +46,11 @@ export default function Preview({
 
     root.innerHTML = '' // clear leftover pagesArea from previous render (RESEARCH.md §Pitfall 3)
     setHasError(false)
-    setPageCount(null) // reset so scaleReady gates re-arm on content change
+    // NOTE: Do NOT reset pageCount to null here. Keeping the previous count means
+    // `zoomReady` stays true and `zoomStyle` keeps the current fit-zoom applied
+    // through the reflow — eliminates the scale-snap blink (content visibly jumping
+    // from fitted → 100% → fitted on each edit). The pill label briefly shows the
+    // stale count until the new render resolves.
 
     ;(async () => {
       // StrictMode dev double-mount safety. The async IIFE otherwise runs synchronously
@@ -68,9 +71,6 @@ export default function Preview({
 
         const previewer = new Previewer()
         activePreviewer = previewer
-
-        // sleep to wait dom mount
-        await sleep(10)
 
         // Explicit non-null stylesheets argument — passing undefined here would strip
         // every <style> and <link> in the document (RESEARCH.md §Pitfall 2, verified
