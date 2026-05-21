@@ -4,7 +4,7 @@ milestone: v1.3.0
 milestone_name: Support preview with realistic page
 status: completed
 stopped_at: Phase 10 context gathered
-last_updated: "2026-05-21T10:04:27.574Z"
+last_updated: "2026-05-21T15:55:00.000Z"
 last_activity: 2026-05-21
 progress:
   total_phases: 4
@@ -109,6 +109,7 @@ v1.3.0 Progress: [██████████] 100% (4/4 phases, 10/10 plans 
 |---|-------------|------|--------|-----------|
 | 260518-vgl | Fix duplicate first page bug on initial mount / refresh (pagedjs + React 18 StrictMode) | 2026-05-18 | c3924c2 | [260518-vgl-fix-duplicate-first-page-bug-on-page-ref](./quick/260518-vgl-fix-duplicate-first-page-bug-on-page-ref/) |
 | 260521-m56 | Fix preview blink during editor updates (zoom-fit reset on reflow) | 2026-05-21 | d4354fa | [260521-m56-fix-preview-blink-during-editor-updates-](./quick/260521-m56-fix-preview-blink-during-editor-updates-/) |
+| 260521-vq8 | Refactor: extract usePagedjsPreview hook to remove duplicated paged.js lifecycle in Preview.tsx and PrintMount.tsx | 2026-05-21 | e598bc2 | [260521-vq8-refactor-code-by-reusing-redundant-compo](./quick/260521-vq8-refactor-code-by-reusing-redundant-compo/) |
 
 ---
 
@@ -120,4 +121,4 @@ v1.3.0 Progress: [██████████] 100% (4/4 phases, 10/10 plans 
 
 ---
 
-*Last updated: 2026-05-21 — v1.3.0 milestone closed and archived (4 phases, 10 plans, 9/9 requirements satisfied)*
+*Last updated: 2026-05-21 — Completed quick task 260521-vq8: extracted usePagedjsPreview hook (Preview.tsx + PrintMount.tsx refactor)*
