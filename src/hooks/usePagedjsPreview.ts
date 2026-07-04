@@ -12,6 +12,8 @@ interface UsePagedjsPreviewArgs {
   margins: MarginValues
   enabled?: boolean
   onPageCount?: (n: number) => void
+  /** Called after freshly paginated pages are swapped into the root. */
+  onRendered?: (root: HTMLDivElement) => void
   errorLogPrefix?: string
 }
 
@@ -28,6 +30,7 @@ export function usePagedjsPreview({
   margins,
   enabled = true,
   onPageCount,
+  onRendered,
   errorLogPrefix,
 }: UsePagedjsPreviewArgs): UsePagedjsPreviewResult {
   const [pageCount, setPageCount] = useState<number | null>(null)
@@ -35,7 +38,9 @@ export function usePagedjsPreview({
 
   // Paged.js render effect — runs only when pagination is enabled AND htmlContent is non-empty.
   // Reflow trigger: [htmlContent, template] per CONTEXT.md D-02 (piggybacks on App.tsx's existing 150ms debounce).
-  // Lifecycle pattern: fresh Previewer per reflow + manual mount-clear + polisher.destroy + chunker.destroy in cleanup.
+  // Lifecycle pattern: fresh Previewer per reflow, paginated into an off-screen 1:1 staging
+  // node (never under the caller's zoom), then swapped into `root`; polisher.destroy +
+  // chunker.destroy + staging removal in cleanup.
   // Stylesheets argument MUST be non-null (RESEARCH.md §Pitfall 2 — default behavior strips document stylesheets).
   useEffect(() => {
     if (!enabled) return
@@ -45,8 +50,8 @@ export function usePagedjsPreview({
 
     let cancelled = false
     let activePreviewer: Previewer | null = null
+    let staging: HTMLDivElement | null = null
 
-    root.innerHTML = '' // clear leftover pagesArea from previous render (RESEARCH.md §Pitfall 3)
     setHasError(false)
     // NOTE: Do NOT reset pageCount to null here. Keeping the previous count means
     // `zoomReady` stays true and `zoomStyle` keeps the current fit-zoom applied
@@ -71,6 +76,16 @@ export function usePagedjsPreview({
         const wrapper = document.createElement('div')
         wrapper.innerHTML = `<div class="theme-${template} ${templateContainerClass}">${safeHtml}</div>`
 
+        // Paginate in an off-screen staging node attached to <body>, NOT in `root`.
+        // `root` may sit inside the zoomed .pagedjs-scale-wrapper, and CSS zoom on an
+        // ancestor skews paged.js's break measurements (wrong breaks, dropped content
+        // on overflow). The staging cloak mirrors the proven #print-area styles in
+        // src/index.css — real 210mm layout, hidden but measurable.
+        staging = document.createElement('div')
+        staging.style.cssText =
+          'position:fixed;top:0;left:0;width:210mm;height:auto;visibility:hidden;pointer-events:none;z-index:-1;'
+        document.body.appendChild(staging)
+
         const previewer = new Previewer()
         activePreviewer = previewer
 
@@ -80,27 +95,39 @@ export function usePagedjsPreview({
         const flow = await previewer.preview(
           wrapper,
           [{ pagedjs_inline: `@page { size: A4 portrait; margin: ${margins.top}mm ${margins.right}mm ${margins.bottom}mm ${margins.left}mm; }` }],
-          root,
+          staging,
         )
         if (cancelled) return
+
+        // Swap the freshly paginated pages into the visible mount. Clearing `root`
+        // only now (instead of at effect start) keeps the previous pages on screen
+        // through the reflow — no blank flash while paged.js works.
+        root.innerHTML = ''
+        root.append(...staging.children)
+        staging.remove()
+        staging = null
 
         const count = flow.pages.length
         setPageCount(count)
         onPageCount?.(count)
+        onRendered?.(root)
       } catch (err) {
         console.error(errorLogPrefix ?? 'paged.js render failed', err)
+        staging?.remove()
+        staging = null
         if (!cancelled) setHasError(true)
       }
     })()
 
     return () => {
       cancelled = true
+      staging?.remove() // drop cancelled in-flight render's off-screen mount
       if (activePreviewer) {
         try { activePreviewer.polisher?.destroy() } catch { /* ignore */ }
         try { activePreviewer.chunker?.destroy() } catch { /* ignore */ }
       }
     }
-  }, [htmlContent, template, templateContainerClass, margins, enabled, onPageCount, errorLogPrefix])
+  }, [htmlContent, template, templateContainerClass, margins, enabled, onPageCount, onRendered, errorLogPrefix])
 
   return { pageCount, hasError }
 }

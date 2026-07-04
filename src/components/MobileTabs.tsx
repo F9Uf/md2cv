@@ -33,9 +33,12 @@ export default function MobileTabs({ editorContent, previewContent }: MobileTabs
           Preview
         </button>
       </div>
-      {/* Tab content */}
+      {/* Tab content — both panes stay MOUNTED (inactive one is CSS-hidden).
+          The preview must keep paginating while the user edits so #print-area
+          (mirrored from the preview's pages) is always fresh for Export PDF. */}
       <div className="flex-1 min-h-0 overflow-auto">
-        {activeTab === 'editor' ? editorContent : previewContent}
+        <div className={activeTab === 'editor' ? 'h-full' : 'hidden'}>{editorContent}</div>
+        <div className={activeTab === 'preview' ? 'h-full' : 'hidden'}>{previewContent}</div>
       </div>
     </div>
   )
