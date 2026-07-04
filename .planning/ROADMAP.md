@@ -61,7 +61,13 @@
   2. User sees their GitHub identity (avatar or username) in the UI after sign-in, confirming a valid token was obtained
   3. User can sign out / disconnect GitHub; the stored token is cleared and the app returns to an unauthenticated state
   4. The token-exchange endpoint URL is read from a config value so it can be changed without modifying app source code
-**Plans**: TBD
+**Plans**: 5 plans (4 waves)
+Plans:
+- [ ] 11-01-PLAN.md — Serverless token-exchange function + env config (.env.example, .gitignore) [wave 1]
+- [ ] 11-02-PLAN.md — Pure OAuth web-flow lib + unit tests + Vite env typing [wave 1]
+- [ ] 11-03-PLAN.md — useGitHubAuth hook (callback handling, token persistence, sign-out) [wave 2]
+- [ ] 11-04-PLAN.md — Header auth UI (button/avatar/dropdown/toast) + App wiring [wave 3]
+- [ ] 11-05-PLAN.md — Human-verify checkpoint: end-to-end OAuth flow with real credentials [wave 4]
 **UI hint**: yes
 
 ### Phase 12: Repo Sync & Toolbar
@@ -103,6 +109,6 @@
 | 8. Configurable Margins | v1.3.0 | 2/2 | Complete | 2026-05-18 |
 | 9. Responsive Auto-Fit Zoom | v1.3.0 | 2/2 | Complete | 2026-05-19 |
 | 10. Unified Pixel-Perfect PDF Pipeline | v1.3.0 | 3/3 | Complete | 2026-05-21 |
-| 11. GitHub Auth Foundation | v1.4.0 | 0/? | Not started | - |
+| 11. GitHub Auth Foundation | v1.4.0 | 0/5 | Not started | - |
 | 12. Repo Sync & Toolbar | v1.4.0 | 0/? | Not started | - |
 | 13. File Tree Sidebar | v1.4.0 | 0/? | Not started | - |
