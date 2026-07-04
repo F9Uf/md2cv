@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.3.0
-milestone_name: Support preview with realistic page
-status: completed
-stopped_at: Phase 10 context gathered
-last_updated: "2026-05-21T16:20:00.000Z"
-last_activity: 2026-05-21
+milestone: v1.4.0
+milestone_name: Support GitHub repository
+status: defining-requirements
+stopped_at: Milestone started — defining requirements
+last_updated: "2026-07-04T00:00:00.000Z"
+last_activity: 2026-07-04
 progress:
-  total_phases: 4
-  completed_phases: 4
-  total_plans: 10
-  completed_plans: 10
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # State: md2cv
@@ -25,26 +25,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-21 after v1.3.0 close)
 
 **Core value:** Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
-**Current focus:** Planning next milestone (v1.3.0 shipped 2026-05-21)
+**Current focus:** Milestone v1.4.0 — Support GitHub repository (defining requirements)
 
 ---
 
 ## Current Position
 
-Milestone: v1.3.0 — SHIPPED 2026-05-21
-Status: Milestone complete; ready for `/gsd-new-milestone`
-Last activity: 2026-07-04 - Generated milestone v1.3.0 summary (.planning/reports/MILESTONE_SUMMARY-v1.3.0.md)
-
-```
-v1.3.0 Progress: [██████████] 100% (4/4 phases, 10/10 plans complete)
-```
-
-**v1.3.0 phase sequence (shipped):**
-
-- ✅ Phase 7: Page Chrome & Auto Pagination — PREV-01/02/03
-- ✅ Phase 8: Configurable Margins — MARG-01/02/03
-- ✅ Phase 9: Responsive Auto-Fit Zoom — ZOOM-01
-- ✅ Phase 10: Unified Pixel-Perfect PDF Pipeline — PDFX-01/02
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-07-04 — Milestone v1.4.0 started
 
 ---
 
@@ -118,10 +108,10 @@ v1.3.0 Progress: [██████████] 100% (4/4 phases, 10/10 plans 
 
 ## Session Continuity
 
-**Last session:** v1.3.0 milestone close
-**Stopped at:** Milestone shipped, archived, tagged
-**Next action:** `/gsd-new-milestone` to scope v1.4.0
+**Last session:** v1.4.0 milestone kickoff
+**Stopped at:** Defining requirements
+**Next action:** Requirements → roadmap
 
 ---
 
-*Last updated: 2026-05-21 — Completed quick task 260521-w4e: fixed PDF export trailing blank page (override paged.js break-after on `.pagedjs_page:last-child`)*
+*Last updated: 2026-07-04 — Milestone v1.4.0 (Support GitHub repository) started*

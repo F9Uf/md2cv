@@ -12,7 +12,20 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 
 **Shipped:** v1.3.0 — Support preview with realistic page (2026-05-21). Phases 7–10 complete. Preview renders as paged.js-driven A4 pages with configurable margins, live "Page X of N", responsive auto-fit zoom on desktop and mobile; PDF export uses the same DOM the user sees via browser-native print over paged.js.
 
-**Next milestone:** Not yet defined. Run `/gsd-new-milestone` to scope v1.4.0.
+**In progress:** v1.4.0 — Support GitHub repository (started 2026-07-04).
+
+## Current Milestone: v1.4.0 Support GitHub repository
+
+**Goal:** Store and sync resume markdown in a GitHub repo — auto-pull on open, manual commit on click — with a VS Code-style file tree for browsing nested markdown files.
+
+**Target features:**
+- GitHub OAuth sign-in (web flow) via a small Vercel serverless function for token exchange; endpoint abstracted so it can move to Cloudflare Worker / Next.js later
+- Repo picker: choose repository + branch from the user's GitHub repos after sign-in
+- Auto-pull on app open; if uncommitted local edits differ from remote, prompt user to keep local or take remote
+- Manual commit: button opens commit-message dialog (sensible default), then commits + pushes the current file via GitHub API
+- Toolbar regrouping: GitHub sync button grouped/collapsed with existing import/export .md buttons (PDF export stays separate)
+- Toggleable left sidebar rendering the repo directory tree (nested folders, VS Code-style)
+- Clicking a markdown file opens it — editor and preview swap to that file; single file open at a time
 
 ## Requirements
 
@@ -33,7 +46,7 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 
 ### Active
 
-(No active requirements — v1.3.0 shipped 2026-05-21. Next milestone requirements will land here.)
+(v1.4.0 requirements being defined — see .planning/REQUIREMENTS.md once written.)
 
 ### Validated in Phase 10: unified-pixel-perfect-pdf-pipeline
 
@@ -81,8 +94,8 @@ Shipped v1.3.0 with ~990 LOC TS/TSX (1,184 LOC including CSS). v1.3.0 added `<Ma
 
 ## Constraints
 
-- **Client-side only**: No server, no backend — everything runs in the browser
-- **No auth**: Personal tool — no login, no user management
+- **Static app + one auth function**: App remains a static client-side SPA; the only server-side piece is a single token-exchange serverless function for GitHub OAuth (Vercel, portable to Cloudflare Worker/Next.js). Relaxed in v1.4.0 from "client-side only, no backend".
+- **No user management**: Personal single-user tool — GitHub OAuth is for repo access only, not accounts/profiles
 - **Node.js**: Project machine runs v20.11.0 — use Vite 5 (not 6+) which requires ^20.19.0
 
 ## Key Decisions
@@ -126,4 +139,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-21 after v1.3.0 milestone close*
+*Last updated: 2026-07-04 — milestone v1.4.0 started*
