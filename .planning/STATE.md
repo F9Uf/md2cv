@@ -33,7 +33,7 @@ See: .planning/PROJECT.md (updated 2026-05-21 after v1.3.0 close)
 
 Milestone: v1.3.0 — SHIPPED 2026-05-21
 Status: Milestone complete; ready for `/gsd-new-milestone`
-Last activity: 2026-07-04 - Completed quick task 260704-op6: Fix preview pagination mismatch under zoom
+Last activity: 2026-07-04 - Completed quick task 260704-ptj: Print the preview's exact pages (single pagination for preview + PDF)
 
 ```
 v1.3.0 Progress: [██████████] 100% (4/4 phases, 10/10 plans complete)
@@ -111,6 +111,7 @@ v1.3.0 Progress: [██████████] 100% (4/4 phases, 10/10 plans 
 | 260521-m56 | Fix preview blink during editor updates (zoom-fit reset on reflow) | 2026-05-21 | d4354fa | [260521-m56-fix-preview-blink-during-editor-updates-](./quick/260521-m56-fix-preview-blink-during-editor-updates-/) |
 | 260521-vq8 | Refactor: extract usePagedjsPreview hook to remove duplicated paged.js lifecycle in Preview.tsx and PrintMount.tsx | 2026-05-21 | e598bc2 | [260521-vq8-refactor-code-by-reusing-redundant-compo](./quick/260521-vq8-refactor-code-by-reusing-redundant-compo/) |
 | 260704-op6 | Fix preview/print pagination mismatch under zoom (paged.js measured inside zoomed wrapper, dropping content on overflow) | 2026-07-04 | 7266a96 | [260704-op6-fix-preview-pagination-mismatch-under-zo](./quick/260704-op6-fix-preview-pagination-mismatch-under-zo/) |
+| 260704-ptj | Print the preview's exact pages — mirror preview pagination into #print-area instead of a second paged.js pass | 2026-07-04 | 98f3a3f | [260704-ptj-print-the-preview-s-exact-pages-mirror-p](./quick/260704-ptj-print-the-preview-s-exact-pages-mirror-p/) |
 | 260521-w4e | Fix: PDF export emitted a trailing blank page when content fit on one page — override paged.js's polyfill `break-after: page` on `.pagedjs_page:last-child` in print CSS | 2026-05-21 | 61253f8 | [260521-w4e-fix-pdf-export-extra-blank-page-when-con](./quick/260521-w4e-fix-pdf-export-extra-blank-page-when-con/) |
 
 ---
