@@ -1,10 +1,11 @@
 ---
 phase: 11
 slug: github-auth-foundation
-status: draft
+status: approved
 shadcn_initialized: false
 preset: none
 created: 2026-07-05
+reviewed_at: 2026-07-05
 ---
 
 # Phase 11 — UI Design Contract
@@ -42,6 +43,16 @@ Phase 11 adds three elements — all within the existing `h-12 bg-gray-900` head
 
 ---
 
+## Visual Hierarchy
+
+Signed-out primary anchor: the "Sign in with GitHub" button at the right of the header controls — it is the only interactive auth element visible and draws the eye via contrast against `bg-gray-900`.
+
+Signed-in primary anchor: the circular avatar button at the same rightmost position — it replaces the sign-in button one-for-one and is the sole entry point to auth actions.
+
+The "Export PDF" blue button retains its existing primary status on the action spectrum; all auth UI uses `bg-gray-700` to avoid competing with it.
+
+---
+
 ## Spacing Scale
 
 Declared values (all multiples of 4). Existing header usage listed where relevant.
@@ -52,29 +63,26 @@ Declared values (all multiples of 4). Existing header usage listed where relevan
 | sm | 8px | gap-2 | Spacing between header controls (already in use) |
 | md | 16px | px-4 | Header horizontal padding (already in use) |
 | button-h | 32px | h-8 | Sign-in button height; avatar height (matches existing buttons) |
-| button-px | 12px | px-3 | Sign-in button horizontal padding (matches existing buttons) |
 | header-h | 48px | h-12 | Header height (existing, unchanged) |
 
 Exceptions:
 - Avatar: 32px × 32px (h-8 w-8 rounded-full) — fits existing button height, no exception needed
 - Dropdown min-width: 160px (min-w-[160px]) — accommodates typical GitHub usernames
 - Dropdown item vertical padding: 8px top + 8px bottom (py-2) per item
-- Dropdown item horizontal padding: 12px (px-3) — matching button pattern
-- Error toast: 8px vertical padding, 12px horizontal padding (py-2 px-3)
+- **12px horizontal padding (px-3):** Used on sign-in button, dropdown items, and error toast. Matches the existing gray button pattern in `Header.tsx` — deviating would break visual consistency with the existing button row. Justified exception; not added to the scale table.
 
 ---
 
 ## Typography
 
-All new Phase 11 UI lives in the header (small surface). Two sizes, two weights.
+Phase 11 introduces only two weights: regular (400) for button/body text and semibold (600) for the dropdown username label. All new elements are at the button/label scale.
 
 | Role | Size | Tailwind | Weight | Weight class | Line Height |
 |------|------|----------|--------|--------------|-------------|
 | Button / body text | 14px | text-sm | 400 — regular | font-normal | 1.5 |
 | Dropdown username label | 14px | text-sm | 600 — semibold | font-semibold | 1.5 |
-| Branding ("md2cv") | 18px | text-lg | 700 — bold | font-bold | 1.2 |
 
-> No heading/display size needed — all new elements are at the button/label scale. Branding line included because it is the only existing heading in the header surface.
+> The existing "md2cv" branding text in the header uses `text-lg font-bold` (18px / 700). That element is unchanged by Phase 11 and is therefore not part of this phase's typography contract. It is noted here only for completeness — it does not affect Phase 11 implementation.
 
 ---
 
