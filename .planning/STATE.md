@@ -2,12 +2,12 @@
 gsd_state_version: 1.0
 milestone: v1.4.0
 milestone_name: Support GitHub repository
-status: defining-requirements
-stopped_at: Milestone started — defining requirements
-last_updated: "2026-07-04T00:00:00.000Z"
-last_activity: 2026-07-04
+status: roadmap-ready
+stopped_at: Roadmap created — Phase 11 ready for planning
+last_updated: "2026-07-05T00:00:00.000Z"
+last_activity: 2026-07-05
 progress:
-  total_phases: 0
+  total_phases: 3
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -25,16 +25,21 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-21 after v1.3.0 close)
 
 **Core value:** Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
-**Current focus:** Milestone v1.4.0 — Support GitHub repository (defining requirements)
+**Current focus:** Milestone v1.4.0 — Support GitHub repository (roadmap ready, Phase 11 next)
 
 ---
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: 11 — GitHub Auth Foundation (not started)
 Plan: —
-Status: Defining requirements
-Last activity: 2026-07-04 — Milestone v1.4.0 started
+Status: Roadmap created; ready to plan Phase 11
+Last activity: 2026-07-05 — Roadmap for v1.4.0 created (Phases 11–13)
+
+**Roadmap:**
+- [ ] Phase 11: GitHub Auth Foundation — AUTH-01, AUTH-02, AUTH-03
+- [ ] Phase 12: Repo Sync & Toolbar — SYNC-01..05, TOOL-01
+- [ ] Phase 13: File Tree Sidebar — TREE-01..04
 
 ---
 
@@ -108,10 +113,10 @@ Last activity: 2026-07-04 — Milestone v1.4.0 started
 
 ## Session Continuity
 
-**Last session:** v1.4.0 milestone kickoff
-**Stopped at:** Defining requirements
-**Next action:** Requirements → roadmap
+**Last session:** v1.4.0 roadmap creation
+**Stopped at:** Roadmap created — 3 phases (11–13) defined and files written
+**Next action:** Plan Phase 11 (`/gsd-plan-phase 11`)
 
 ---
 
-*Last updated: 2026-07-04 — Milestone v1.4.0 (Support GitHub repository) started*
+*Last updated: 2026-07-05 — Roadmap for v1.4.0 (Support GitHub repository) created*

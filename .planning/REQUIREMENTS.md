@@ -62,25 +62,25 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUTH-01 | — | Pending |
-| AUTH-02 | — | Pending |
-| AUTH-03 | — | Pending |
-| SYNC-01 | — | Pending |
-| SYNC-02 | — | Pending |
-| SYNC-03 | — | Pending |
-| SYNC-04 | — | Pending |
-| SYNC-05 | — | Pending |
-| TREE-01 | — | Pending |
-| TREE-02 | — | Pending |
-| TREE-03 | — | Pending |
-| TREE-04 | — | Pending |
-| TOOL-01 | — | Pending |
+| AUTH-01 | Phase 11 | Pending |
+| AUTH-02 | Phase 11 | Pending |
+| AUTH-03 | Phase 11 | Pending |
+| SYNC-01 | Phase 12 | Pending |
+| SYNC-02 | Phase 12 | Pending |
+| SYNC-03 | Phase 12 | Pending |
+| SYNC-04 | Phase 12 | Pending |
+| SYNC-05 | Phase 12 | Pending |
+| TREE-01 | Phase 13 | Pending |
+| TREE-02 | Phase 13 | Pending |
+| TREE-03 | Phase 13 | Pending |
+| TREE-04 | Phase 13 | Pending |
+| TOOL-01 | Phase 12 | Pending |
 
 **Coverage:**
 - v1.4.0 requirements: 13 total
-- Mapped to phases: 0
-- Unmapped: 13 ⚠️ (roadmap pending)
+- Mapped to phases: 13
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-07-05*
-*Last updated: 2026-07-05 after initial definition*
+*Last updated: 2026-07-05 after roadmap creation*
