@@ -33,7 +33,7 @@ See: .planning/PROJECT.md (updated 2026-05-21 after v1.3.0 close)
 
 Milestone: v1.3.0 — SHIPPED 2026-05-21
 Status: Milestone complete; ready for `/gsd-new-milestone`
-Last activity: 2026-07-04 - Completed quick task 260704-ptj: Print the preview's exact pages (single pagination for preview + PDF)
+Last activity: 2026-07-04 - Generated milestone v1.3.0 summary (.planning/reports/MILESTONE_SUMMARY-v1.3.0.md)
 
 ```
 v1.3.0 Progress: [██████████] 100% (4/4 phases, 10/10 plans complete)
