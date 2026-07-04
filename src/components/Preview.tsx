@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import DOMPurify from 'dompurify'
 import { TEMPLATE_STYLES, type TemplateName } from '../lib/templateStyles'
 import { type MarginValues } from './MarginControls'
@@ -24,6 +24,16 @@ export default function Preview({
 }: PreviewProps) {
   const styles = TEMPLATE_STYLES[template] ?? TEMPLATE_STYLES['classic']
   const previewerRootRef = useRef<HTMLDivElement>(null)
+
+  // Mirror the preview's rendered pages into #print-area (the browser-print
+  // mount, see index.css). The printed PDF must reproduce the preview's page
+  // breaks exactly — running a second independent paged.js pass for print can
+  // break at different points, so print gets a copy of these pages instead.
+  const mirrorPagesToPrintArea = useCallback((root: HTMLDivElement) => {
+    const printArea = document.getElementById('print-area')
+    if (printArea) printArea.innerHTML = root.innerHTML
+  }, [])
+
   const { pageCount, hasError } = usePagedjsPreview({
     rootRef: previewerRootRef,
     htmlContent,
@@ -32,6 +42,7 @@ export default function Preview({
     margins,
     enabled: enablePagination,
     onPageCount: onPageCountChange,
+    onRendered: mirrorPagesToPrintArea,
   })
   const isMobile = useMediaQuery('(max-width: 767px)')
   const scrollContainerRef = useRef<HTMLDivElement>(null)
@@ -50,6 +61,7 @@ export default function Preview({
     const recompute = () => {
       if (!scrollContainerRef.current) return
       const availableWidth = scrollContainerRef.current.getBoundingClientRect().width - 32 // px-4 × 2
+      if (availableWidth <= 0) return // container hidden (e.g. inactive mobile tab)
       setScale(Math.min(availableWidth / 793.7, 1))
     }
 

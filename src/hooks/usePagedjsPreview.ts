@@ -12,6 +12,8 @@ interface UsePagedjsPreviewArgs {
   margins: MarginValues
   enabled?: boolean
   onPageCount?: (n: number) => void
+  /** Called after freshly paginated pages are swapped into the root. */
+  onRendered?: (root: HTMLDivElement) => void
   errorLogPrefix?: string
 }
 
@@ -28,6 +30,7 @@ export function usePagedjsPreview({
   margins,
   enabled = true,
   onPageCount,
+  onRendered,
   errorLogPrefix,
 }: UsePagedjsPreviewArgs): UsePagedjsPreviewResult {
   const [pageCount, setPageCount] = useState<number | null>(null)
@@ -107,6 +110,7 @@ export function usePagedjsPreview({
         const count = flow.pages.length
         setPageCount(count)
         onPageCount?.(count)
+        onRendered?.(root)
       } catch (err) {
         console.error(errorLogPrefix ?? 'paged.js render failed', err)
         staging?.remove()
@@ -123,7 +127,7 @@ export function usePagedjsPreview({
         try { activePreviewer.chunker?.destroy() } catch { /* ignore */ }
       }
     }
-  }, [htmlContent, template, templateContainerClass, margins, enabled, onPageCount, errorLogPrefix])
+  }, [htmlContent, template, templateContainerClass, margins, enabled, onPageCount, onRendered, errorLogPrefix])
 
   return { pageCount, hasError }
 }

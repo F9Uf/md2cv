@@ -5,7 +5,6 @@ import SplitPane from './components/SplitPane'
 import MobileTabs from './components/MobileTabs'
 import Editor from './components/Editor'
 import Preview from './components/Preview'
-import PrintMount from './components/PrintMount'
 import { useMediaQuery } from './hooks/useMediaQuery'
 import { parseResume } from './lib/parseResume'
 import { SAMPLE_RESUME } from './lib/sampleResume'
@@ -163,9 +162,10 @@ function App() {
           )}
         </main>
       </div>
-      <div id="print-area" aria-hidden="true">
-        <PrintMount htmlContent={htmlContent} template={selectedTemplate} margins={margins} />
-      </div>
+      {/* Browser-print mount. Populated by Preview, which mirrors its rendered
+          paged.js pages here after every reflow — the PDF is guaranteed to
+          paginate exactly like the on-screen preview. */}
+      <div id="print-area" aria-hidden="true" />
       <input
         ref={fileInputRef}
         type="file"
