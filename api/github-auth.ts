@@ -18,7 +18,12 @@ export default async function handler(req: AuthRequest, res: AuthResponse) {
   if (req.method === 'OPTIONS') { res.status(204).end(); return }
   if (req.method !== 'POST') { res.status(405).json({ error: 'method_not_allowed' }); return }
 
-  const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body
+  let body: { code?: string } | undefined
+  if (typeof req.body === 'string') {
+    try { body = JSON.parse(req.body) } catch { res.status(400).json({ error: 'invalid_json' }); return }
+  } else {
+    body = req.body as { code?: string } | undefined
+  }
   const code = body?.code
   if (!code) { res.status(400).json({ error: 'missing_code' }); return }
 

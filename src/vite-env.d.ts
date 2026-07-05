@@ -1,8 +1,8 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_AUTH_ENDPOINT: string
-  readonly VITE_GITHUB_CLIENT_ID: string
+  readonly VITE_AUTH_ENDPOINT: string | undefined
+  readonly VITE_GITHUB_CLIENT_ID: string | undefined
 }
 
 interface ImportMeta {

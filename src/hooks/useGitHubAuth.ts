@@ -67,10 +67,13 @@ export function useGitHubAuth(): UseGitHubAuthResult {
         cleanUrl()
         if (!expected || expected !== state) {
           if (!cancelled) setError(ERR_FAILED)
+          activeToken = null
         } else {
           if (!cancelled) setLoading(true)
           try {
-            const newToken = await exchangeCodeForToken(code, import.meta.env.VITE_AUTH_ENDPOINT)
+            const endpoint = import.meta.env.VITE_AUTH_ENDPOINT
+            if (!endpoint) throw new Error('VITE_AUTH_ENDPOINT not configured')
+            const newToken = await exchangeCodeForToken(code, endpoint)
             if (cancelled) return
             activeToken = newToken
             setToken(newToken)
@@ -100,8 +103,10 @@ export function useGitHubAuth(): UseGitHubAuthResult {
     const state = generateState()
     try { sessionStorage.setItem(STATE_KEY, state) } catch { /* ignore */ }
     setError(null)
+    const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID
+    if (!clientId) { setError(ERR_FAILED); return }
     window.location.href = buildAuthorizeUrl(
-      import.meta.env.VITE_GITHUB_CLIENT_ID,
+      clientId,
       state,
       window.location.origin + '/',
     )
