@@ -38,7 +38,7 @@ export default async function handler(req: AuthRequest, res: AuthResponse) {
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({ client_id: clientId, client_secret: clientSecret, code }),
     })
-    data = await ghRes.json()
+    data = await ghRes.json() as { access_token?: string; error?: string }
   } catch {
     res.status(502).json({ error: 'exchange_failed' }); return
   }
