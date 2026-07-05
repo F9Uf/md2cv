@@ -46,7 +46,7 @@
 
 ### v1.4.0 Support GitHub repository (Phases 11–13)
 
-- [ ] **Phase 11: GitHub Auth Foundation** - OAuth sign-in, token exchange serverless function, sign-out
+- [x] **Phase 11: GitHub Auth Foundation** - OAuth sign-in, token exchange serverless function, sign-out — completed 2026-07-05
 - [ ] **Phase 12: Repo Sync & Toolbar** - Repo/branch picker, auto-pull, conflict prompt, commit, dirty indicator, toolbar regrouping
 - [ ] **Phase 13: File Tree Sidebar** - Toggleable VS Code-style directory tree, click-to-open markdown files
 
@@ -63,11 +63,11 @@
   4. The token-exchange endpoint URL is read from a config value so it can be changed without modifying app source code
 **Plans**: 5 plans (4 waves)
 Plans:
-- [ ] 11-01-PLAN.md — Serverless token-exchange function + env config (.env.example, .gitignore) [wave 1]
-- [ ] 11-02-PLAN.md — Pure OAuth web-flow lib + unit tests + Vite env typing [wave 1]
-- [ ] 11-03-PLAN.md — useGitHubAuth hook (callback handling, token persistence, sign-out) [wave 2]
-- [ ] 11-04-PLAN.md — Header auth UI (button/avatar/dropdown/toast) + App wiring [wave 3]
-- [ ] 11-05-PLAN.md — Human-verify checkpoint: end-to-end OAuth flow with real credentials [wave 4]
+- [x] 11-01-PLAN.md — Serverless token-exchange function + env config (.env.example, .gitignore) [wave 1]
+- [x] 11-02-PLAN.md — Pure OAuth web-flow lib + unit tests + Vite env typing [wave 1]
+- [x] 11-03-PLAN.md — useGitHubAuth hook (callback handling, token persistence, sign-out) [wave 2]
+- [x] 11-04-PLAN.md — Header auth UI (button/avatar/dropdown/toast) + App wiring [wave 3]
+- [x] 11-05-PLAN.md — Human-verify checkpoint: end-to-end OAuth flow with real credentials [wave 4]
 **UI hint**: yes
 
 ### Phase 12: Repo Sync & Toolbar
