@@ -80,7 +80,15 @@ Plans:
   3. User can click a commit button, type a commit message (sensible default pre-filled), and the current file is committed and pushed to GitHub via the API
   4. A dirty indicator is visible in the UI whenever the open file has uncommitted local changes
   5. The GitHub sync button is grouped with the import/export .md buttons in the toolbar; the PDF export button remains in its own separate group
-**Plans**: TBD
+**Plans**: 7 plans (5 waves)
+Plans:
+- [ ] 12-01-PLAN.md — GitHub repo/content API module + unit tests [wave 1]
+- [ ] 12-02-PLAN.md — Dialog modal primitive + ConflictModal [wave 1]
+- [ ] 12-03-PLAN.md — useRepoSync hook (config, auto-pull, dirty, commit, conflict) [wave 2]
+- [ ] 12-04-PLAN.md — PickerDialog (repo/branch/file) + CommitDialog [wave 2]
+- [ ] 12-05-PLAN.md — Header File menu + dirty dot + repo caption + toast variants [wave 3]
+- [ ] 12-06-PLAN.md — App.tsx wiring (hook, dialogs, toasts) [wave 4]
+- [ ] 12-07-PLAN.md — Human-verify checkpoint: end-to-end sync against live GitHub [wave 5]
 **UI hint**: yes
 
 ### Phase 13: File Tree Sidebar
@@ -110,5 +118,5 @@ Plans:
 | 9. Responsive Auto-Fit Zoom | v1.3.0 | 2/2 | Complete | 2026-05-19 |
 | 10. Unified Pixel-Perfect PDF Pipeline | v1.3.0 | 3/3 | Complete | 2026-05-21 |
 | 11. GitHub Auth Foundation | v1.4.0 | 0/5 | Not started | - |
-| 12. Repo Sync & Toolbar | v1.4.0 | 0/? | Not started | - |
+| 12. Repo Sync & Toolbar | v1.4.0 | 0/7 | Not started | - |
 | 13. File Tree Sidebar | v1.4.0 | 0/? | Not started | - |
