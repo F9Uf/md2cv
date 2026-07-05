@@ -6,6 +6,7 @@ import MobileTabs from './components/MobileTabs'
 import Editor from './components/Editor'
 import Preview from './components/Preview'
 import { useMediaQuery } from './hooks/useMediaQuery'
+import { useGitHubAuth } from './hooks/useGitHubAuth'
 import { parseResume } from './lib/parseResume'
 import { SAMPLE_RESUME } from './lib/sampleResume'
 import type { TemplateName } from './lib/templateStyles'
@@ -14,6 +15,7 @@ import { DEFAULT_MARGINS } from './lib/constants'
 
 function App() {
   const isDesktop = useMediaQuery('(min-width: 768px)')
+  const auth = useGitHubAuth()
 
   // Template state with localStorage persistence (per D-09)
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateName>(() => {
@@ -146,6 +148,10 @@ function App() {
           onDownloadMd={handleDownloadMd}
           onExportPdf={handleExportPdf}
           onImportMd={handleImportMd}
+          authState={auth}
+          onSignIn={auth.signIn}
+          onSignOut={auth.signOut}
+          onDismissError={auth.dismissError}
         />
         <MarginControls margins={margins} onMarginsChange={handleMarginChange} />
         <main className="flex-1 flex min-h-0">
