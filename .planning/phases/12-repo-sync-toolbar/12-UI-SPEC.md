@@ -1,10 +1,11 @@
 ---
 phase: 12
 slug: repo-sync-toolbar
-status: draft
+status: approved
 shadcn_initialized: false
 preset: none
 created: 2026-07-06
+reviewed_at: 2026-07-06
 ---
 
 # Phase 12 — UI Design Contract
@@ -25,6 +26,8 @@ created: 2026-07-06
 | Font | system-ui (browser default — no custom font declared) |
 
 **Source:** Codebase scan of `src/components/Header.tsx`, `src/index.css`, `src/App.tsx`. No `components.json` found. Tailwind v4 via `@tailwindcss/vite` — no `tailwind.config.*` file exists; all token values are Tailwind v4 defaults.
+
+**Primary visual anchor:** The Export PDF button (blue-600) is the only accent-colored element in the toolbar — it draws the eye first and signals the app's core export purpose.
 
 ---
 
@@ -53,12 +56,12 @@ Exceptions:
 
 | Role | Size | Weight | Line Height |
 |------|------|--------|-------------|
-| App title | 18px (text-lg) | 700 (font-bold) | 1.5 |
+| App title | 18px (text-lg) | 600 (font-semibold) | 1.5 |
 | Heading (dialog title, menu section label) | 16px (text-base) | 600 (font-semibold) | 1.25 |
 | Body / buttons / menu items / repo-info text | 14px (text-sm) | 400 (normal) | 1.5 |
 | Repo/branch header caption | 12px (text-xs) | 400 (normal) | 1.5 |
 
-Exactly 4 sizes, 2 weights (400 and 600/700 collapsed to "semibold+" tier).
+Exactly 4 sizes, 2 weights: 400 and 600.
 
 **Source:** Inferred from `Header.tsx` existing classes (`text-lg font-bold`, `text-sm`, `text-sm font-semibold`). 12px added for the compact repo caption (D-16) which must not compete with the app title.
 
@@ -138,7 +141,7 @@ Menu item disabled class: `px-3 py-2 text-sm text-gray-500 cursor-default` (no h
 
 ### 3. Dialog/Modal Primitive
 
-First modal in the app — establishes the reusable pattern for picker, conflict prompt, and commit dialog.
+First modal in the app — establishes the reusable pattern for picker, conflict prompt, and commit dialog. Each consuming dialog MUST declare its own dismissal label (see picker, conflict modal, and commit dialog below — each has distinct dismissal semantics).
 
 ```
 <!-- Backdrop -->
@@ -151,10 +154,10 @@ First modal in the app — establishes the reusable pattern for picker, conflict
       {title}
     </h2>
     <!-- content slot -->
-    <!-- footer -->
+    <!-- footer — each consuming dialog declares its own dismissal label -->
     <div class="flex justify-end gap-2 mt-6">
       <button class="h-8 px-3 rounded bg-gray-700 text-white text-sm border border-gray-600 hover:bg-gray-600 transition-colors">
-        Cancel
+        {dismissal label}
       </button>
       <button class="h-8 px-3 rounded bg-blue-600 text-white text-sm border border-blue-500 hover:bg-blue-500 transition-colors">
         {primary action}
@@ -164,7 +167,7 @@ First modal in the app — establishes the reusable pattern for picker, conflict
 </div>
 ```
 
-Close on: Escape key, backdrop click, Cancel button. Focus traps inside panel while open.
+Close on: Escape key, backdrop click, dismissal button. Focus traps inside panel while open.
 
 ### 4. Picker Dialog (SYNC-01)
 
@@ -198,7 +201,7 @@ Two full-width action buttons (stacked vertically, `flex flex-col gap-2`):
 - "Keep my local version" — `h-9 w-full rounded bg-gray-700 text-white text-sm border border-gray-600 hover:bg-gray-600 transition-colors`
 - "Use GitHub version" — `h-9 w-full rounded bg-red-800 text-white text-sm border border-red-700 hover:bg-red-700 transition-colors` (destructive styling — overwrites local)
 
-No Cancel. User must choose.
+No dismissal button. User must choose.
 
 ### 6. Commit Dialog (SYNC-04)
 
@@ -209,8 +212,8 @@ Title: "Commit to GitHub"
 - Label above input: `class="block text-xs text-gray-400 mb-1"` — "Commit message"
 - Empty message: primary button disabled (`opacity-50 cursor-not-allowed`) — no commit without a message
 
-Primary CTA: "Commit" — `bg-blue-600`
-Cancel: `bg-gray-700`
+Primary CTA: "Commit Changes" — `bg-blue-600`
+Dismissal: "Discard" — `bg-gray-700` (signals that uncommitted message text is discarded)
 
 ### 7. Repo/Branch Caption in Header (SYNC-05, D-16)
 
@@ -236,7 +239,7 @@ Base class (all toasts): `fixed top-12 right-4 z-50 flex items-center gap-2 px-3
 | Success | `bg-green-950 border border-green-800 text-green-400` |
 | Warning / offline | `bg-amber-950 border border-amber-800 text-amber-400` |
 
-All toasts include a dismiss `×` button: `ml-auto pl-2 hover:text-white cursor-pointer`
+All toasts include a dismiss `×` button: `ml-auto pl-2 hover:text-white cursor-pointer aria-label="Dismiss"`
 
 Auto-dismiss: success toasts after 4 seconds. Error and warning toasts require manual dismiss.
 
@@ -278,7 +281,8 @@ Auto-dismiss: success toasts after 4 seconds. Error and warning toasts require m
 |---------|------|
 | Primary CTA — open picker | "Connect repository…" |
 | Primary CTA — confirm repo+file | "Open file" |
-| Primary CTA — commit | "Commit" |
+| Primary CTA — commit dialog | "Commit Changes" |
+| Dismissal — commit dialog | "Discard" |
 | File menu label | "File" |
 | Menu item — import | "Import MD" |
 | Menu item — download | "Download MD" |
@@ -313,6 +317,7 @@ Auto-dismiss: success toasts after 4 seconds. Error and warning toasts require m
 - Escape closes menus and dialogs (except conflict modal — no Escape; user must choose)
 - Dirty dot: conveys state via `aria-label` on the File button — not color alone
 - Toasts: `role="alert" aria-live="polite"` (error/warning); success toasts `aria-live="polite"`
+- Toast dismiss button: `aria-label="Dismiss"` on the `×` button — not announced by text content alone
 - Commit button disabled state: `aria-disabled="true"` when message empty
 - Spinner: `aria-hidden="true"` on the visual spinner; button's accessible label updated to reflect in-progress state
 
