@@ -154,7 +154,12 @@ export async function getFileContent(
     { headers: authHeaders(token) },
   )
   if (!res.ok) throw new Error(`content_fetch_failed_${res.status}`)
-  const data = (await res.json()) as { content: string; sha: string }
+  const data = (await res.json()) as { content: string; sha: string; size?: number; download_url?: string }
+  if (!data.content && data.download_url) {
+    // File is too large for the Contents API (>1 MB). Surface a clear error rather
+    // than silently replacing the editor with an empty string.
+    throw new Error('content_too_large')
+  }
   return { content: decodeBase64(data.content), sha: data.sha }
 }
 
