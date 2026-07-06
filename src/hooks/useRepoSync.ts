@@ -32,6 +32,7 @@ export interface UseSyncResult {
   successMessage: string | null
   conflict: ConflictState | null
   connectRepo: (config: RepoConfig) => void
+  openFile: (path: string) => void
   commit: (message: string) => void
   resolveConflict: (choice: 'local' | 'remote') => void
   clearRepo: () => void
@@ -162,6 +163,29 @@ export function useRepoSync(
     })()
   }, [token, applyRemoteContent])
 
+  // openFile: pull a different file into the editor and re-anchor sync state to it (Phase 13).
+  // Caller MUST have resolved any dirty-switch prompt before calling this.
+  const openFile = useCallback((path: string) => {
+    const cfg = configRef.current
+    if (!token || !cfg) return
+    setPulling(true)
+    setSyncError(null)
+    ;(async () => {
+      try {
+        const remote = await getFileContent(token, cfg.owner, cfg.repo, path, cfg.branch)
+        // Only replace content + re-anchor config AFTER the fetch succeeds (D-07)
+        applyRemoteContent(remote.content)
+        setSyncState({ sha: remote.sha, contentSnapshot: remote.content })
+        setRepoConfig(prev => prev ? { ...prev, filePath: path } : prev)
+      } catch {
+        setSyncError("Couldn't open file — check your connection and try again.")
+        // current file + edits remain untouched (D-07)
+      } finally {
+        setPulling(false)
+      }
+    })()
+  }, [token, applyRemoteContent])
+
   const clearRepo = useCallback(() => {
     setRepoConfig(null)
     setSyncState(null)
@@ -250,6 +274,7 @@ export function useRepoSync(
     successMessage,
     conflict,
     connectRepo,
+    openFile,
     commit,
     resolveConflict,
     clearRepo,

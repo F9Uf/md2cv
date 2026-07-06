@@ -3,6 +3,7 @@ import {
   listUserRepos,
   listBranches,
   listMdFiles,
+  listTreeEntries,
   getFileContent,
   commitFile,
 } from './githubRepo'
@@ -215,6 +216,75 @@ describe('getFileContent', () => {
     const mockFetch = vi.fn().mockResolvedValue({ ok: false, status: 404 })
     vi.stubGlobal('fetch', mockFetch)
     await expect(getFileContent('tok', 'me', 'repo', 'README.md', 'main')).rejects.toThrow()
+  })
+})
+
+describe('listTreeEntries', () => {
+  it('returns all entries unfiltered including folders and non-md files', async () => {
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: () =>
+        Promise.resolve({
+          tree: [
+            { type: 'tree', path: 'docs' },
+            { type: 'blob', path: 'docs/resume.md' },
+            { type: 'blob', path: 'logo.png' },
+          ],
+        }),
+    })
+    vi.stubGlobal('fetch', mockFetch)
+
+    const result = await listTreeEntries('tok', 'me', 'repo', 'main')
+    expect(result.entries).toHaveLength(3)
+    expect(result.entries).toContainEqual({ type: 'blob', path: 'logo.png' })
+    expect(result.entries).toContainEqual({ type: 'tree', path: 'docs' })
+  })
+
+  it('propagates truncated flag', async () => {
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: () => Promise.resolve({ tree: [], truncated: true }),
+    })
+    vi.stubGlobal('fetch', mockFetch)
+
+    const result = await listTreeEntries('tok', 'me', 'repo', 'main')
+    expect(result.truncated).toBe(true)
+  })
+
+  it('defaults truncated to false when absent', async () => {
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: () => Promise.resolve({ tree: [] }),
+    })
+    vi.stubGlobal('fetch', mockFetch)
+
+    const result = await listTreeEntries('tok', 'me', 'repo', 'main')
+    expect(result.truncated).toBe(false)
+  })
+
+  it('excludes non blob/tree entries', async () => {
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: () =>
+        Promise.resolve({
+          tree: [{ type: 'commit', path: 'sub' }],
+        }),
+    })
+    vi.stubGlobal('fetch', mockFetch)
+
+    const result = await listTreeEntries('tok', 'me', 'repo', 'main')
+    expect(result.entries).toHaveLength(0)
+  })
+
+  it('throws tree_fetch_failed on non-ok response', async () => {
+    const mockFetch = vi.fn().mockResolvedValue({ ok: false, status: 404 })
+    vi.stubGlobal('fetch', mockFetch)
+
+    await expect(listTreeEntries('t', 'o', 'r', 'main')).rejects.toThrow('tree_fetch_failed_404')
   })
 })
 

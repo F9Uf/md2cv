@@ -15,6 +15,16 @@ export interface GitHubMdFile {
   path: string
 }
 
+export interface GitHubTreeEntry {
+  type: 'blob' | 'tree'  // 'blob' = file, 'tree' = folder
+  path: string
+}
+
+export interface GitHubTreeResult {
+  entries: GitHubTreeEntry[]
+  truncated: boolean
+}
+
 export interface GitHubFileContent {
   content: string
   sha: string
@@ -107,6 +117,29 @@ export async function listMdFiles(
   return data.tree
     .filter((entry) => entry.type === 'blob' && entry.path.endsWith('.md'))
     .map((entry) => ({ path: entry.path }))
+}
+
+export async function listTreeEntries(
+  token: string,
+  owner: string,
+  repo: string,
+  branch: string,
+): Promise<GitHubTreeResult> {
+  const res = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}/git/trees/${encodeURIComponent(branch)}?recursive=1`,
+    { headers: authHeaders(token) },
+  )
+  if (!res.ok) throw new Error(`tree_fetch_failed_${res.status}`)
+  const data = (await res.json()) as {
+    tree: Array<{ type: string; path: string }>
+    truncated?: boolean
+  }
+  return {
+    entries: data.tree
+      .filter((e) => e.type === 'blob' || e.type === 'tree')
+      .map((e) => ({ type: e.type as 'blob' | 'tree', path: e.path })),
+    truncated: data.truncated ?? false,
+  }
 }
 
 export async function getFileContent(
