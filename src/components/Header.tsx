@@ -17,6 +17,12 @@ interface HeaderProps {
   isDirty: boolean
   onOpenFilePicker: () => void
   onOpenCommitDialog: () => void
+  syncError: string | null
+  syncSuccess: string | null
+  syncWarning: string | null
+  onDismissSyncError: () => void
+  onDismissSyncSuccess: () => void
+  onDismissSyncWarning: () => void
 }
 
 export default function Header({
@@ -33,6 +39,12 @@ export default function Header({
   isDirty,
   onOpenFilePicker,
   onOpenCommitDialog,
+  syncError,
+  syncSuccess,
+  syncWarning,
+  onDismissSyncError,
+  onDismissSyncSuccess,
+  onDismissSyncWarning,
 }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -92,6 +104,13 @@ export default function Header({
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [fileMenuOpen])
+
+  // Auto-dismiss success toast after 4s
+  useEffect(() => {
+    if (!syncSuccess) return
+    const t = setTimeout(onDismissSyncSuccess, 4000)
+    return () => clearTimeout(t)
+  }, [syncSuccess, onDismissSyncSuccess])
 
   return (
     <>
@@ -237,23 +256,76 @@ export default function Header({
         </div>
       </header>
 
-      {/* Error toast — floats below header without expanding it */}
-      {authState.error && (
-        <div
-          role="alert"
-          aria-live="polite"
-          className="fixed top-12 right-4 z-50 flex items-center gap-2 px-3 py-2 rounded bg-red-950 border border-red-800 text-red-400 text-sm shadow-md max-w-[320px]"
-        >
-          {authState.error}
-          <button
-            aria-label="Dismiss error"
-            onClick={onDismissError}
-            className="ml-auto pl-2 text-red-400 hover:text-white cursor-pointer"
+      {/* Toast container — stacks all active toasts below the header */}
+      <div className="fixed top-12 right-4 z-50 flex flex-col gap-2 items-end">
+        {/* Auth error toast */}
+        {authState.error && (
+          <div
+            role="alert"
+            aria-live="polite"
+            className="flex items-center gap-2 px-3 py-2 rounded bg-red-950 border border-red-800 text-red-400 text-sm shadow-md max-w-[320px]"
           >
-            ×
-          </button>
-        </div>
-      )}
+            {authState.error}
+            <button
+              aria-label="Dismiss"
+              onClick={onDismissError}
+              className="ml-auto pl-2 hover:text-white cursor-pointer"
+            >
+              ×
+            </button>
+          </div>
+        )}
+        {/* Sync error toast */}
+        {syncError && (
+          <div
+            role="alert"
+            aria-live="polite"
+            className="flex items-center gap-2 px-3 py-2 rounded bg-red-950 border border-red-800 text-red-400 text-sm shadow-md max-w-[320px]"
+          >
+            {syncError}
+            <button
+              aria-label="Dismiss"
+              onClick={onDismissSyncError}
+              className="ml-auto pl-2 hover:text-white cursor-pointer"
+            >
+              ×
+            </button>
+          </div>
+        )}
+        {/* Warning toast — offline / pull-failure */}
+        {syncWarning && (
+          <div
+            role="alert"
+            aria-live="polite"
+            className="flex items-center gap-2 px-3 py-2 rounded bg-amber-950 border border-amber-800 text-amber-400 text-sm shadow-md max-w-[320px]"
+          >
+            {syncWarning}
+            <button
+              aria-label="Dismiss"
+              onClick={onDismissSyncWarning}
+              className="ml-auto pl-2 hover:text-white cursor-pointer"
+            >
+              ×
+            </button>
+          </div>
+        )}
+        {/* Success toast — post-commit, auto-dismisses after 4s */}
+        {syncSuccess && (
+          <div
+            aria-live="polite"
+            className="flex items-center gap-2 px-3 py-2 rounded bg-green-950 border border-green-800 text-green-400 text-sm shadow-md max-w-[320px]"
+          >
+            {syncSuccess}
+            <button
+              aria-label="Dismiss"
+              onClick={onDismissSyncSuccess}
+              className="ml-auto pl-2 hover:text-white cursor-pointer"
+            >
+              ×
+            </button>
+          </div>
+        )}
+      </div>
     </>
   )
 }
