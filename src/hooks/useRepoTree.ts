@@ -69,5 +69,16 @@ export function useRepoTree(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, repoConfig?.owner, repoConfig?.repo, repoConfig?.branch, refreshTick])
 
+  // When the active file changes (openFile), expand its ancestor folders without
+  // re-fetching the tree. Merges into the existing set so manual toggles are preserved.
+  useEffect(() => {
+    if (!repoConfig?.filePath) return
+    setExpandedPaths(prev => {
+      const next = new Set(prev)
+      for (const p of pathsToExpand(repoConfig.filePath)) next.add(p)
+      return next
+    })
+  }, [repoConfig?.filePath])
+
   return { tree, loading, error, truncated, expandedPaths, toggleFolder, refresh }
 }
