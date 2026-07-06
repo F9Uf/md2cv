@@ -85,7 +85,7 @@ Plans:
 - [ ] 12-01-PLAN.md — GitHub repo/content API module + unit tests [wave 1]
 - [ ] 12-02-PLAN.md — Dialog modal primitive + ConflictModal [wave 1]
 - [ ] 12-03-PLAN.md — useRepoSync hook (config, auto-pull, dirty, commit, conflict) [wave 2]
-- [ ] 12-04-PLAN.md — PickerDialog (repo/branch/file) + CommitDialog [wave 2]
+- [ ] 12-04-PLAN.md — PickerDialog (repo/branch/file) + CommitDialog [wave 3]
 - [ ] 12-05-PLAN.md — Header File menu + dirty dot + repo caption + toast variants [wave 3]
 - [ ] 12-06-PLAN.md — App.tsx wiring (hook, dialogs, toasts) [wave 4]
 - [ ] 12-07-PLAN.md — Human-verify checkpoint: end-to-end sync against live GitHub [wave 5]
