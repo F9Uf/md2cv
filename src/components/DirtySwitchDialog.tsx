@@ -27,7 +27,8 @@ export default function DirtySwitchDialog({
         </button>
         <button
           onClick={onDiscard}
-          className="h-9 w-full rounded text-red-400 text-sm hover:bg-gray-800 transition-colors"
+          disabled={committing}
+          className="h-9 w-full rounded text-red-400 text-sm hover:bg-gray-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         >
           Discard my edits
         </button>
