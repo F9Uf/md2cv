@@ -126,4 +126,4 @@ Plans:
 | 10. Unified Pixel-Perfect PDF Pipeline | v1.3.0 | 3/3 | Complete | 2026-05-21 |
 | 11. GitHub Auth Foundation | v1.4.0 | 0/5 | Not started | - |
 | 12. Repo Sync & Toolbar | v1.4.0 | 7/7 | Complete   | 2026-07-06 |
-| 13. File Tree Sidebar | v1.4.0 | 6/6 | Complete   | 2026-07-06 |
+| 13. File Tree Sidebar | v1.4.0 | 6/6 | Complete    | 2026-07-06 |
