@@ -7,11 +7,15 @@ import Editor from './components/Editor'
 import Preview from './components/Preview'
 import { useMediaQuery } from './hooks/useMediaQuery'
 import { useGitHubAuth } from './hooks/useGitHubAuth'
+import { useRepoSync } from './hooks/useRepoSync'
 import { parseResume } from './lib/parseResume'
 import { SAMPLE_RESUME } from './lib/sampleResume'
 import type { TemplateName } from './lib/templateStyles'
 import MarginControls, { type MarginValues } from './components/MarginControls'
 import { DEFAULT_MARGINS } from './lib/constants'
+import PickerDialog from './components/PickerDialog'
+import CommitDialog from './components/CommitDialog'
+import ConflictModal from './components/ConflictModal'
 
 function App() {
   const isDesktop = useMediaQuery('(min-width: 768px)')
@@ -74,6 +78,21 @@ function App() {
       try { localStorage.setItem('md2cv-content', value) } catch { /* ignore */ }
     }, 150)
   }, [])
+
+  // Apply remote content immediately (no debounce) — used by useRepoSync on pull/connect
+  const applyRemoteContent = useCallback((content: string) => {
+    setMarkdownContent(content)
+    setHtmlContent(parseResume(content))
+    try { localStorage.setItem('md2cv-content', content) } catch { /* ignore */ }
+  }, [])
+
+  const repoSync = useRepoSync(auth.token, markdownContent, applyRemoteContent)
+
+  const [pickerOpen, setPickerOpen] = useState(false)
+  const [commitOpen, setCommitOpen] = useState(false)
+
+  const handleOpenFilePicker = useCallback(() => setPickerOpen(true), [])
+  const handleOpenCommitDialog = useCallback(() => setCommitOpen(true), [])
 
   // Download current markdown content as a .md file (per D-06, D-07, D-08)
   const handleDownloadMd = useCallback(() => {
@@ -152,16 +171,16 @@ function App() {
           onSignIn={auth.signIn}
           onSignOut={auth.signOut}
           onDismissError={auth.dismissError}
-          repoConfig={null}
-          isDirty={false}
-          onOpenFilePicker={() => {}}
-          onOpenCommitDialog={() => {}}
-          syncError={null}
-          syncSuccess={null}
-          syncWarning={null}
-          onDismissSyncError={() => {}}
-          onDismissSyncSuccess={() => {}}
-          onDismissSyncWarning={() => {}}
+          repoConfig={repoSync.repoConfig}
+          isDirty={repoSync.isDirty}
+          onOpenFilePicker={handleOpenFilePicker}
+          onOpenCommitDialog={handleOpenCommitDialog}
+          syncError={repoSync.syncError === "Couldn't sync with GitHub — working locally" ? null : repoSync.syncError}
+          syncSuccess={repoSync.successMessage}
+          syncWarning={repoSync.syncError === "Couldn't sync with GitHub — working locally" ? repoSync.syncError : null}
+          onDismissSyncError={repoSync.dismissSyncError}
+          onDismissSyncSuccess={repoSync.dismissSuccess}
+          onDismissSyncWarning={repoSync.dismissSyncError}
         />
         <MarginControls margins={margins} onMarginsChange={handleMarginChange} />
         <main className="flex-1 flex min-h-0">
@@ -189,6 +208,26 @@ function App() {
         onChange={handleFileChange}
         style={{ display: 'none' }}
         aria-hidden="true"
+      />
+      {auth.token && (
+        <PickerDialog
+          open={pickerOpen}
+          token={auth.token}
+          onClose={() => setPickerOpen(false)}
+          onConnect={(config) => { repoSync.connectRepo(config); setPickerOpen(false) }}
+        />
+      )}
+      <CommitDialog
+        open={commitOpen}
+        filename={repoSync.repoConfig ? (repoSync.repoConfig.filePath.split('/').pop() ?? 'resume.md') : 'resume.md'}
+        committing={repoSync.committing}
+        onClose={() => setCommitOpen(false)}
+        onCommit={(message) => { repoSync.commit(message); setCommitOpen(false) }}
+      />
+      <ConflictModal
+        open={repoSync.conflict !== null}
+        onKeepLocal={() => repoSync.resolveConflict('local')}
+        onUseRemote={() => repoSync.resolveConflict('remote')}
       />
     </>
   )
