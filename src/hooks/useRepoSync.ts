@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { getFileContent } from '../lib/githubRepo'
+import { getFileContent, commitFile } from '../lib/githubRepo'
 
 const REPO_CONFIG_KEY = 'md2cv-repo-config'
 const SYNC_STATE_KEY = 'md2cv-sync-state'
@@ -172,11 +172,74 @@ export function useRepoSync(
   const dismissSyncError = useCallback(() => setSyncError(null), [])
   const dismissSuccess = useCallback(() => setSuccessMessage(null), [])
 
-  // commit and resolveConflict stubs — filled in Task 2
-  const commit = useCallback((_message: string) => {
-    setCommitting(false) // placeholder — real impl in Task 2
-  }, [])
-  const resolveConflict = useCallback((_choice: 'local' | 'remote') => {}, [])
+  // commit: PUT current content against stored sha; re-raise conflict on sha mismatch (D-13)
+  const commit = useCallback((message: string) => {
+    if (!token || !configRef.current || !syncRef.current) return
+    setCommitting(true)
+    setSyncError(null)
+    ;(async () => {
+      try {
+        const content = contentRef.current
+        const cfg = configRef.current!
+        const snap = syncRef.current!
+        const result = await commitFile(token, cfg.owner, cfg.repo, cfg.filePath, cfg.branch, content, message, snap.sha)
+        setSyncState({ sha: result.sha, contentSnapshot: content }) // dirty clears: content === snapshot
+        setSuccessMessage(`Committed to ${cfg.branch}`)
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : ''
+        if (msg.includes('commit_failed_409') || msg.includes('commit_failed_422')) {
+          // sha mismatch — someone changed remote; fetch fresh remote and re-raise conflict (D-13)
+          try {
+            const cfg = configRef.current!
+            const remote = await getFileContent(token, cfg.owner, cfg.repo, cfg.filePath, cfg.branch)
+            setConflict({ remoteContent: remote.content, remoteSha: remote.sha, source: 'commit' })
+          } catch {
+            setSyncError('Commit failed — check your connection and try again')
+          }
+        } else {
+          setSyncError('Commit failed — check your connection and try again')
+        }
+      } finally {
+        setCommitting(false)
+      }
+    })()
+  }, [token])
+
+  // resolveConflict: handle keep-local/take-remote for both pull and commit sources
+  const resolveConflict = useCallback((choice: 'local' | 'remote') => {
+    const c = conflictRef.current
+    if (!c) return
+    setConflict(null)
+    if (choice === 'remote') {
+      // discard local, take remote (D-08 take-remote; D-13 commit-source take-remote)
+      applyRemoteContent(c.remoteContent)
+      setSyncState({ sha: c.remoteSha, contentSnapshot: c.remoteContent })
+      return
+    }
+    // choice === 'local'
+    if (c.source === 'pull') {
+      // keep local, mark dirty (D-09). Adopt the fresh remote sha so a later commit targets it,
+      // but keep the OLD snapshot so isDirty stays true.
+      setSyncState((prev) => ({ sha: c.remoteSha, contentSnapshot: prev ? prev.contentSnapshot : '' }))
+    } else {
+      // source === 'commit': "keep local" == overwrite remote — re-commit with the fresh sha (D-13)
+      if (!token || !configRef.current) return
+      setCommitting(true)
+      ;(async () => {
+        try {
+          const content = contentRef.current
+          const cfg = configRef.current!
+          const result = await commitFile(token, cfg.owner, cfg.repo, cfg.filePath, cfg.branch, content, `Update ${cfg.filePath.split('/').pop()}`, c.remoteSha)
+          setSyncState({ sha: result.sha, contentSnapshot: content })
+          setSuccessMessage(`Committed to ${cfg.branch}`)
+        } catch {
+          setSyncError('Commit failed — check your connection and try again')
+        } finally {
+          setCommitting(false)
+        }
+      })()
+    }
+  }, [token, applyRemoteContent])
 
   return {
     repoConfig,
