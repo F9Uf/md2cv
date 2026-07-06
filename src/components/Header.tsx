@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import type { TemplateName } from '../lib/templateStyles'
 import type { GitHubAuthState } from '../hooks/useGitHubAuth'
+import type { RepoConfig } from '../hooks/useRepoSync'
 
 interface HeaderProps {
   selectedTemplate: TemplateName
@@ -12,6 +13,10 @@ interface HeaderProps {
   onSignIn: () => void
   onSignOut: () => void
   onDismissError: () => void
+  repoConfig: RepoConfig | null
+  isDirty: boolean
+  onOpenFilePicker: () => void
+  onOpenCommitDialog: () => void
 }
 
 export default function Header({
@@ -24,17 +29,23 @@ export default function Header({
   onSignIn,
   onSignOut,
   onDismissError,
+  repoConfig,
+  isDirty,
+  onOpenFilePicker,
+  onOpenCommitDialog,
 }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [imgFailed, setImgFailed] = useState(false)
+  const [fileMenuOpen, setFileMenuOpen] = useState(false)
+  const fileMenuRef = useRef<HTMLDivElement>(null)
 
   // Reset imgFailed when user changes
   useEffect(() => {
     setImgFailed(false)
   }, [authState.user?.login])
 
-  // Close dropdown on outside click (mousedown) or Escape key
+  // Close avatar dropdown on outside click (mousedown) or Escape key
   useEffect(() => {
     if (!menuOpen) return
 
@@ -58,26 +69,57 @@ export default function Header({
     }
   }, [menuOpen])
 
+  // Close file menu on outside click (mousedown) or Escape key
+  useEffect(() => {
+    if (!fileMenuOpen) return
+
+    function handleMouseDown(e: MouseEvent) {
+      if (fileMenuRef.current && !fileMenuRef.current.contains(e.target as Node)) {
+        setFileMenuOpen(false)
+      }
+    }
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        setFileMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleMouseDown)
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('mousedown', handleMouseDown)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [fileMenuOpen])
+
   return (
     <>
       <header className="h-12 bg-gray-900 text-white flex items-center justify-between px-4 shrink-0">
-        <h1 className="text-lg font-bold tracking-tight flex items-center">
-          md
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="#f9d855"
-            className="size-4 inline-block"
-            aria-hidden="true"
-          >
-            <path
-              fillRule="evenodd"
-              d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z"
-              clipRule="evenodd"
-            />
-          </svg>
-          cv
-        </h1>
+        <div className="flex items-center min-w-0">
+          <h1 className="text-lg font-bold tracking-tight flex items-center">
+            md
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="#f9d855"
+              className="size-4 inline-block"
+              aria-hidden="true"
+            >
+              <path
+                fillRule="evenodd"
+                d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z"
+                clipRule="evenodd"
+              />
+            </svg>
+            cv
+          </h1>
+          {repoConfig && (
+            <span className="text-xs text-gray-400 truncate max-w-[160px] hidden sm:inline-block ml-3">
+              {repoConfig.owner}/{repoConfig.repo} · {repoConfig.filePath.split('/').pop()}
+            </span>
+          )}
+        </div>
         <div className="flex items-center gap-2">
           {/* Template switcher dropdown */}
           <select
@@ -90,20 +132,39 @@ export default function Header({
             <option value="modern">Modern</option>
             <option value="minimal">Minimal</option>
           </select>
-          <button
-            onClick={onImportMd}
-            className="h-8 px-3 rounded bg-gray-700 text-white text-sm border border-gray-600 hover:bg-gray-600 transition-colors"
-            aria-label="Import markdown file"
-          >
-            Import MD
-          </button>
-          <button
-            onClick={onDownloadMd}
-            className="h-8 px-3 rounded bg-gray-700 text-white text-sm border border-gray-600 hover:bg-gray-600 transition-colors"
-            aria-label="Download markdown file"
-          >
-            Download MD
-          </button>
+
+          {/* File dropdown menu — replaces two standalone file buttons */}
+          <div ref={fileMenuRef} className="relative">
+            <button
+              onClick={() => setFileMenuOpen(o => !o)}
+              className="h-8 px-3 rounded bg-gray-700 text-white text-sm border border-gray-600 hover:bg-gray-600 transition-colors flex items-center gap-1 relative"
+              aria-haspopup="menu"
+              aria-expanded={fileMenuOpen}
+              aria-label={isDirty ? 'File — uncommitted changes' : 'File'}
+            >
+              File
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 6l4 4 4-4z" /></svg>
+              {isDirty && <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-amber-400" aria-hidden="true" />}
+            </button>
+            {fileMenuOpen && (
+              <div role="menu" className="absolute left-0 top-full mt-1 min-w-[200px] z-50 bg-gray-900 border border-gray-600 rounded shadow-lg">
+                <button role="menuitem" onClick={() => { setFileMenuOpen(false); onImportMd() }} className="w-full text-left px-3 py-2 text-sm text-gray-200 hover:bg-gray-700 cursor-pointer">Import MD</button>
+                <button role="menuitem" onClick={() => { setFileMenuOpen(false); onDownloadMd() }} className="w-full text-left px-3 py-2 text-sm text-gray-200 hover:bg-gray-700 cursor-pointer">Download MD</button>
+                <hr className="border-gray-700 my-1" />
+                {!authState.user ? (
+                  <span className="px-3 py-2 text-xs text-gray-500 block">Sign in to sync with GitHub</span>
+                ) : !repoConfig ? (
+                  <button role="menuitem" onClick={() => { setFileMenuOpen(false); onOpenFilePicker() }} className="w-full text-left px-3 py-2 text-sm text-gray-200 hover:bg-gray-700 cursor-pointer">Connect repository…</button>
+                ) : (
+                  <>
+                    <button role="menuitem" onClick={() => { setFileMenuOpen(false); onOpenFilePicker() }} className="w-full text-left px-3 py-2 text-sm text-gray-200 hover:bg-gray-700 cursor-pointer">Connect repository…</button>
+                    <button role="menuitem" onClick={() => { setFileMenuOpen(false); onOpenCommitDialog() }} className="w-full text-left px-3 py-2 text-sm text-gray-200 hover:bg-gray-700 cursor-pointer">Commit to GitHub…</button>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+
           <button
             onClick={onExportPdf}
             className="h-8 px-3 rounded bg-blue-600 text-white text-sm border border-blue-500 hover:bg-blue-500 transition-colors"

@@ -152,6 +152,10 @@ function App() {
           onSignIn={auth.signIn}
           onSignOut={auth.signOut}
           onDismissError={auth.dismissError}
+          repoConfig={null}
+          isDirty={false}
+          onOpenFilePicker={() => {}}
+          onOpenCommitDialog={() => {}}
         />
         <MarginControls margins={margins} onMarginsChange={handleMarginChange} />
         <main className="flex-1 flex min-h-0">
