@@ -48,7 +48,7 @@
 
 - [x] **Phase 11: GitHub Auth Foundation** - OAuth sign-in, token exchange serverless function, sign-out — completed 2026-07-05
 - [x] **Phase 12: Repo Sync & Toolbar** - Repo/branch picker, auto-pull, conflict prompt, commit, dirty indicator, toolbar regrouping (completed 2026-07-06)
-- [ ] **Phase 13: File Tree Sidebar** - Toggleable VS Code-style directory tree, click-to-open markdown files
+- [x] **Phase 13: File Tree Sidebar** - Toggleable VS Code-style directory tree, click-to-open markdown files (completed 2026-07-06)
 
 ## Phase Details
 
@@ -107,7 +107,7 @@ Plans:
 - [x] 13-03-PLAN.md — FileTree recursive renderer + DirtySwitchDialog [wave 3]
 - [x] 13-04-PLAN.md — FileSidebar container (panel/drawer, header, states) [wave 4]
 - [x] 13-05-PLAN.md — Header toggle button + App integration (sidebar, tree, dirty-switch, scrim) [wave 5]
-- [ ] 13-06-PLAN.md — Human-verify checkpoint: end-to-end tree browsing against live GitHub [wave 6]
+- [x] 13-06-PLAN.md — Human-verify checkpoint: end-to-end tree browsing against live GitHub [wave 6]
 **UI hint**: yes
 
 ## Progress
@@ -126,4 +126,4 @@ Plans:
 | 10. Unified Pixel-Perfect PDF Pipeline | v1.3.0 | 3/3 | Complete | 2026-05-21 |
 | 11. GitHub Auth Foundation | v1.4.0 | 0/5 | Not started | - |
 | 12. Repo Sync & Toolbar | v1.4.0 | 7/7 | Complete   | 2026-07-06 |
-| 13. File Tree Sidebar | v1.4.0 | 5/6 | In Progress|  |
+| 13. File Tree Sidebar | v1.4.0 | 6/6 | Complete   | 2026-07-06 |
