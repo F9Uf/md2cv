@@ -20,11 +20,11 @@ describe('buildFileTree', () => {
     expect(result[0].type).toBe('folder')
     expect(result[0].name).toBe('docs')
     expect(result[0].path).toBe('docs')
-    // files alphabetical
+    // files alphabetical (case-insensitive: 'l' < 'r', so logo.png before README.md)
     expect(result[1].type).toBe('file')
-    expect(result[1].name).toBe('README.md')
+    expect(result[1].name).toBe('logo.png')
     expect(result[2].type).toBe('file')
-    expect(result[2].name).toBe('logo.png')
+    expect(result[2].name).toBe('README.md')
   })
 
   it('nests children inside folder', () => {
