@@ -104,7 +104,7 @@ Plans:
 Plans:
 - [x] 13-01-PLAN.md — githubRepo.listTreeEntries (unfiltered tree) + useRepoSync.openFile [wave 1]
 - [x] 13-02-PLAN.md — fileTree.ts build/expand logic (TDD) + useRepoTree hook [wave 2]
-- [ ] 13-03-PLAN.md — FileTree recursive renderer + DirtySwitchDialog [wave 3]
+- [x] 13-03-PLAN.md — FileTree recursive renderer + DirtySwitchDialog [wave 3]
 - [ ] 13-04-PLAN.md — FileSidebar container (panel/drawer, header, states) [wave 4]
 - [ ] 13-05-PLAN.md — Header toggle button + App integration (sidebar, tree, dirty-switch, scrim) [wave 5]
 - [ ] 13-06-PLAN.md — Human-verify checkpoint: end-to-end tree browsing against live GitHub [wave 6]
@@ -126,4 +126,4 @@ Plans:
 | 10. Unified Pixel-Perfect PDF Pipeline | v1.3.0 | 3/3 | Complete | 2026-05-21 |
 | 11. GitHub Auth Foundation | v1.4.0 | 0/5 | Not started | - |
 | 12. Repo Sync & Toolbar | v1.4.0 | 7/7 | Complete   | 2026-07-06 |
-| 13. File Tree Sidebar | v1.4.0 | 2/6 | In Progress|  |
+| 13. File Tree Sidebar | v1.4.0 | 3/6 | In Progress|  |
