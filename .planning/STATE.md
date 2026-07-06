@@ -4,8 +4,8 @@ milestone: v1.4.0
 milestone_name: Support GitHub repository
 status: executing
 stopped_at: Phase 13 UI-SPEC approved
-last_updated: "2026-07-06T07:32:44.843Z"
-last_activity: 2026-07-06 -- Phase 13 planning complete
+last_updated: "2026-07-06T07:35:11.640Z"
+last_activity: 2026-07-06 -- Phase 13 execution started
 progress:
   total_phases: 3
   completed_phases: 2
@@ -25,16 +25,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-21 after v1.3.0 close)
 
 **Core value:** Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
-**Current focus:** Phase 12 — repo-sync-toolbar
+**Current focus:** Phase 13 — file-tree-sidebar
 
 ---
 
 ## Current Position
 
-Phase: 12 (repo-sync-toolbar) — EXECUTING
-Plan: 1 of 7
-Status: Ready to execute
-Last activity: 2026-07-06 -- Phase 13 planning complete
+Phase: 13 (file-tree-sidebar) — EXECUTING
+Plan: 1 of 6
+Status: Executing Phase 13
+Last activity: 2026-07-06 -- Phase 13 execution started
 
 **Roadmap:**
 
