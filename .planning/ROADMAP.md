@@ -82,8 +82,8 @@ Plans:
   5. The GitHub sync button is grouped with the import/export .md buttons in the toolbar; the PDF export button remains in its own separate group
 **Plans**: 7 plans (5 waves)
 Plans:
-- [ ] 12-01-PLAN.md — GitHub repo/content API module + unit tests [wave 1]
-- [ ] 12-02-PLAN.md — Dialog modal primitive + ConflictModal [wave 1]
+- [x] 12-01-PLAN.md — GitHub repo/content API module + unit tests [wave 1]
+- [x] 12-02-PLAN.md — Dialog modal primitive + ConflictModal [wave 1]
 - [ ] 12-03-PLAN.md — useRepoSync hook (config, auto-pull, dirty, commit, conflict) [wave 2]
 - [ ] 12-04-PLAN.md — PickerDialog (repo/branch/file) + CommitDialog [wave 3]
 - [ ] 12-05-PLAN.md — Header File menu + dirty dot + repo caption + toast variants [wave 3]
@@ -118,5 +118,5 @@ Plans:
 | 9. Responsive Auto-Fit Zoom | v1.3.0 | 2/2 | Complete | 2026-05-19 |
 | 10. Unified Pixel-Perfect PDF Pipeline | v1.3.0 | 3/3 | Complete | 2026-05-21 |
 | 11. GitHub Auth Foundation | v1.4.0 | 0/5 | Not started | - |
-| 12. Repo Sync & Toolbar | v1.4.0 | 0/7 | Not started | - |
+| 12. Repo Sync & Toolbar | v1.4.0 | 2/7 | In Progress|  |
 | 13. File Tree Sidebar | v1.4.0 | 0/? | Not started | - |
