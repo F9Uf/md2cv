@@ -87,7 +87,7 @@ Plans:
 - [x] 12-03-PLAN.md — useRepoSync hook (config, auto-pull, dirty, commit, conflict) [wave 2]
 - [x] 12-04-PLAN.md — PickerDialog (repo/branch/file) + CommitDialog [wave 3]
 - [x] 12-05-PLAN.md — Header File menu + dirty dot + repo caption + toast variants [wave 3]
-- [ ] 12-06-PLAN.md — App.tsx wiring (hook, dialogs, toasts) [wave 4]
+- [x] 12-06-PLAN.md — App.tsx wiring (hook, dialogs, toasts) [wave 4]
 - [ ] 12-07-PLAN.md — Human-verify checkpoint: end-to-end sync against live GitHub [wave 5]
 **UI hint**: yes
 
@@ -118,5 +118,5 @@ Plans:
 | 9. Responsive Auto-Fit Zoom | v1.3.0 | 2/2 | Complete | 2026-05-19 |
 | 10. Unified Pixel-Perfect PDF Pipeline | v1.3.0 | 3/3 | Complete | 2026-05-21 |
 | 11. GitHub Auth Foundation | v1.4.0 | 0/5 | Not started | - |
-| 12. Repo Sync & Toolbar | v1.4.0 | 5/7 | In Progress|  |
+| 12. Repo Sync & Toolbar | v1.4.0 | 6/7 | In Progress|  |
 | 13. File Tree Sidebar | v1.4.0 | 0/? | Not started | - |
