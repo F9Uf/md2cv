@@ -17,6 +17,7 @@ interface HeaderProps {
   isDirty: boolean
   onOpenFilePicker: () => void
   onOpenCommitDialog: () => void
+  onToggleSidebar: () => void
   syncError: string | null
   syncSuccess: string | null
   syncWarning: string | null
@@ -39,6 +40,7 @@ export default function Header({
   isDirty,
   onOpenFilePicker,
   onOpenCommitDialog,
+  onToggleSidebar,
   syncError,
   syncSuccess,
   syncWarning,
@@ -116,6 +118,19 @@ export default function Header({
     <>
       <header className="h-12 bg-gray-900 text-white flex items-center justify-between px-4 shrink-0">
         <div className="flex items-center min-w-0">
+          {repoConfig && (
+            <button
+              onClick={onToggleSidebar}
+              aria-label="Toggle file tree sidebar"
+              className="h-8 w-8 mr-1 rounded flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition-colors focus:outline-none focus:ring-1 focus:ring-blue-400"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                <rect x="1.5" y="2.5" width="13" height="11" rx="1.5" />
+                <line x1="6" y1="2.5" x2="6" y2="13.5" />
+                <rect x="2.5" y="3.5" width="2.5" height="9" fill="currentColor" stroke="none" />
+              </svg>
+            </button>
+          )}
           <h1 className="text-lg font-bold tracking-tight flex items-center">
             md
             <svg

@@ -16,6 +16,9 @@ import { DEFAULT_MARGINS } from './lib/constants'
 import PickerDialog from './components/PickerDialog'
 import CommitDialog from './components/CommitDialog'
 import ConflictModal from './components/ConflictModal'
+import FileSidebar from './components/FileSidebar'
+import DirtySwitchDialog from './components/DirtySwitchDialog'
+import { useRepoTree } from './hooks/useRepoTree'
 
 function App() {
   const isDesktop = useMediaQuery('(min-width: 768px)')
@@ -87,9 +90,21 @@ function App() {
   }, [])
 
   const repoSync = useRepoSync(auth.token, markdownContent, applyRemoteContent)
+  const repoTree = useRepoTree(auth.token, repoSync.repoConfig)
 
   const [pickerOpen, setPickerOpen] = useState(false)
   const [commitOpen, setCommitOpen] = useState(false)
+
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(() => {
+    try { return localStorage.getItem('md2cv-sidebar') !== 'false' } catch { return true }
+  })
+  const [pendingSwitchPath, setPendingSwitchPath] = useState<string | null>(null)
+  const awaitingCommitRef = useRef(false)
+
+  // Persist sidebar open/closed state
+  useEffect(() => {
+    try { localStorage.setItem('md2cv-sidebar', sidebarOpen ? 'true' : 'false') } catch { /* ignore */ }
+  }, [sidebarOpen])
 
   const handleOpenFilePicker = useCallback(() => setPickerOpen(true), [])
   const handleOpenCommitDialog = useCallback(() => setCommitOpen(true), [])
@@ -150,6 +165,53 @@ function App() {
     })
   }, [])
 
+  // Click a .md file in the tree. On mobile, close the drawer immediately (UI-SPEC §2).
+  const handleTreeOpenFile = useCallback((path: string) => {
+    if (!isDesktop) setSidebarOpen(false)
+    if (repoSync.repoConfig && path === repoSync.repoConfig.filePath) return // already open
+    if (repoSync.isDirty) {
+      setPendingSwitchPath(path) // opens DirtySwitchDialog
+    } else {
+      repoSync.openFile(path)
+    }
+  }, [isDesktop, repoSync])
+
+  const currentFilename = repoSync.repoConfig
+    ? (repoSync.repoConfig.filePath.split('/').pop() ?? 'file')
+    : 'file'
+
+  // DirtySwitchDialog actions
+  const handleDirtyDiscard = useCallback(() => {
+    const path = pendingSwitchPath
+    setPendingSwitchPath(null)
+    if (path) repoSync.openFile(path) // openFile replaces content with remote → discards local edits
+  }, [pendingSwitchPath, repoSync])
+
+  const handleDirtyCommit = useCallback(() => {
+    awaitingCommitRef.current = true  // effect below performs the switch after a successful commit
+    setPendingSwitchPath(prev => prev) // keep pending path
+    setCommitOpen(true)               // open the Phase 12 commit dialog
+  }, [])
+
+  const handleDirtyCancel = useCallback(() => setPendingSwitchPath(null), [])
+
+  // Auto-switch after a commit initiated from the dirty prompt
+  useEffect(() => {
+    if (!awaitingCommitRef.current) return
+    if (repoSync.committing) return           // still committing
+    if (repoSync.syncError) {                 // commit failed → abort switch
+      awaitingCommitRef.current = false
+      setPendingSwitchPath(null)
+      return
+    }
+    if (!repoSync.isDirty && pendingSwitchPath) { // commit succeeded → switch now
+      const path = pendingSwitchPath
+      awaitingCommitRef.current = false
+      setPendingSwitchPath(null)
+      repoSync.openFile(path)
+    }
+  }, [repoSync.committing, repoSync.isDirty, repoSync.syncError, pendingSwitchPath, repoSync])
+
   // Cleanup debounce on unmount
   useEffect(() => {
     return () => { if (debounceRef.current) clearTimeout(debounceRef.current) }
@@ -175,6 +237,7 @@ function App() {
           isDirty={repoSync.isDirty}
           onOpenFilePicker={handleOpenFilePicker}
           onOpenCommitDialog={handleOpenCommitDialog}
+          onToggleSidebar={() => setSidebarOpen(o => !o)}
           syncError={repoSync.syncError === "Couldn't sync with GitHub — working locally" ? null : repoSync.syncError}
           syncSuccess={repoSync.successMessage}
           syncWarning={repoSync.syncError === "Couldn't sync with GitHub — working locally" ? repoSync.syncError : null}
@@ -183,19 +246,37 @@ function App() {
           onDismissSyncWarning={repoSync.dismissSyncError}
         />
         <MarginControls margins={margins} onMarginsChange={handleMarginChange} />
-        <main className="flex-1 flex min-h-0">
-          {isDesktop ? (
-            <SplitPane
-              left={editor}
-              right={preview}
-            />
-          ) : (
-            <MobileTabs
-              editorContent={editor}
-              previewContent={preview}
-            />
-          )}
-        </main>
+        <div className="flex flex-1 min-h-0">
+          <FileSidebar
+            open={sidebarOpen && !!repoSync.repoConfig}
+            activePath={repoSync.repoConfig?.filePath ?? null}
+            isDirty={repoSync.isDirty}
+            tree={repoTree.tree}
+            loading={repoTree.loading}
+            error={repoTree.error}
+            truncated={repoTree.truncated}
+            expandedPaths={repoTree.expandedPaths}
+            onToggleFolder={repoTree.toggleFolder}
+            onOpenFile={handleTreeOpenFile}
+            onRefresh={repoTree.refresh}
+          />
+          <main className="flex-1 flex min-h-0">
+            {isDesktop ? (
+              <SplitPane
+                left={editor}
+                right={preview}
+              />
+            ) : (
+              <MobileTabs
+                editorContent={editor}
+                previewContent={preview}
+              />
+            )}
+          </main>
+        </div>
+        {!isDesktop && sidebarOpen && repoSync.repoConfig && (
+          <div className="fixed inset-0 top-12 bg-black/40 z-30" aria-hidden="true" onClick={() => setSidebarOpen(false)} />
+        )}
       </div>
       {/* Browser-print mount. Populated by Preview, which mirrors its rendered
           paged.js pages here after every reflow — the PDF is guaranteed to
@@ -221,8 +302,16 @@ function App() {
         open={commitOpen}
         filename={repoSync.repoConfig ? (repoSync.repoConfig.filePath.split('/').pop() ?? 'resume.md') : 'resume.md'}
         committing={repoSync.committing}
-        onClose={() => setCommitOpen(false)}
+        onClose={() => { setCommitOpen(false); awaitingCommitRef.current = false; setPendingSwitchPath(null) }}
         onCommit={(message) => { repoSync.commit(message); setCommitOpen(false) }}
+      />
+      <DirtySwitchDialog
+        open={pendingSwitchPath !== null}
+        currentFilename={currentFilename}
+        committing={repoSync.committing}
+        onCommit={handleDirtyCommit}
+        onDiscard={handleDirtyDiscard}
+        onCancel={handleDirtyCancel}
       />
       <ConflictModal
         open={repoSync.conflict !== null}
