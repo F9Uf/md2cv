@@ -221,7 +221,7 @@ This state should never render because the sidebar/toggle are hidden when `repoC
 - Icon: ⚠ SVG or a simple text indicator
 - Copy line 1: "Couldn't load file tree" — text-xs text-red-400
 - Copy line 2: "Check your connection." — text-xs text-gray-500
-- Retry button: "Refresh" — text-xs text-gray-400 underline cursor-pointer; triggers manual re-fetch.
+- Retry button: "Refresh tree" — text-xs text-gray-400 underline cursor-pointer; triggers manual re-fetch.
 - Rendered in the sidebar body below the header.
 
 ### 8. Sidebar header row
@@ -251,7 +251,7 @@ This state should never render because the sidebar/toggle are hidden when `repoC
 | Empty state body | Connect a repository from File → Connect repository… |
 | Error state line 1 | Couldn't load file tree |
 | Error state line 2 | Check your connection. |
-| Error retry label | Refresh |
+| Error retry label | Refresh tree |
 | Failed file open toast | Couldn't open file — check your connection and try again. |
 | Truncated tree notice | Repository too large — some folders may be missing. |
 | Loading aria-label | Loading file tree |
