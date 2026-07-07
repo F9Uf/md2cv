@@ -6,7 +6,7 @@
 - ✅ **v1.1.0 Support text styles & HTML** — Phase 4 (shipped 2026-04-24) — [archive](milestones/v1.1.0-ROADMAP.md)
 - ✅ **v1.2.0 Support render HTML with Tailwind classes** — Phases 5–6 (shipped 2026-04-26) — [archive](milestones/v1.2.0-ROADMAP.md)
 - ✅ **v1.3.0 Support preview with realistic page** — Phases 7–10 (shipped 2026-05-21) — [archive](milestones/v1.3.0-ROADMAP.md)
-- 🔄 **v1.4.0 Support GitHub repository** — Phases 11–13 (in progress)
+- ✅ **v1.4.0 Support GitHub repository** — Phases 11–13 (shipped 2026-07-06) — [archive](milestones/v1.4.0-ROADMAP.md)
 
 ## Phases
 
@@ -44,11 +44,14 @@
 
 </details>
 
-### v1.4.0 Support GitHub repository (Phases 11–13)
+<details>
+<summary>✅ v1.4.0 Support GitHub repository (Phases 11–13) — SHIPPED 2026-07-06</summary>
 
-- [x] **Phase 11: GitHub Auth Foundation** - OAuth sign-in, token exchange serverless function, sign-out — completed 2026-07-05
-- [x] **Phase 12: Repo Sync & Toolbar** - Repo/branch picker, auto-pull, conflict prompt, commit, dirty indicator, toolbar regrouping (completed 2026-07-06)
-- [x] **Phase 13: File Tree Sidebar** - Toggleable VS Code-style directory tree, click-to-open markdown files (completed 2026-07-06)
+- [x] Phase 11: GitHub Auth Foundation (5/5 plans) — completed 2026-07-05
+- [x] Phase 12: Repo Sync & Toolbar (7/7 plans) — completed 2026-07-06
+- [x] Phase 13: File Tree Sidebar (6/6 plans) — completed 2026-07-06
+
+</details>
 
 ## Phase Details
 
@@ -124,6 +127,6 @@ Plans:
 | 8. Configurable Margins | v1.3.0 | 2/2 | Complete | 2026-05-18 |
 | 9. Responsive Auto-Fit Zoom | v1.3.0 | 2/2 | Complete | 2026-05-19 |
 | 10. Unified Pixel-Perfect PDF Pipeline | v1.3.0 | 3/3 | Complete | 2026-05-21 |
-| 11. GitHub Auth Foundation | v1.4.0 | 0/5 | Not started | - |
-| 12. Repo Sync & Toolbar | v1.4.0 | 7/7 | Complete   | 2026-07-06 |
-| 13. File Tree Sidebar | v1.4.0 | 6/6 | Complete    | 2026-07-06 |
+| 11. GitHub Auth Foundation | v1.4.0 | 5/5 | Complete | 2026-07-05 |
+| 12. Repo Sync & Toolbar | v1.4.0 | 7/7 | Complete | 2026-07-06 |
+| 13. File Tree Sidebar | v1.4.0 | 6/6 | Complete | 2026-07-06 |

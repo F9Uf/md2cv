@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v1.4.0
 milestone_name: Support GitHub repository
-status: executing
-stopped_at: Phase 13 UI-SPEC approved
-last_updated: "2026-07-06T08:57:55.864Z"
-last_activity: 2026-07-06
+status: complete
+stopped_at: v1.4.0 milestone closed
+last_updated: "2026-07-07T00:00:00.000Z"
+last_activity: 2026-07-07
 progress:
   total_phases: 3
   completed_phases: 3
@@ -22,25 +22,25 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-05-21 after v1.3.0 close)
+See: .planning/PROJECT.md (updated 2026-07-07 after v1.4.0 close)
 
 **Core value:** Write your resume in plain Markdown, see it rendered beautifully in real time, export to PDF — zero friction, zero backend.
-**Current focus:** Phase 13 — file-tree-sidebar
+**Current focus:** v1.4.0 shipped — run `/gsd-new-milestone` to start v1.5.0
 
 ---
 
 ## Current Position
 
-Phase: 13
-Plan: Not started
-Status: Executing Phase 13
-Last activity: 2026-07-06
+Phase: —
+Plan: —
+Status: v1.4.0 milestone complete
+Last activity: 2026-07-07
 
 **Roadmap:**
 
 - [x] Phase 11: GitHub Auth Foundation — AUTH-01, AUTH-02, AUTH-03 (completed 2026-07-05)
-- [ ] Phase 12: Repo Sync & Toolbar — SYNC-01..05, TOOL-01
-- [ ] Phase 13: File Tree Sidebar — TREE-01..04
+- [x] Phase 12: Repo Sync & Toolbar — SYNC-01..05, TOOL-01 (completed 2026-07-06)
+- [x] Phase 13: File Tree Sidebar — TREE-01..04 (completed 2026-07-06)
 
 ---
 
@@ -114,10 +114,10 @@ Last activity: 2026-07-06
 
 ## Session Continuity
 
-**Last session:** 2026-07-06T07:11:41.395Z
-**Stopped at:** Phase 13 UI-SPEC approved
-**Next action:** Execute Phase 12 (`/gsd-execute-phase 12`)
+**Last session:** 2026-07-07T00:00:00.000Z
+**Stopped at:** v1.4.0 milestone closed
+**Next action:** `/gsd-new-milestone` to start v1.5.0
 
 ---
 
-*Last updated: 2026-07-05 — Roadmap for v1.4.0 (Support GitHub repository) created*
+*Last updated: 2026-07-07 — v1.4.0 milestone closed*
