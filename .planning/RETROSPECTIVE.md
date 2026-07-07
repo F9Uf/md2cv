@@ -150,6 +150,47 @@
 
 ---
 
+## Milestone: v1.4.0 — Support GitHub repository
+
+**Shipped:** 2026-07-06
+**Phases:** 3 | **Plans:** 18
+
+### What Was Built
+- Vercel serverless function (`api/github-auth.ts`) for GitHub OAuth token exchange — client secret stays server-side; `VITE_AUTH_ENDPOINT` env var makes host portable (Phase 11)
+- `useGitHubAuth` hook + 5-state header auth UI — signed-out / loading / signed-in with avatar/dropdown / error / dismissible-error (Phase 11)
+- `githubRepo.ts` (5 async functions) + `useRepoSync` hook — auto-pull on load, keep-local/take-remote conflict modal, manual commit+push, dirty dot indicator (Phase 12)
+- PickerDialog (repo → branch → file) + CommitDialog + toolbar regrouping — GitHub sync grouped with import/export; PDF stays separate (Phase 12)
+- `buildFileTree` + `useRepoTree` + `FileSidebar` — VS Code-style nested folder tree, auto-expand on active file, `DirtySwitchDialog` interception for safe switching (Phase 13)
+
+### What Worked
+- **One-hook-per-concern discipline** — `useGitHubAuth` owns auth state, `useRepoSync` owns sync state, `useRepoTree` owns tree state; clean interfaces between them
+- **TDD for pure data functions** (`buildFileTree`, `pathsToExpand`, githubRepo API module) — red-green-refactor gave high confidence in the most complex logic before any UI was wired
+- **Human-verify checkpoints at the end of each phase** caught real integration issues (WR-01, WR-02, WR-03 from Phase 13) before they became cross-phase bugs
+- **Code-review step surfacing WR-xx items** gave a structured channel to surface deferred-but-real issues; pattern held cleanly across all three phases
+
+### What Was Inefficient
+- **REQUIREMENTS.md traceability checkboxes drifted again** — all 13 requirements showed "Pending" at milestone close despite all being shipped; same lesson as v1.0 / v1.3.0. Structural workflow fix still deferred.
+- **`useRepoSync` grew to ~300 lines** during Phase 12 without a refactor pause — splitting into `useRepoConfig` + `useRepoActions` would have kept the hook testable; deferred to tech debt
+
+### Patterns Established
+- **`VITE_AUTH_ENDPOINT` env-var abstraction** for serverless function location — lets the token-exchange host change without touching app source
+- **`DirtySwitchDialog` interception at navigation time** — check for unsaved changes when the user clicks a file, not at commit time; prevents accidental content loss
+- **`buildFileTree` folders-first ordering** with implied intermediate folder creation — handles GitHub's flat tree API response reliably
+- **`pathsToExpand(filePath)`** helper pattern — derives ancestor folder paths for auto-seeding expand state; separable from tree rendering
+
+### Key Lessons
+1. **OAuth web flow for SPAs needs a server-side exchange step** — client-only OAuth exposes the client secret; Vercel serverless function is the minimal correct shape.
+2. **`useRepoSync` complexity signals a split-hook boundary** — when a hook exceeds ~200 lines and covers distinct concerns (persistence vs. network actions), plan a refactor phase.
+3. **REQUIREMENTS.md checkbox drift is a workflow problem, not a discipline problem** — this is the 4th milestone with the same observation. Worth adding `gsd-sdk query requirements.mark-complete` to the plan-completion template.
+4. **Human-verify checkpoints at phase boundaries are effective bug filters** — WR-01/02/03 were all real issues that would have reached production without them.
+
+### Cost Observations
+- Model mix: sonnet-dominant (balanced profile)
+- Sessions: ~4 (Phase 11 discuss+plan+execute, Phase 12 execute, Phase 13 execute, milestone close)
+- Notable: 18 plans executed across 3 phases in ~2 days; wave-based parallelization kept individual sessions focused
+
+---
+
 ## Cross-Milestone Trends
 
 ### Process Evolution
@@ -160,6 +201,7 @@
 | v1.1.0 | 1 | 1 | Inline HTML/markdown rendering in bullets |
 | v1.2.0 | ~4 | 2 | Parser rewrite + Tailwind CSS runtime |
 | v1.3.0 | ~5 | 4 | paged.js preview + unified PDF pipeline; html2pdf.js retired |
+| v1.4.0 | ~4 | 3 | GitHub OAuth + repo sync + VS Code-style file tree sidebar |
 
 ### Cumulative Quality
 
@@ -168,13 +210,16 @@
 | v1.0 | 0 | ~1,100 | Baseline |
 | v1.1.0 | 0 | ~1,100 | Minimal code change |
 | v1.2.0 | 15 | ~633 | Parser simplification reduced LOC significantly |
-| v1.3.0 | 15 | ~990 | +`<MarginControls/>`, +`<PrintMount/>`, rewired Preview/App/CSS for paged.js — net +357 LOC for unified render path |
+| v1.3.0 | 15 | ~990 | +`<MarginControls/>`, +`<PrintMount/>`, rewired Preview/App/CSS for paged.js — net +357 LOC |
+| v1.4.0 | ~30 | ~3,651 | +GitHub OAuth, API lib, sync hook, tree components — net +2,660 LOC |
 
 ### Top Lessons (Verified Across Milestones)
 
 1. Test PDF/canvas-based exports early — third-party rendering libraries have CSS compatibility constraints that surface late. (v1.0 → v1.3.0)
-2. Keep requirement tracking live during execution — stale checkboxes create unnecessary review work at milestone close. (v1.0, v1.2.0, **v1.3.0 — third recurrence; now a workflow signal**)
+2. Keep requirement tracking live during execution — stale checkboxes create unnecessary review work at milestone close. (v1.0, v1.2.0, v1.3.0, **v1.4.0 — fourth recurrence; workflow change needed**)
 3. Close human verification prompts within the same session — leaving them open carries noise into future milestone close. (v1.1.0)
 4. DOMPurify strips `class` and other attributes by default — plan for this when sanitizing user-authored HTML that needs passthrough. (v1.2.0)
 5. Decouple "off-screen for the print engine" from "off-screen for the user" — different requirements, different CSS techniques. (v1.3.0)
 6. Spike CSS layout-affecting properties (`zoom`, `display: contents`, container queries) before committing — they often look interchangeable with paint-only counterparts (`transform`, `visibility`) but break differently. (v1.3.0)
+7. OAuth SPAs need a server-side token exchange step — the client secret cannot be in the browser bundle; a minimal serverless function is the correct boundary. (v1.4.0)
+8. When a hook exceeds ~200 lines across distinct concerns, plan a refactor phase — the complexity signals a split-hook boundary that will compound if deferred further. (v1.4.0)

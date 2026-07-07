@@ -10,9 +10,9 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 
 ## Current State
 
-**Shipped:** v1.3.0 — Support preview with realistic page (2026-05-21). Phases 7–10 complete. Preview renders as paged.js-driven A4 pages with configurable margins, live "Page X of N", responsive auto-fit zoom on desktop and mobile; PDF export uses the same DOM the user sees via browser-native print over paged.js.
+**Shipped:** v1.4.0 — Support GitHub repository (2026-07-06). Phases 11–13 complete. Users can sign in with GitHub via OAuth web flow, pick a repo and branch, auto-pull the open file on load, manually commit changes, see a dirty indicator, and browse the full repo directory tree in a VS Code-style sidebar.
 
-**Next milestone:** Not yet defined. Run `/gsd-new-milestone` to scope v1.4.0.
+**Next:** v1.5.0 — to be defined via `/gsd-new-milestone`.
 
 ## Requirements
 
@@ -33,7 +33,21 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 
 ### Active
 
-(No active requirements — v1.3.0 shipped 2026-05-21. Next milestone requirements will land here.)
+(None — define next milestone requirements with `/gsd-new-milestone`.)
+
+### Validated in v1.4.0: Support GitHub repository
+
+- ✓ GitHub OAuth web flow sign-in via Vercel serverless token-exchange function — v1.4.0
+- ✓ Auth endpoint abstracted via `VITE_AUTH_ENDPOINT` — host portable to Cloudflare Worker/Next.js — v1.4.0
+- ✓ Sign-out / disconnect GitHub, clearing stored token — v1.4.0
+- ✓ Repo/branch picker from authenticated user's GitHub repos — v1.4.0
+- ✓ Auto-pull open file from selected repo on app load — v1.4.0
+- ✓ Conflict prompt (keep-local / take-remote) when local edits differ from remote — v1.4.0
+- ✓ Manual commit: commit-message dialog (sensible default) + commit + push via GitHub API — v1.4.0
+- ✓ Dirty indicator dot visible when open file has uncommitted changes — v1.4.0
+- ✓ Toggleable VS Code-style file tree sidebar rendering repo directory structure — v1.4.0
+- ✓ Clicking a .md file in the tree opens it (editor + preview swap to that file) — v1.4.0
+- ✓ GitHub sync controls grouped with import/export .md; PDF export stays separate — v1.4.0
 
 ### Validated in Phase 10: unified-pixel-perfect-pdf-pipeline
 
@@ -69,20 +83,23 @@ Write your resume in plain Markdown, see it rendered beautifully in real time, e
 
 ## Context
 
-Shipped v1.3.0 with ~990 LOC TS/TSX (1,184 LOC including CSS). v1.3.0 added `<MarginControls/>` + `<PrintMount/>` and rewired Preview/App/index.css/pages.css around the unified paged.js path; net codebase growth ≈360 LOC over v1.2.0.
+Shipped v1.4.0 with ~3,651 LOC TS/TSX. v1.4.0 added Vercel serverless function for token exchange + OAuth hooks + GitHub API library + sync hook + tree sidebar; net codebase growth ≈2,660 LOC over v1.3.0.
 
-**Tech stack:** Vite 5, React 18, TypeScript, Tailwind CSS v4, CodeMirror 6, markdown-it, DOMPurify, paged.js (pagination), browser-native print (PDF export)
+**Tech stack:** Vite 5, React 18, TypeScript, Tailwind CSS v4, CodeMirror 6, markdown-it, DOMPurify, paged.js (pagination), browser-native print (PDF export), Vercel serverless function (GitHub OAuth token exchange), GitHub REST API (repo sync)
 
 **Known technical debt:**
 - Dark mode for CodeMirror editor — quick task dropped from v1.1.0, carry forward if desired.
-- `PrintMount` lacks a `hasError` fallback path (parity with `Preview.tsx`) — a paged.js render failure produces a silent blank PDF; surfaced in Phase 10 code review (WR-01). Track for follow-up.
-- Bundle size: pagedjs adds ~1.3MB to the largest chunk (`index-*.js: 1,320 kB minified / 391 kB gzip`). Acceptable for personal-tool scope; revisit with `await import('pagedjs')` code-split if first-paint matters later.
-- Phase 8 UI-SPEC cosmetic deviations (margin strip uses `bg-gray-700` vs spec `bg-gray-900`; UPPERCASE labels; SVG Reset icon vs text button) — accepted by shipping; only relevant if a future phase touches the margin strip visuals.
+- `PrintMount` lacks a `hasError` fallback path — paged.js render failure produces a silent blank PDF (Phase 10 WR-01). Track for follow-up.
+- Bundle size: pagedjs adds ~1.3MB to the largest chunk. Revisit with `await import('pagedjs')` code-split if first-paint matters.
+- Phase 8 UI-SPEC cosmetic deviations (margin strip `bg-gray-700` vs spec, UPPERCASE labels, SVG Reset) — accepted at ship.
+- `useRepoSync` hook grew to ~300 lines — consider splitting into `useRepoConfig` + `useRepoActions` in a future refactor.
+- Tree fetch is a full recursive call on every file open — no cache layer; acceptable for personal-tool scope.
+- No offline / network-error retry in file tree — sidebar shows error state but no retry button.
 
 ## Constraints
 
-- **Client-side only**: No server, no backend — everything runs in the browser
-- **No auth**: Personal tool — no login, no user management
+- **Static app + one auth function**: App remains a static client-side SPA; the only server-side piece is a single token-exchange serverless function for GitHub OAuth (Vercel, portable to Cloudflare Worker/Next.js). Relaxed in v1.4.0 from "client-side only, no backend".
+- **No user management**: Personal single-user tool — GitHub OAuth is for repo access only, not accounts/profiles
 - **Node.js**: Project machine runs v20.11.0 — use Vite 5 (not 6+) which requires ^20.19.0
 
 ## Key Decisions
@@ -107,6 +124,10 @@ Shipped v1.3.0 with ~990 LOC TS/TSX (1,184 LOC including CSS). v1.3.0 added `<Ma
 | Tailwind v4 `@custom-variant` for theme CSS (v1.2.0) | Discovered during build as valid alternative to `@layer base`; scopes element styles to `.theme-{template}` container | ✓ Good — production verified |
 | Play CDN for runtime Tailwind (v1.2.0) | Enables arbitrary user-authored utility classes without build-time scanning | ✓ Good — required for user-authored HTML classes |
 | DOMPurify `ADD_ATTR: ['class']` (v1.2.0) | Required to let user class attributes survive sanitization before CDN resolves them | ✓ Good — PREV-03 blocker fix |
+| Vercel serverless function for token exchange (v1.4.0) | Keeps `GITHUB_CLIENT_SECRET` out of browser bundle; `VITE_AUTH_ENDPOINT` satisfies AUTH-02 portability | ✓ Good — clean zero-dependency function |
+| `useRepoSync` single hook for all sync state (v1.4.0) | One hook owns config + dirty flag + conflict + commit; avoids split state across components | ✓ Good — clear API, but hook is ~300 lines |
+| `buildFileTree` folders-first alphabetical ordering (v1.4.0) | VS Code UX convention; handles GitHub's flat tree array + implied intermediate folders | ✓ Good — resilient to deep repos |
+| `DirtySwitchDialog` interception at navigation time (v1.4.0) | Prevents accidental content loss; checked on file-click before switching, not at commit time | ✓ Good — correct UX pattern |
 
 ## Evolution
 
@@ -126,4 +147,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-21 after v1.3.0 milestone close*
+*Last updated: 2026-07-07 after v1.4.0 milestone*

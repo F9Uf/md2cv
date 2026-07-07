@@ -1,5 +1,24 @@
 # Milestones
 
+## v1.4.0 Support GitHub repository (Shipped: 2026-07-06)
+
+**Phases completed:** 3 phases, 18 plans (Phases 11–13)
+**Git range:** `f2ed31f` (chore(11-01): add .env.example) → `f116966` (docs(13): add code review fix report)
+**Timeline:** 2026-07-05 → 2026-07-06 (~2 days; 99 commits)
+**Codebase:** ~3,651 LOC TS/TSX
+
+**Key accomplishments:**
+
+- GitHub OAuth web flow via Vercel serverless function — `api/github-auth.ts` exchanges codes for tokens server-side; `VITE_AUTH_ENDPOINT` env var abstracts the exchange host (AUTH-01, AUTH-02, AUTH-03)
+- `useGitHubAuth` hook + 5-state header auth UI — signed-out/loading/signed-in (avatar+dropdown)/error/dismissible-error with GitHub Octocat icon and sign-out flow (Phase 11)
+- GitHub repo API library (`githubRepo.ts`, 5 async functions) + `useRepoSync` hook — auto-pull on load, keep-local/take-remote ConflictModal, manual commit+push via GitHub API, dirty indicator dot (SYNC-01..05)
+- Repo/branch/file PickerDialog + CommitDialog (pre-filled message) + toolbar regrouping — GitHub sync controls grouped with import/export .md; PDF export stays separate (TOOL-01, Phase 12)
+- VS Code-style file tree sidebar — `buildFileTree` nested folders-first structure, `FileSidebar` panel with loading/empty/error states, `DirtySwitchDialog` for safe file switching, auto-expand ancestor folders on active file change (TREE-01..04, Phase 13)
+
+**Known deferred items at close: 8 (all carry-overs from v1.3.0 close — see STATE.md Deferred Items)**
+
+---
+
 ## v1.3.0 Support preview with realistic page (Shipped: 2026-05-21)
 
 **Phases completed:** 4 phases, 10 plans, 18 tasks (Phases 7–10)

@@ -25,3 +25,9 @@ dist-ssr
 
 .claude/settings.local.json
 .claude/worktrees/
+
+# Local env files with secrets (keep .env.example, ignore real ones)
+.env
+.env.*
+!.env.example
+.vercel
